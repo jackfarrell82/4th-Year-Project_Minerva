@@ -2,5 +2,5 @@
 
 echo "Shell Script GO"
 pwd
-# cd ../
-# python3 main.py testing/testfile.txt
+cd res/gareth_prototyping
+python3 main.py testing/testfile.txt
