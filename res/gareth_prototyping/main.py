@@ -51,8 +51,7 @@ if "user" in sys.argv:
             user_input = input("User" + ": ")
             resp = bot.get_response(user_input)
 
-            print(f"Minerva: {resp} (Conf: {resp.confidence})")
-
+            print("Minerva: ", resp)
         # Press ctrl-c or ctrl-d on the keyboard to exit
         except (KeyboardInterrupt, EOFError, SystemExit):
             break
