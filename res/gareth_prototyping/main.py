@@ -2,6 +2,7 @@ from chatterbot import ChatBot
 from chatterbot import comparisons
 from chatterbot import response_selection
 from chatterbot.trainers import ListTrainer
+from chatterbot import filters
 from training_dict import trainset
 import sys
 import logging
@@ -10,6 +11,9 @@ if "log" in sys.argv:
     logging.basicConfig(level=logging.INFO)
 
 n = len(sys.argv)
+
+# this filter is on by default and stops the chatbot from repeating itself, however with limited responses it means the chatbot repsonds incorrectly to some prompts, this overrides what it does and makes it do nothing
+filters.get_recent_repeated_responses = lambda *args, **kwargs: []
 
 # Create a new instance of a ChatBot
 bot = ChatBot('Minerva',
