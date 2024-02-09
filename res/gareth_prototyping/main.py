@@ -1,6 +1,4 @@
 from chatterbot import ChatBot
-from chatterbot import comparisons
-from chatterbot import response_selection
 from chatterbot.trainers import ListTrainer
 from chatterbot import filters
 from training_dict import trainset
@@ -25,6 +23,7 @@ bot = ChatBot('Minerva',
             }
         ],
     filters=[],
+    database_uri = 'sqlite:///data/db.sqlite3'
     )
 
 # empty storage, reset the responses that might be built in, DO NOT RUN EVERYTIME
