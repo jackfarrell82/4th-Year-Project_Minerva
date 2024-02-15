@@ -21,7 +21,7 @@ prompt-test-job:   # This job runs in the test stage.
 
 deploy_production:
   stage: deploy
-  image: npm:latest
+  image: node:latest
   script:
     - npm install --global vercel
     - vercel pull --yes --environment=production --token=$VERCEL_TOKEN
