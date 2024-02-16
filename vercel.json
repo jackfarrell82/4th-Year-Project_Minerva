@@ -1,5 +1,5 @@
 {
-    "rewrites": [
-      { "source": "/(.*)", "destination": "/res/flask_proto/app" }
-    ]
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/res/flask_proto/app" }
+  ]
 }
