@@ -11,4 +11,7 @@ trainset = {
     # Response to Help
     "I'm very sorry you are struggling to get what you want, I am still in beta and learning new things. If you want to know what I can do at the moment just ask me “What can you do?”" :
     ["Help", "I need help", "I am lost", "I am stuck", "Help me"],
+    # How do you work
+    "To submit a query to the database simple enter the word 'Query' followed by your query, I will send this to the database and return the results right to you! I can also answer some other simple questions, ask me what I can do to find them." :
+    ["How do you work?", "How do I send a query?", "How do I submit a query?", "How to I use the database?", "Submitting a query", "How to I ask the database something", "How do I use you?", "How does this work?", "How do I use this system?"]
 }

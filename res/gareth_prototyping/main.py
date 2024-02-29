@@ -17,6 +17,9 @@ filters.get_recent_repeated_responses = lambda *args, **kwargs: []
 bot = ChatBot('Minerva',
     logic_adapters=[
             {
+                'import_path': 'adapter.QueryAdapter',
+            },
+            {
                 'import_path': 'chatterbot.logic.BestMatch',
                 'default_response': "I'm sorry but I don't understand your message, I am still learning. If you don't know what to ask just ask me “What can you do?” and I will be able to show you!",
                 'maximum_similarity_threshold': 0.90
