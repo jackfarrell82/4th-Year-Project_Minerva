@@ -6,26 +6,24 @@
         <link rel="stylesheet" type="text/css" href="/static/style.css">
     </head>
     <body>
-        <div style="display: block" id="hideAll">&nbsp;</div>
+        <!-- <div style="display: block" id="hideAll">&nbsp;</div> -->
+        <div id="floatingElement" class="hidden">
+            <button id="closeButton">×</button>
+            <br>
+            Current Database: X
+
+        </div>
+        <div id="overlay" class="hidden"></div>
         <section class="msger">
-            <header class="msger-header">
-                <div class="msger-header-title">
-                    <i class="fas fa-comment-alt"></i> Minerva: Data Assistance Chatbot
-                </div>
-                <div class="msger-header-options">
-                    <span><i class="fas fa-cog"></i></span>
-                </div>
-            </header>
-          
             <main class="msger-chat" id="msgerChat">
                 <!-- Left Side (Minerva) -->
                 <div class="msg left-msg">                
                     <div class="msg-bubble">
                         <div class="msg-info">
-                            <div class="msg-info-name">Minerva 🤖</div>
+                            <div class="msg-info-name">Minerva  </div>
                         </div>
                         <div class="msg-text">
-                            Hello, welcome, my name is Minerva.👋
+                            Hello, welcome, my name is Minerva 👋
                         </div>
                     </div>
                 </div>
@@ -42,12 +40,24 @@
                     </div>
                 </div> -->
             </main>
-          
+            <div class="suggestions">
+                <button class="suggestion autosubmit">What are you?</button>
+                <button class="suggestion autosubmit">What can you do?</button>
+                <button class="suggestion autosubmit">How do I send a query?</button>
+                <button class="suggestion autosubmit">I need help.</button>
+                <button class="suggestion" id="QuerySub">Query:</button>
+            </div>
             <form class="msger-inputarea" id="form" autocomplete="off">
                 <input type="text" class="msger-input" placeholder="Enter your message..." id="form-input">
-                <button type="submit" class="msger-send-btn">Send</button>
+                <button type="submit" class="msger-send-btn" id="send-msg">Send</button>
             </form>
-          </section>
-          <script src="/static/script.js"></script>
+        </section>
+        <section>
+            <div class="footnotes">
+                <button class="foot-button" id="floater">Change Database</button>
+                <a href="https://gitlab.computing.dcu.ie/hogang22/2024-ca400-hogang22-farrej82" target="_blank"><button class="foot-button">Source Code</button></a>
+            </div>
+        </section>
+        <script src="/static/script.js"></script>
     </body>
 </html>

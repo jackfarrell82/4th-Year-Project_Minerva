@@ -17,6 +17,36 @@ msgerForm.addEventListener("submit", event => {
     botResponse(msgText);
 });
 
+document.getElementById("floater").addEventListener("click", function() {
+    var floatingElement = document.getElementById("floatingElement");
+    var overlay = document.getElementById("overlay");
+    floatingElement.classList.toggle("hidden");
+    overlay.classList.toggle("hidden");
+});
+
+document.getElementById("closeButton").addEventListener("click", function() {
+    var floatingElement = document.getElementById("floatingElement");
+    var overlay = document.getElementById("overlay");
+    floatingElement.classList.add("hidden");
+    overlay.classList.add("hidden");
+});
+
+var suggestion_buttons = document.querySelectorAll('.autosubmit');
+var inputField = document.getElementById('form-input');
+
+suggestion_buttons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        var buttonText = this.textContent;
+        inputField.value = buttonText;
+        document.getElementById('send-msg').click();
+    });
+});
+
+document.getElementById("QuerySub").addEventListener('click', function() {
+    var buttonText = this.textContent;
+    inputField.value = buttonText;
+});
+
 function appendMessage(name, side, text) {
     const msgHTML = `
     <div class="msg ${side}-msg">
