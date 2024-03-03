@@ -73,12 +73,22 @@ function botResponse(input) {
     });
 }
 
+function loadDatabase(){
+    var dropdown_selection = document.getElementById("dropdown").value;
+    DB_change(dropdown_selection);
+}
+
+function DB_change(file){
+    fetch("/database", {method: "POST", body: JSON.stringify({"db_name":file})})
+}
+
 function get(selector, root = document) {
     return root.querySelector(selector);
 }
 
 window.onload = function(){ 
-    div = document.getElementById("hideAll")
+    DB_change("");
+    div = document.getElementById("hideAll");
 
     div.ontransitionend = () => {
         div.style.display = "none";
