@@ -1,9 +1,13 @@
 :root {
-    --body-bg: linear-gradient(130deg, #145374 0%, #E8E8E8 100%);
+    --body-bg: url("media/background.png");
     --msger-bg: #fff;
     --border: 2px solid #ddd;
     --left-msg-bg: #ececec;
     --right-msg-bg: #2884fd;
+    --arrow-bg: #00334E;
+    --arrow-icon: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg);
+    --option-bg: #00334E;
+    --select-bg: #145374;
 }
 
 /* 2A2E45 Space Cadet Grey Blue Dark*/
@@ -155,14 +159,14 @@ body {
 
 .msger-send-btn {
     margin-left: 10px;
-    background: rgb(0, 196, 65);
+    background: #145374;
     color: #fff;
     font-weight: bold;
     cursor: pointer;
     transition: background 0.23s;
 }
 .msger-send-btn:hover {
-    background: rgb(0, 180, 50);
+    background: #00334E;
 }
 
 .msger-chat {
@@ -175,10 +179,13 @@ body {
     right: 0px; 
     top: 0px; 
     bottom: 0px; 
-    background-image: radial-gradient(circle, silver, #2A2E45);
+    /* background-image: radial-gradient(circle, silver, #2A2E45); */
+    background-image: url("media/Minerva.gif");
+    background-repeat: no-repeat;
+    background-size: cover; 
     z-index: 99;
     opacity: 1;
-    transition: opacity 2s ease-out;
+    transition: opacity 2s ease-in;
 }
 
 .suggestions{
@@ -359,21 +366,11 @@ body {
     cursor: pointer;
 }
 
-:root {
-    --arrow-bg: #00334E;
-    --arrow-icon: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg);
-    --option-bg: #00334E;
-    --select-bg: #145374;
-}
-
-/* <select> styles */
 select {
-    /* Reset */
     appearance: none;
     border: 0;
     outline: 0;
     font: inherit;
-    /* Personalize */
     width: 20rem;
     padding: 1rem 4rem 1rem 1rem;
     background: var(--arrow-icon) no-repeat right 0.8em center / 1.4em, linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
@@ -382,13 +379,12 @@ select {
     box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
     cursor: pointer;
 
-&:focus {
-    outline: none;
-}
-/* <option> colors */
-option {
-    color: inherit;
-    background-color: var(--option-bg);
-}
+    &:focus {
+        outline: none;
+    }
+    option {
+        color: inherit;
+        background-color: var(--option-bg);
+    }
 }
 

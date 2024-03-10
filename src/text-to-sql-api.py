@@ -16,12 +16,12 @@ headers = {
     'Authorization': 'Bearer 59ad71fc36bd590f4237955b6ac578d612c5cad6825dcf908aa8e76d0af1b01c', # what allows us to use the api
 }
 
-prompt = "how many iterations do we have where open is less than close"
+example_prompt = "how many iterations do we have where open is less than close"
 
 schema = "indexprocessed (Index: text, Date: text, Open: double, High: double, Low: double, Close: double, Adj Close: double, Volume: double, CloseUSD: double)"
 
 data = {
-    "prompt": prompt, # passes in the prompt needs to be in quotes
+    "prompt": example_prompt, # passes in the prompt needs to be in quotes
     "type": "mysql", # the language it is translating too
     "schema": schema
 }
@@ -32,7 +32,8 @@ def changeDatabase():
     else:
         schema == "indexprocessed (Index: text, Date: text, Open: double, High: double, Low: double, Close: double, Adj Close: double, Volume: double, CloseUSD: double)"
 
-def toSQL():
+def toSQL(prompt):
+    data["prompt"] = prompt;
     response = requests.get("https://www.text2sql.ai/api/sql/generate", headers=headers, data=data) # send it to the api
     response = response.text # get the text version back
     list = response.split('"') # modify the output to be just the SQL query
@@ -61,7 +62,7 @@ def toDatabase(query):
         cursor.close()
         cnx.close()
 
-response = toSQL()
-print(prompt)
+response = toSQL(example_prompt)
+print(example_prompt)
 print(response)
 toDatabase(response)

@@ -10,7 +10,7 @@ class QueryAdapter(LogicAdapter):
 
     def process(self, statement, additional_response_selection_parameters):
         # Extract the query from the statement
-        query = statement.text.lower().replace("query", "").strip()
+        query = statement.text.lower().replace("query:", "").strip()
         
         # Submit the query to another function and get the response
         response = functionX(query)

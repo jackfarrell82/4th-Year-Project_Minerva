@@ -3,7 +3,7 @@ trainset = {
     "Hi there, I am Minerva, how can I help you?" : 
     ["Hi", "Hello", "What's up", "Sup", "Howdy", "Hey", "Hey there", "Hello there", "How's it going", "Hewwo", "Hello?", "Hi there"],
     # Who/What are you?
-    "My Name is Minerva, I am a chatbot created by Gareth & Jack" :
+    "My Name is Minerva, I am a chatbot created by Gareth & Jack, I can help you access data in your databases" :
     ["Who are you?", "What are you?", "What is this?", "What is Minerva", "Who is there?", "Who?"],
     # What can you do?
     "I am a database assistance bot, I can help you retrieve and filter data from the loaded database. Some of the things I can do are \n - XXX \n - XXX \n Try asking me something now!" :
