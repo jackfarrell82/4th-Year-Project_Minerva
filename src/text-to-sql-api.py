@@ -3,12 +3,35 @@ import requests
 import mysql.connector
 from mysql.connector import errorcode
 
+database = "metabolic_syndrome"
+schema = "indexprocessed (Index: text, Date: text, Open: double, High: double, Low: double, Close: double, Adj Close: double, Volume: double, CloseUSD: double)"
+
+example_prompt = "how many people are registered that are under 40"
+
+def changeDatabase():
+    global database
+    if database == "financial":
+        database = "metabloic_syndrome"
+        return database
+    elif database == "metabolic_syndrome":
+        database = "financial"
+        return database
+    
+def changeSchema():
+    global schema
+    if schema == "indexprocessed (Index: text, Date: text, Open: double, High: double, Low: double, Close: double, Adj Close: double, Volume: double, CloseUSD: double)":
+        schema = "metabolic_syndrome (seqn: int, Age: int, Sex: text, Marital: text, Income: text, Race: text, WaistCirc: double, BMI: double, Albuminuria: int, UrAlbCr: double, UricAcid: double, BloodGlucose: int, HDL: int, Triglycerides: int, MetabolicSyndrome: int)"
+        return schema
+    elif schema == "metabolic_syndrome (seqn: int, Age: int, Sex: text, Marital: text, Income: text, Race: text, WaistCirc: double, BMI: double, Albuminuria: int, UrAlbCr: double, UricAcid: double, BloodGlucose: int, HDL: int, Triglycerides: int, MetabolicSyndrome: int)":
+        schema = "indexprocessed (Index: text, Date: text, Open: double, High: double, Low: double, Close: double, Adj Close: double, Volume: double, CloseUSD: double)"
+        return schema
+
 config = {
-  'user': 'DESKTOP-7LEP5EQ', #Device Name LAPTOP-EDUNB10Q DESKTOP-7LEP5EQ
+  'user': 'LAPTOP-EDUNB10Q', #Device Name LAPTOP-EDUNB10Q DESKTOP-7LEP5EQ
   'password': 'Destiny14',
-  'host': '192.168.0.150', #Device ipv4 address 192.168.0.150
+  'host': '136.206.169.4', #Device ipv4 address 192.168.0.150
   'port': '3306',
-  'database': 'financial', #What database we are sending our query too
+  'database': database, #What database we are sending our query too
   'raise_on_warnings': True,
 }
 
@@ -16,24 +39,14 @@ headers = {
     'Authorization': 'Bearer 59ad71fc36bd590f4237955b6ac578d612c5cad6825dcf908aa8e76d0af1b01c', # what allows us to use the api
 }
 
-example_prompt = "how many iterations do we have where open is less than close"
-
-schema = "indexprocessed (Index: text, Date: text, Open: double, High: double, Low: double, Close: double, Adj Close: double, Volume: double, CloseUSD: double)"
-
 data = {
     "prompt": example_prompt, # passes in the prompt needs to be in quotes
     "type": "mysql", # the language it is translating too
     "schema": schema
 }
 
-def changeDatabase():
-    if schema == "indexprocessed (Index: text, Date: text, Open: double, High: double, Low: double, Close: double, Adj Close: double, Volume: double, CloseUSD: double)":
-        schema == "metabolic syndrome (seqn: int, Age: int, Sex: text, Marital: text, Income: text, Race: text, WaistCirc: double, BMI: double, Albuminuria: int, UrAlbCr: double, UricAcid: double, BloodGlucose: int, HDL: int, Triglycerides: int, MetabolicSyndrome: int)"
-    else:
-        schema == "indexprocessed (Index: text, Date: text, Open: double, High: double, Low: double, Close: double, Adj Close: double, Volume: double, CloseUSD: double)"
-
 def toSQL(prompt):
-    data["prompt"] = prompt;
+    data["prompt"] = prompt
     response = requests.get("https://www.text2sql.ai/api/sql/generate", headers=headers, data=data) # send it to the api
     response = response.text # get the text version back
     list = response.split('"') # modify the output to be just the SQL query
@@ -62,6 +75,10 @@ def toDatabase(query):
         cursor.close()
         cnx.close()
 
+changeDatabase()
+changeSchema()
+print(database)
+print(schema)
 response = toSQL(example_prompt)
 print(example_prompt)
 print(response)
