@@ -96,20 +96,53 @@ Aside from the Chatterbot library there actually was a surpising lack of tools o
 ## Problems and Solutions
 
 <!-- *Problems we could solve, small bits* -->
+In this section we will highlight some of the problems we encountered over the course of Minerva's development, unique problems that we needed to solve and how we went about doing it.
 
 ---
 
 ## Limitations
 
 <!-- *Limitations be imposed on us by bad libary, bad model, etc.* -->
+In this section we talk about some of the blockers we encountered during development of Minerva, these were things that caused significant delays, redesigns or things we generally couldn't fix or avoid. We will outline the problems we had and how they impacted on the final version of Minerva, and what we might have done to fix them.
+
+### Chatterbot Downsides
+
+<!-- Talk about how shit CHatterbot is -->
+One major component of this project that limited us was the Chatterbot library that was used to develop Minerva. As we said in the research section, this library seemed to be in very common use for making basic chatbots in python, and there were lots of recommendations online to use it for making a chatbot in python.
+
+Chatterbot was a good starting point for Minerva, it allowed us more control over the development as we were using code instead of a prebuilt tool or website. However Gareth started to progress past the basic features of Minerva he started to realise how limited Chatterbot is in its features, and how badly documented the available features were.
+
+**Filters**
+A specific example of where things started to turn south was when Minerva started exhibiting strange behaviour, she would respond incorrectly or misunderstand the most basic of prompts such as "Hello" for unknown reasons and there wasn't a pattern to it. After much research, testing and looking through the logs the problem was discovered, by default Chatterbot has a filter that stops a chatbot repeating itself too much, it downweights or excludes answers that it has recently responded with, the problem with this is that it persists across conversations and instances, meaning common prompts such as "Hello", "Hi There" and other greetings were being misunderstood because Minerva was responding to them all the same. What was even more frustrating was that nowhere in the documentation was there a mention of this filter being on by default, and there was no documented way to turn it off, here you can view the entire page they have on filters [Filter Documentation](https://chatterbot.readthedocs.io/en/stable/filters.html). Ultimately we bypassed this by setting the filter function to do nothing in our app but it is still enabled.
+
+![Our solution to the filter problem](../media/filter_solve.png)
+
+The filter example was just one of many problems we encountered as we tried to make Minerva more advanced in her conversation skills, we quickly realised that Chatterbot offered very little in the name of advanced features or support for making chatbots that were more advanced than just recognising an input and returning the trained response. We were missing tools to be able to slice the prompt up and send it to our backend, recognise prompts that were similar but not exactly the same as our training data, or even to do more than just return a string, we had to implement our own way to call a function when a specific prompt was encountered.
+
+In the end, we were too far into development to really rip out Chatterbot and replace it, we also could not find any suitable replacements, we would either have to downgrade to natural language processing tools and implement a lot of the chat processing ourselves, or we could sacrifice using code and control and use a web solution such as IBM watson assistant. Neither of these solutions really appealed to us or seemed better than what we decided to do, which was to keep the Chatterbot library to run the basics and to work around it to implement the more advanced features ourselves, what this means is that Minerva is slightly less intelligent that we originally wanted, she needs more help and prompt formatting by users to be able to understand what they want.
+
+### API & Model Troubles
+
+<!-- Talk about the different trials and tribulations of all the models and APIs u tried -->
+
+### Hosting - A fruitless foray
+
+<!-- little section on trying to host not on localhost, not worth effort to try find free version -->
 
 ---
 
 ## Testing
 
+<!-- Methods we had to use -->
+<!-- User centric so not a lot of automatic testing -->
+<!-- Ethics, results and analysis -->
+<!-- Outcomes -->
+
 ---
 
 ## What we learnt
+
+<!-- SKills, tech and teamwork stuff, planning etc -->
 
 ---
 
@@ -121,18 +154,11 @@ If you would like to try out the system for yourself please follow these instruc
 1. First make sure you have Git installed (sudo apt install git)
 2. Clone our repo
 3. Navigate to /src in your terminal
-4. For the backend:
-   a. First make sure you have the pip installer **sudo apt install python3-pip**
-   b. navigate to /src/backend
-   c. use pip to install the requirements **pip install -r requirements.txt**
-   d. start the Django backend with the command **python3 manage.py runserver**
-5. For the frontend: (Open a second terminal window)
-   a. Make sure you have NPM installed - **sudo apt install npm**
-   b. navigate to /src/frontend
-   c. Install Nodemon **npm install nodemon**
-   d. Start the Node server with the command **npm start**
-6. Once both servers are running head to *localhost:3000* to view the webpage
-
-> *Note about flask: when you start the flask service it takes a moment to start, the new tab will say failed to connect briefly before it will display the UI*
+   a. Make sure you have pip installed **sudo apt install ptyhon3-pip**
+   b. Install the requirements for Minerva with **pip install -r requirements.txt**
+4. Start the flask application by running the command "python3 app.py deploy"
+5. This will power up Minerva and you can head to *127.0.0.1:5000* on your browser to open up Minerva's interface 
 
 ## Future Work
+
+<!-- What we would like to have worked on more, natural extensions that could be accomplished next, what could be added or polished -->
