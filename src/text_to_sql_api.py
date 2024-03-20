@@ -4,14 +4,17 @@ import mysql.connector
 from mysql.connector import errorcode
 
 database = "metabolic_syndrome"
-schema = "indexprocessed (Index: text, Date: text, Open: double, High: double, Low: double, Close: double, Adj Close: double, Volume: double, CloseUSD: double)"
+schema = "metabolic_syndrome (seqn: int, Age: int, Sex: text, Marital: text, Income: text, Race: text, WaistCirc: double, BMI: double, Albuminuria: int, UrAlbCr: double, UricAcid: double, BloodGlucose: int, HDL: int, Triglycerides: int, MetabolicSyndrome: int)"
 
-example_prompt = "how many people are registered that are under 40"
+# database = "financial"
+# schema = "indexprocessed (Index: text, Date: text, Open: double, High: double, Low: double, Close: double, Adj Close: double, Volume: double, CloseUSD: double)"
+
+example_prompt = "what trades have 0 volume"
 
 def changeDatabase():
     global database
     if database == "financial":
-        database = "metabloic_syndrome"
+        database = "metabolic_syndrome"
         return database
     elif database == "metabolic_syndrome":
         database = "financial"
@@ -27,9 +30,9 @@ def changeSchema():
         return schema
 
 config = {
-  'user': 'LAPTOP-EDUNB10Q', #Device Name LAPTOP-EDUNB10Q DESKTOP-7LEP5EQ
-  'password': 'Destiny14',
-  'host': '136.206.169.4', #Device ipv4 address 192.168.0.150
+  'user': 'root', #Device Name LAPTOP-EDUNB10Q DESKTOP-7LEP5EQ
+  'password': 'Cedarpark12702',
+  'host': '169.254.58.93', #Device ipv4 address 192.168.0.150
   'port': '3306',
   'database': database, #What database we are sending our query too
   'raise_on_warnings': True,
@@ -40,7 +43,7 @@ headers = {
 }
 
 data = {
-    "prompt": example_prompt, # passes in the prompt needs to be in quotes
+    "prompt": "SELECT COUNT(*) from metabolic_syndrome where Age > 40;", # passes in the prompt needs to be in quotes
     "type": "mysql", # the language it is translating too
     "schema": schema
 }
@@ -75,11 +78,13 @@ def toDatabase(query):
         cursor.close()
         cnx.close()
 
-changeDatabase()
-changeSchema()
-print(database)
-print(schema)
-response = toSQL(example_prompt)
-print(example_prompt)
-print(response)
-toDatabase(response)
+if __name__ == "__main__":
+    #changeDatabase()
+    #changeSchema()
+    print(database)
+    print(schema)
+    response = toSQL(example_prompt)
+    print(response)
+    print(example_prompt)
+    print("SELECT COUNT(*) from metabolic_syndrome where Age > 40;")
+    # toDatabase("SELECT COUNT(*) from metabolic_syndrome where Age > 40;")
