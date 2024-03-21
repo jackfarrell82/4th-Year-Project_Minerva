@@ -11,8 +11,7 @@ schema = "metabolic_syndrome (seqn: int, Age: int, Sex: text, Marital: text, Inc
 
 example_prompt = "what trades have 0 volume"
 
-def changeDatabase():
-    global database
+def changeDatabase(database):
     if database == "financial":
         database = "metabolic_syndrome"
         return database
@@ -20,8 +19,7 @@ def changeDatabase():
         database = "financial"
         return database
     
-def changeSchema():
-    global schema
+def changeSchema(schema):
     if schema == "indexprocessed (Index: text, Date: text, Open: double, High: double, Low: double, Close: double, Adj Close: double, Volume: double, CloseUSD: double)":
         schema = "metabolic_syndrome (seqn: int, Age: int, Sex: text, Marital: text, Income: text, Race: text, WaistCirc: double, BMI: double, Albuminuria: int, UrAlbCr: double, UricAcid: double, BloodGlucose: int, HDL: int, Triglycerides: int, MetabolicSyndrome: int)"
         return schema
@@ -43,7 +41,7 @@ headers = {
 }
 
 data = {
-    "prompt": "SELECT COUNT(*) from metabolic_syndrome where Age > 40;", # passes in the prompt needs to be in quotes
+    "prompt": example_prompt, # passes in the prompt needs to be in quotes
     "type": "mysql", # the language it is translating too
     "schema": schema
 }
@@ -79,8 +77,8 @@ def toDatabase(query):
         cnx.close()
 
 if __name__ == "__main__":
-    #changeDatabase()
-    #changeSchema()
+    #changeDatabase(database)
+    #changeSchema(schema)
     print(database)
     print(schema)
     response = toSQL(example_prompt)

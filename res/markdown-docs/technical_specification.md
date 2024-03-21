@@ -102,9 +102,24 @@ After going through the other models before settling on our final choice we came
 **SQLNet**
 When we first moved on from the Few-Shot-NL2SQL model this was the next model that was found, similarly to the previous model it requied cloning the github repo but unlike the previous one it does not require an api to function. This would have allowed us to use this model completly offline and without encountering a pay wall. SQLNet uses Python and pytorch in order to operate but an issue was encountered very early on into testing with this model as it uses python 2 as opposed to python 3. We thought that this would only be a small problem but as Jack looked into the model more and tried to get it functioning we realised how much of a problem this actually was. 
 
+The biggest problem caused by the older version of python is that [pytorch](https://pytorch.org/), an open source machine learning framework, has been updated since this model was made seven years ago and now only supports python 3. Without pytorch the model will not work as there will be no framework for the model to build off of. The 2 solutions to this problem is to either update the code to python 3 or to download an older version of pytorch that could possibly run with python 2.
+
+What Jack did first was try to update the python 2 code into python 3 but due to the large amount of files and the complexity of the model doing it manually would take far too much time so we tried using the python package [2to3](http://python3porting.com/2to3.html) to assist in updating the files. Initially this appeared to work and progress on implementing the model was going well but upon closer inspection the 2to3 package seemed to not be fully converting the code into python 3 instead it was changing the majority but there were edge cases that remained unchanged. This lead to errors occuring and the error log was saying that the error occuring in the imported libraries. Without knowing the source of the error and still having to go through all the files manually to try and find the source of the errors which is what we were trying to avoid in the first place we decided to try out our other possible solution as no progress was being made here.
+
+After updating the code didn't work Jack moved on to trying to download an older version of pytorch allowing it to interact with the python 2 code as it would have when it was first released. The github page does not say which version of pytorch they used which required us to go through multiple versions and extra research trying to find what version of pytorch supports python 2. Not much progress was made in this solution as we quickly came to the relisation that having our project split between a python 2 backend and a python 3 frontend could cause us problems later on when we try to combine our sections to create the full project. Becuase of this and no solution working due to the age of the model and its necessary components updating we went back to the drawing board and started looking for offline Text-to-SQL models that are more recently made.
+
 **IRNet**
 
+
 **text2sql-API**
+
+After spending a large amount of time trying and testing a variety of different models and without anything to show for it we decided to choose the API approach as, while it was simpler then getting the models set up, it wasn't us being handed a solution we still had to put in a lot of effort and create our own functions in order to get the results we wanted.
+
+The first thing that we needed to do was set up the API in python. Having to learn how to implement API's in python was something we had never done before but due to our knowledge of API's in javascript it was simple to get the basics. We used this [API Tutorial](https://www.dataquest.io/blog/python-api-tutorial/) to help us with the exact syntax needed to get the API functioning. 
+
+The API needed different data in the "headers" and "data" sections. The header only had one piece of information and it was the Authorization key needed to give us access to the API while data included the "prompt" that we want to be translated, "type" indicated what language it is translating to, the type is hardcoded as it will always be translating into MYSQL. The last information included in data is the schema, The schema is used to let the model know what the column names are and what type of data is stored in them which helps in the creation of the MYSQL code.
+
+More information about how we developed this code and any problems we encountered will be discussed in [API & Model Troubles](#api-model-troubles)
 
 ---
 
