@@ -100,13 +100,11 @@ According to the README file the setup only required running the requirements.tx
 After going through the other models before settling on our final choice we came back to this to try testing it out, Jack paid a small amount of money for us to test out the model before making a final decision. The model did work but was very limited to the questions that were alredy assigned to it as it appeared the data that it was using for translating the questions was hard coded into the model itself. This would mean that we would have to manually change all of the data in the model to be relevant to the database's that we want Minerva to pull information from and due to the large amount of time Jack spent researching all these different models, we decided to not pursue this model and instead go with the text2sql-API.
 
 **SQLNet**
-
 When we first moved on from the Few-Shot-NL2SQL model this was the next model that was found, similarly to the previous model it requied cloning the github repo but unlike the previous one it does not require an api to function. This would have allowed us to use this model completly offline and without encountering a pay wall. SQLNet uses Python and pytorch in order to operate but an issue was encountered very early on into testing with this model as it uses python 2 as opposed to python 3. We thought that this would only be a small problem but as Jack looked into the model more and tried to get it functioning we realised how much of a problem this actually was. 
+
 **IRNet**
 
-
 **text2sql-API**
-
 
 ---
 
@@ -156,6 +154,26 @@ In the end, we were too far into development to really rip out Chatterbot and re
 
 <!-- little section on trying to host not on localhost, not worth effort to try find free version -->
 
+One thing we tried out briefly was looking to host our flask application somewhere other than locally, this would be a learning experience as neither of us had done this before and would also provide a cleaner way to view Minerva as the webpage would be accessible from any device all the time, instead of having to be run locally and accessed that way aswell.
+
+Gareth trialed using three different services to host Minerva, each is outlined below
+
+**Heroku** - [Website](heroku.com)
+We didn't get very far with using Heroku, it seemed promising and there was several tutorials and examples available online of using it to host a flask application. However after installing the CLI tool and trying to upload a test application and then Minerva it became very unclear as to what was going wrong, to use Heroku you must create a *Procfile* in your application, this tells Heroku how to run the app, however no matter what way we formatted this file we could never get the app up and running on Heroku, so we quickly moved to trying a different service.
+
+**Vercel** - [Website](vercel.com)
+Vercel was a very promising candidate and we achieved the most progress using it. Vercel was intitially reccomended by a fellow classmate who was using it for their own project so we knew it had potential to work for ours, however differences in our project types meant we encountered a few problems. The first problem was integrating our git repo into Vercel, vercel is very easy to use and connect with default git providers like Github and Gitlab, however because the School of Computing hosts its own Gitlab instance it was not as simple as signing in and picking a repo to host, instead we had to link our repo using an access token and then trigger a deployment everytime a push was made to our repo using deploy script in our CI/CD pipeline (seen below)
+
+![Vercel Deploy Script](../media/vercel_deploy.png)
+
+Our next problem encountered was that Vercel did not natively support Flask as a template, it supports many templates such as Next.js, Nuxt.js and SvelteKit, these templates make it much easier to use and deploy. There are ways to work around this though, and there are many examples online of how people get flask apps hosted on Vercel, we tried following a lot of these but nothing seemed to work, there was a lack of clear error or debugging messages so each time we deployed we didn't really know what was wrong we just had to try different things each time. The best we got was our site was deployed however the CSS and JS did not deploy so it was bare HTML with no functionality attached. After much trial and error we decided to move on.
+
+**Python Anywhere** - [Website](pythonanywhere.com)
+Python Anywhere was the last service we tried, and it seemed very promising, it was centered all around python and so Flask was very often used and deployed with Python Anywhere, it was not as flashy or modern as the other two systems but all we needed was it to work. However we quickly ran into an unavoidable problem, we ran out of storage on the free plan, because the Chatterbot library is quite large and has many dependencies we were unable to install it before we ran out of storage. This quickly ruled out this as an option as we did not want to pay for a service.
+
+**Conclusion**
+After much frustration and many experiments we decided to just stay on localhost and not waste anymore effort on hosting, it provided very little value to the final project and wasn't required. This version of Minerva is just a proof of concept, so localhost is perfectly adequate for what we are showing. Hosting and deploying Minerva is a natural extension of this project and could easily be done with more time and money if needed, but for the scope of this project we kept Minerva hosted locally.
+
 ---
 
 ## Testing
@@ -189,3 +207,9 @@ If you would like to try out the system for yourself please follow these instruc
 ## Future Work
 
 <!-- What we would like to have worked on more, natural extensions that could be accomplished next, what could be added or polished -->
+
+### Training and Intelligence
+
+### Expanding Functionality
+
+### Deployment
