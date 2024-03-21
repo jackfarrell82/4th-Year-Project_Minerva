@@ -70,7 +70,7 @@ So the first part of research was to look into they type of chatbot we wished to
 - [IBM Chatbot types](https://www.ibm.com/blog/chatbot-types/) - this IBM article was one we looked at a lot, it explains the different types of chatbots arranged in order from least intelligent/conversational to the highest intelligence and conversation skill
 - [Yellow AI Chatbot types](https://yellow.ai/blog/types-of-chatbots/) - this was another article we loooked at, it also explains the different types of chatbots with a few extra examples and types that are hybrids
 
-Once we had agreed upon the type of chatbot we wanted to try create we needed to look into how we could get this done, what tools and solutions are there out there to do this. We had already at this point decided that using Python was the best course of action, it is a powerful modern language that we are both very comfortable with, it is also known for being great to use when manipulating data and Natural Language. Gareth started to look into different tutorials and blog posts about how to create and train chatbots in python, some of which are linked below, the common denominator between a lot of these was the use of the chatterbot python library to create and run a chatbot in python, this library was was Gareth decided to use to create Minerva as it allowed us to actually create the chatbot using python code.
+Once we had agreed upon the type of chatbot we wanted to try create we needed to look into how we could get this done, what tools and solutions are there out there to do this. We had already at this point decided that using Python was the best course of action, it is a powerful modern language that we are both very comfortable with, it is also known for being great to use when manipulating data and Natural Language. Gareth started to look into different tutorials and blog posts about how to create and train chatbots in python, some of which are linked below, the common denominator between a lot of these was the use of the chatterbot python library to create and run a chatbot in python, this library was what Gareth decided to use to create Minerva as it allowed us to actually create the chatbot using python code.
 
 - [Hubspot - Craft your own chatbot](https://blog.hubspot.com/website/python-ai-chat-bot)
 - [Realpython - Build a chatbot in Python](https://realpython.com/build-a-chatbot-python-chatterbot/)
@@ -81,7 +81,32 @@ Aside from the Chatterbot library there actually was a surpising lack of tools o
 - [IBM Watson Assistant](https://www.ibm.com/products/watsonx-assistant)
 - [Chatbot.com](https://www.chatbot.com/)
 
-### Database & Text-to-SQL Research - Jack
+### Text-to-SQL Research - Jack
+
+Jack was incharge of the back end of the project which included that database and the Text-to-SQL system which was the largest part of the backend. Having dealt with MYSQL databases in 2nd year and feeling confident with the notes provided by that a lot of the research that we focused on was for the Text-to-SQL system and how we go about implementing it into our project.
+
+We ended up going through several different models each of which having their own unique problems that arose at different stages of development. The models that we tried were:
+
+- [Few-Shot-NL2SQL](https://github.com/MohammadrezaPourreza/Few-shot-NL2SQL-with-prompting)
+- [IRNet](https://github.com/microsoft/IRNet)
+- [SQLNet](https://github.com/xiaojunxu/SQLNet)
+- [text2sql-API](https://www.text2sql.ai/app)
+
+**Few-Shot-NL2SQL**
+This was the first model that Jack found after reaching out to professor Andy Way, who got us in contact with reasearchers who suggested we take a look at the [Spider Leaderboard](https://yale-lily.github.io/spider). The Spider Leaderboard is a leaderboard for the best Text-to-SQL models that are currently available, The leaderboard also provides links to the github where we can download and use the model. Jack went through the leaderboard and picked out this model as it did not require setting up a conda environment and looked the simplest to set up.
+
+According to the README file the setup only required running the requirements.txt and then one python file, this was not the case as the model required we download the specific data from a google drive and also have a Chat-gpt API subscription. This model uses gpt-4.0 to help in the translating of natural language to MYSQL code. This API uses a "pay as you go" model so this is what initially caused us to move to a different model as we did not want to spend money on this project if we could help it, in addition, if we were to upload this to our gitlab someone else could then download it and use it multiple times causing the cost to increase rapidily and then we are left with a large bill.
+
+After going through the other models before settling on our final choice we came back to this to try testing it out, Jack paid a small amount of money for us to test out the model before making a final decision. The model did work but was very limited to the questions that were alredy assigned to it as it appeared the data that it was using for translating the questions was hard coded into the model itself. This would mean that we would have to manually change all of the data in the model to be relevant to the database's that we want Minerva to pull information from and due to the large amount of time Jack spent researching all these different models, we decided to not pursue this model and instead go with the text2sql-API.
+
+**SQLNet**
+
+When we first moved on from the Few-Shot-NL2SQL model this was the next model that was found, similarly to the previous model it requied cloning the github repo but unlike the previous one it does not require an api to function. This would have allowed us to use this model completly offline and without encountering a pay wall. SQLNet uses Python and pytorch in order to operate but an issue was encountered very early on into testing with this model as it uses python 2 as opposed to python 3. We thought that this would only be a small problem but as Jack looked into the model more and tried to get it functioning we realised how much of a problem this actually was. 
+**IRNet**
+
+
+**text2sql-API**
+
 
 ---
 
@@ -124,6 +149,8 @@ In the end, we were too far into development to really rip out Chatterbot and re
 ### API & Model Troubles
 
 <!-- Talk about the different trials and tribulations of all the models and APIs u tried -->
+
+> Note: The troubles that caused us to switch models were stated above in the research section, Here we will be discussing troubleshooting the API, Functions, and Databases
 
 ### Hosting - A fruitless foray
 
