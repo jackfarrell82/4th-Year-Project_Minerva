@@ -1,4 +1,3 @@
-import sys
 import requests
 import mysql.connector
 from mysql.connector import errorcode
@@ -9,7 +8,7 @@ schema = "metabolic_syndrome (seqn: int, Age: int, Sex: text, Marital: text, Inc
 # database = "financial"
 # schema = "indexprocessed (Index: text, Date: text, Open: double, High: double, Low: double, Close: double, Adj Close: double, Volume: double, CloseUSD: double)"
 
-example_prompt = "what trades have 0 volume"
+example_prompt = "How many patients are there that are below 40"
 
 def changeDatabase(database):
     if database == "financial":
@@ -28,8 +27,8 @@ def changeSchema(schema):
         return schema
 
 config = {
-  'user': 'root', #Device Name LAPTOP-EDUNB10Q DESKTOP-7LEP5EQ
-  'password': 'Cedarpark12702',
+  'user': 'root', #Device Name, keep it as root but make sure the data base has all permisions
+  'password': 'Cedarpark12702', # need to find a way to have this not be just written in a file
   'host': '169.254.58.93', #Device ipv4 address 192.168.0.150
   'port': '3306',
   'database': database, #What database we are sending our query too
