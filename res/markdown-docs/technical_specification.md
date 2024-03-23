@@ -110,12 +110,10 @@ After updating the code didn't work Jack moved on to trying to download an older
 
 **IRNet**
 
-
 **text2sql-API**
-
 After spending a large amount of time trying and testing a variety of different models and without anything to show for it we decided to choose the API approach as, while it was simpler then getting the models set up, it wasn't us being handed a solution we still had to put in a lot of effort and create our own functions in order to get the results we wanted.
 
-The first thing that we needed to do was set up the API in python. Having to learn how to implement API's in python was something we had never done before but due to our knowledge of API's in javascript it was simple to get the basics. We used this [API Tutorial](https://www.dataquest.io/blog/python-api-tutorial/) to help us with the exact syntax needed to get the API functioning. 
+The first thing that we needed to do was set up the API in python. Having to learn how to implement API's in python was something we had never done before but due to our knowledge of API's in javascript it was simple to get the basics. We used this [API Tutorial](https://www.dataquest.io/blog/python-api-tutorial/) to help us with the exact syntax needed to get the API functioning.
 
 The API needed different data in the "headers" and "data" sections. The header only had one piece of information and it was the Authorization key needed to give us access to the API while data included the "prompt" that we want to be translated, "type" indicated what language it is translating to, the type is hardcoded as it will always be translating into MYSQL. The last information included in data is the schema, The schema is used to let the model know what the column names are and what type of data is stored in them which helps in the creation of the MYSQL code.
 
@@ -169,7 +167,7 @@ Jack first made the file using the API's without having them be functions as he 
 
 For the MYSQL API we used mysql.connector library [](https://dev.mysql.com/doc/connectors/en/connector-python-introduction.html)
 
-As we were creating our own file to get the API to function how we wanted it to, We decided to have both the Text-to-SQL and MYSQL API's in the same file as having minerva import one file with many functions is better than having minerva run seperate python scripts for each API and database available. 
+As we were creating our own file to get the API to function how we wanted it to, We decided to have both the Text-to-SQL and MYSQL API's in the same file as having minerva import one file with many functions is better than having minerva run seperate python scripts for each API and database available.
 
 ### Hosting - A fruitless foray
 
