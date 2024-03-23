@@ -11,26 +11,17 @@ schema_M = "metabolic_syndrome (seqn: int, Age: int, Sex: text, Marital: text, I
 database_F = "financial"
 schema_F = "indexprocessed (Index: text, Date: text, Open: double, High: double, Low: double, Close: double, Adj Close: double, Volume: double, CloseUSD: double)"
 
-# default DB is medical
-DB_LOADED = database_M
-SCHEMA = schema_M
-
-load_dotenv("config.env")
-AUTH_TOKEN = os.getenv("AUTH_TOKEN")
-DB_USER = os.getenv("DB_USER")
-DB_PORT = os.getenv("DB_PORT")
-
 config = {
-  'user': DB_USER, #Device Name, keep it as root but make sure the data base has all permisions
-  'password': "", # need to find a way to have this not be just written in a file
-  'host': "", #Device ipv4 address 192.168.0.150
-  'port': DB_PORT,
-  'database': "", #What database we are sending our query too
-  'raise_on_warnings': True,
+'user': "", #Device Name, keep it as root but make sure the data base has all permisions
+'password': "", # need to find a way to have this not be just written in a file
+'host': "", #Device ipv4 address 192.168.0.150
+'port': "",
+'database': "", #What database we are sending our query too
+'raise_on_warnings': True,
 }
 
 headers = {
-    'Authorization': AUTH_TOKEN, # what allows us to use the api
+    'Authorization': "", # what allows us to use the api
 }
 
 data = {
@@ -38,6 +29,29 @@ data = {
     "type": "mysql", # the language it is translating too
     "schema": ""
 }
+
+def setupDB():
+    # default DB is medical
+    global DB_LOADED, SCHEMA
+    DB_LOADED = database_M
+    SCHEMA = schema_M
+
+    load_dotenv("config.env")
+    DB_USER = os.getenv("DB_USER")
+    DB_PORT = os.getenv("DB_PORT")
+    config["user"] = DB_USER
+    config["port"] = DB_PORT
+
+    AUTH_TOKEN = os.getenv("AUTH_TOKEN")
+    headers["Authorization"] = AUTH_TOKEN
+
+    HOST = os.getenv("DB_HOST")
+    PASSWORD = os.getenv("DB_PASSWORD")
+    config["password"] = PASSWORD
+    config["host"] = HOST
+
+    config["database"] = DB_LOADED
+    data["schema"] = SCHEMA
 
 def swapDB():
     global DB_LOADED, SCHEMA
@@ -75,35 +89,30 @@ def toDatabase(query):
 
         cursor.execute(query) # sends the query to the database
         rows = cursor.fetchall() # gets all the results and prints it out
-        for r in rows:
-            print(r)
 
         cursor.close()
         cnx.close()
+        return rows
 
 ## this is where shit happens when this file is run, not when it is imported into Minerva
 if __name__ == "__main__":
+    setupDB()
+
     if "medical" in sys.argv:
         DB_LOADED = database_M
         SCHEMA = schema_M   
-    else:
+    if "financial" in sys.argv:
         DB_LOADED = database_F
         SCHEMA = schema_F
-
-    config["database"] = DB_LOADED
-    data["schema"] = SCHEMA
-
-    HOST = os.getenv("DB_HOST")
-    PASSWORD = os.getenv("DB_PASSWORD")
-    config["password"] = PASSWORD
-    config["host"] = HOST
 
     print("Database = " + DB_LOADED)
     prompt = input("Input a prompt: ")
 
     response = toSQL(prompt)
     print("Prompt: " + prompt + " transformed into: " + response)
-    toDatabase(response)
+    resp = toDatabase(response)
+    for r in resp:
+        print(r)
 
     swapDB()
     print("Database = " + DB_LOADED)
@@ -111,7 +120,9 @@ if __name__ == "__main__":
 
     response = toSQL(prompt)
     print("Prompt: " + prompt + " transformed into: " + response)
-    toDatabase(response)
+    resp = toDatabase(response)
+    for r in resp:
+        print(r)
 
 #### STORE EXAMPLES TO TEST HERE IN COMMENTS
 ## MEDICAL

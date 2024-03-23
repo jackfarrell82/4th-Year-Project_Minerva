@@ -1,4 +1,6 @@
 from chatterbot.logic import LogicAdapter
+import text_to_sql_api as api
+from text_to_sql_api import *
 
 class QueryAdapter(LogicAdapter):
     def __init__(self, chatbot, **kwargs):
@@ -13,7 +15,21 @@ class QueryAdapter(LogicAdapter):
         query = statement.text.lower().replace("query:", "").strip()
         
         # Submit the query to another function and get the response
-        response = functionX(query)
+        try:
+            data = processQuery(query)
+            transformation = data.pop()
+            response = transformation + "<br>"
+            if len(data) == 1:
+                response = response + "Answer Returned: " + str(data[0])
+            else:
+                response = response + "Rows returned shown below: <br>"
+                for entry in data:
+                    response = response + str(entry) + "<br>"
+
+        except Exception as e:
+            response = "Oh dear, something went wrong when I went to process this query! <br>" + "ERROR: " + str(e)
+
+        
 
         # Create a response statement using the response
         response_statement = self.get_response_statement(response)
@@ -26,6 +42,9 @@ class QueryAdapter(LogicAdapter):
         return Statement(text=response) 
     
 
-def functionX(query):
-    answer = "The Answer is: " + query
-    return answer
+def processQuery(query):
+    api.setupDB()
+    transformed = api.toSQL(query)
+    response = api.toDatabase(transformed) 
+    response.append("Query transformed into SQL: " + transformed)
+    return response # response is a list
