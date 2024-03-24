@@ -16,5 +16,7 @@ prompt-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
   script:
     - echo "Running prompt tests..."
+    - pip3 install mysql-connector-python
+    - python3 -c "import mysql"
     - bash src/testing/run_prompt_tests.sh
     - echo "Finished"
