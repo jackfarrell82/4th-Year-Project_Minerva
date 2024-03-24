@@ -23,6 +23,7 @@ run-tests:
     ## install mysql
     - pip install --upgrade pip
     - pip install mysql-connector-python
+    - pip install flask
 
     ## run tests
     - echo "Running prompt tests..."
