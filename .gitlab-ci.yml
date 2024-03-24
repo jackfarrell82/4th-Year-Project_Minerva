@@ -1,5 +1,8 @@
 image:  orvice/chatterbot
 
+variables:
+  PYTHON_VERSION: "3.8.10"
+
 stages:
   - setup
   - test
