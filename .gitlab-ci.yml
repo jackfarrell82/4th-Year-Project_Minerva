@@ -7,16 +7,24 @@ stages:
 install-reqs:
   stage: setup
   script:
-    - pip3 install --upgrade pip
-    - pip3 install mysql-connector-python
-    - python3 -c "import mysql"
+    - apt-get update -qy
+    - apt-get install -y --no-install-recommends git
+    - git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+    - export PATH="$HOME/.pyenv/bin:$PATH"
+    - eval "$(pyenv init -)"
+    - eval "$(pyenv virtualenv-init -)"
+    - pyenv install $PYTHON_VERSION
+    - pyenv global $PYTHON_VERSION
+    - export PATH="$HOME/.pyenv/versions/$PYTHON_VERSION/bin:$PATH"
+    - python --version  # Verify Python version
+    - pip install --upgrade pip
+    - pip install mysql-connector-python
     - pip3 install chatterbot
+    - python3 -c "import mysql.connector ; from mysql.connector import errorcode"
 
 prompt-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
   script:
     - echo "Running prompt tests..."
-    - pip3 install mysql-connector-python
-    - python3 -c "import mysql"
     - bash src/testing/run_prompt_tests.sh
     - echo "Finished"
