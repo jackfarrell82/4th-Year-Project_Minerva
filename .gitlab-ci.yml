@@ -27,6 +27,7 @@ install-reqs:
 prompt-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
   script:
+    - pip install mysql-connector-python # i don't know why this is needed
     - echo "Running prompt tests..."
     - bash src/testing/run_prompt_tests.sh
     - echo "Finished"
