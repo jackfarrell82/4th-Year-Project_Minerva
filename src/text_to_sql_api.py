@@ -1,7 +1,7 @@
 import requests
 import sys
 import os
-import mysql.connector
+import mysql
 from mysql.connector import errorcode
 from dotenv import load_dotenv
 
