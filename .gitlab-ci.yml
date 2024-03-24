@@ -22,7 +22,6 @@ install-reqs:
     - python --version  # Verify Python version
     - pip install --upgrade pip
     - pip install mysql-connector-python
-    - pip3 install chatterbot
     - python3 -c "import mysql.connector ; from mysql.connector import errorcode"
 
 prompt-test-job:   # This job runs in the test stage.
