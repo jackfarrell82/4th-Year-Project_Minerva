@@ -7,10 +7,10 @@ stages:
 install-reqs:
   stage: setup
   script:
-    - pip install --upgrade pip
-    - pip install chatterbot
-    - pip install mysql
-    - pip install mysql-connector-python
+    - python -m pip install chatterbot
+    - python -m pip install mysql
+    - python -m pip install mysql-connector
+    - python -m pip install mysql-connector-python
 
 prompt-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
