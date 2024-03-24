@@ -4,11 +4,10 @@ variables:
   PYTHON_VERSION: "3.8.10"
 
 stages:
-  - setup
-  - test
+  - run
 
-install-reqs:
-  stage: setup
+run-tests:
+  stage: run
   script:
     - apt-get update -qy
     - apt-get install -y --no-install-recommends git
@@ -20,15 +19,12 @@ install-reqs:
     - pyenv global $PYTHON_VERSION
     - export PATH="$HOME/.pyenv/versions/$PYTHON_VERSION/bin:$PATH"
     - python --version  # Verify Python version
+
+    ## install mysql
     - pip install --upgrade pip
     - pip install mysql-connector-python
-    - python3 -c "import mysql.connector ; from mysql.connector import errorcode"
 
-prompt-test-job:   # This job runs in the test stage.
-  stage: test    # It only starts when the job in the build stage completes successfully.
-  script:
-    - python --version
-    - pip install mysql-connector-python # i don't know why this is needed
+    ## run tests
     - echo "Running prompt tests..."
     - bash src/testing/run_prompt_tests.sh
     - echo "Finished"
