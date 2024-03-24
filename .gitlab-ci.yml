@@ -1,15 +1,15 @@
-image: python:3.9
+image:  orvice/chatterbot
 
 stages:
   - setup
   - test
-  - deploy
 
 install-reqs:
   stage: setup
   script:
     - pip install --upgrade pip
     - pip install chatterbot
+    - pip install mysql
     - pip install mysql-connector-python
 
 prompt-test-job:   # This job runs in the test stage.
