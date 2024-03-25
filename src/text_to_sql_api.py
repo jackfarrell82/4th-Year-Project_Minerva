@@ -11,6 +11,9 @@ schema_M = "metabolic_syndrome (seqn: int, Age: int, Sex: text, Marital: text, I
 database_F = "financial"
 schema_F = "indexprocessed (Index: text, Date: text, Open: double, High: double, Low: double, Close: double, Adj Close: double, Volume: double, CloseUSD: double)"
 
+DB_LOADED = database_M
+SCHEMA = schema_M
+
 config = {
 'user': "", #Device Name, keep it as root but make sure the data base has all permisions
 'password': "", # need to find a way to have this not be just written in a file
@@ -33,8 +36,6 @@ data = {
 def setupDB():
     # default DB is medical
     global DB_LOADED, SCHEMA
-    DB_LOADED = database_M
-    SCHEMA = schema_M
 
     load_dotenv("config.env")
     DB_USER = os.getenv("DB_USER")
