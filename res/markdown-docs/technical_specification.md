@@ -12,11 +12,20 @@
    1.1 Overview
    1.2 Glossary
 2. Motivation
-3. Research  
+3. Research
+   3.1 Chatbot Research - Gareth
+   3.2 Text-to-SQL Research - Jack
+      - Few-Shot-NL2SQL
+      - IRNet
+      - SQLNet
+      - text2sql-API
 4. Design  
 5. Implementation  
 6. Problems and Solutions  
 7. Limitations
+   7.1 Chatterbot Downsides
+   7.2 Text-to-SQL API & MYSQL API Troubles
+   7.3 Hosting - A fruitless foray
 8. Testing  
 9. Installation Guide  
 10. What we have learnt  
@@ -208,6 +217,13 @@ After much frustration and many experiments we decided to just stay on localhost
 ## What we learnt
 
 <!-- SKills, tech and teamwork stuff, planning etc -->
+We learnt a lot over the course of this project, of course we learnt a lot in our specific sections Gareth with Chatbots and hosting, Jack with Text-to-SQL models and API's. Thats not only what each of us learnt we also learnt about each others sections when it came to combining are parts and testing Minerva.
+
+When we started this project both Jack and Gareth had very similar experience with databases and API's alongside gareth having worked with chatbots before. Now after completing the project both of us have gained valuable insights into the operations and development of chatbots and API's. What Jack learnt most was database and API interaction and gained a deeper insight into how databases work and how they can be manipulated. Gareth learned what gareth learned *plz write what you learned :)*. 
+
+Teamwork, planning and communication where all skills that we developed as part of this project, having worked with each other before we knew what to expect from the other person but having this project have such influence over our final grade we pushed ourselves to improve every aspect on how we work together. We did this not only so the project would run more smoothly but also to improve our skills for when we start our jobs as we would have to develop these skills anyway and getting a head start doesn't hurt.
+
+This project was a great opportunity for us, not only did we get to expand our knowledge but we also got a small taste of what it will be like after college and when we are working in teams to create products for businesses. It has allowed us to practice all of the necessary skills and see the value in each of them without the pressure or risk of making a mistake that has a financial cost to it. These skills will be invaluable in the coming years and will stand to us during our career.
 
 ---
 
