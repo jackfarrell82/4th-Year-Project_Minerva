@@ -25,15 +25,13 @@
    5.3 Microservice
 6. Problems and Solutions  
    6.1 Working with a Camera  
-   6.2 Josh Problem  
-   6.3 Last Problem  
+   6.2 Deleting Lectures and Modules
 7. Testing  
    7.1 Git + CI/CD  
    7.2 Unit Testing  
    7.3 System Testing  
    7.4 User Testing  
 8. Installation Guide  
-9. What we have learnt  
 
 ---  
 
@@ -77,7 +75,7 @@ In this section we will describe some of the research we did for this project, p
 
 ### Microservice
 
-The bulk of the research we did for this project was for the microservice, it was the experimental part of the project that neither of us had done before, and it required a lot of research and experimentation before we started developing the final implementation.
+The bulk of the research we did for this project was for the microservice which was responsible for the computer vision part of the project, analysing the camera input and collecting data, it was the experimental part of the project that neither of us had done before, and it required a lot of research and experimentation before we started developing the final implementation.
 
 For the frontend and backend we did not do as much research, we had already decided on using a Django-Node base for our system and had done this before in CA298, the backend and frontend just needed a small bit of research while we were developing whenever we needed to do something we hadn't done before.
 
@@ -114,7 +112,7 @@ This section will go over the high-level design of our system, how we planned it
 
 ### System Architecture
 
-![System Architecture Diagram](../../res/media/ClassVisionArch.png)
+![System Architecture Diagram](../../res/media/ArchDiagram.drawio.png)
 
 Above you can see our **System Architecture Diagram.**
 This shows you a high-level overview of what the system design is, how we separated the functionalities into different components exactly what each component is going to contain. It also contains some small implementation details such as links between components and what technologies we were going to use, we will talk more about the implementation in the next section.
@@ -430,15 +428,21 @@ Below you can see the merge request to bring this branch into master.
 
 ### Unit Testing
 
-During our development, we did not do set and rigid unit testing using test scripts. We didn't have any because of time constraints and also because we couldn't think of a good approach to testing our frontend or backend components because they are both servers running and need a user to interact with them to test.  
+During our development we didn't do automated unit tests. We didn't do it automated because the setup of our system did not allow it, because our system is mainly about user interaction and runs on two servers.
 
-Instead of formal unit tests, we both made sure to test the components under development at all points during development. Every time there was a change or additional feature added to our code we always ran the servers on our machines and visited the webpage to validate our changes, we filled in as sample users.  
+Instead of automated unit tests, we both made sure to test the components under development at all points during development. Every time there was a change or additional feature added to our code we always ran the servers on our machines and visited the webpage to validate our changes, we filled in as sample users.  
 
 For example, while Gareth was developing the flask app and facial recognition scripts he was constantly testing it as he tweaked values and added features into the microservice trialling the script out on himself with his laptop webcam, making sure the algorithm detected his face, eyes and recorded the data correctly.
 
+We also used Postman when testing the backend, specifically when testing our GET and POST requests to see if they were working and that the database was storing out data correctly.
+
+See the image below for some formal descriptions of an endpoint we tested manually using postman during unit tests. During this test we were trying to figure out the exact syntax we need to create our JSON object so that we could post new lecture objects and add them to a module.
+
+![Unit Test in Postman](../../res/media/UnitTestCase.png)
+
 ### System Testing
 
-Similar to unit testing we did not have the time to set up formal test scripts for testing the system as a whole unit. Instead, after we had brought all three components together we again filled in as users and tried out every possible thing on the webpage that we could, we were trying to prod the system until it broke or encountered a bug.
+We didn't have the ability to do automated system testing because of the nature of our sytem, instead, after we had brought all three components together we again filled in as users and did manual system tests by trying out every possible thing on the system that we could, we were trying to prod the system until it broke or encountered a bug.
 
 This did help us spot a lot of bugs, just by going through the page every few days, adding lectures, starting the flask app and pressing buttons we did manage to find and fix several bugs we might have missed.  
 
@@ -490,9 +494,9 @@ On the functionality side, we got several interesting suggestions on how to make
 - Timetable styling, we improved the styling on the timetable page to make it clearer and easier to read, also linking having buttons to link from a lecture on the timetable to the module page of that lecture.
 - Statistic clarity, improved the display of some stats in the reports and module statistics, specifically ones like attendance percentage to better highlight why they were low, for example, the attendance is 5% because only 1/20 students were at the lecture.
 
----
+Below you can view some of the results we got from our google form, if you want to view the full results file you can find it in */res/testing-results*
 
-## What we learnt
+![User Test Results](../../res/media/UserTestResults.png)
 
 ---
 
@@ -505,17 +509,15 @@ If you would like to try out the system for yourself please follow these instruc
 2. Clone our repo
 3. Navigate to /src in your terminal
 4. For the backend:
-   a. First make sure you have the pip installer **sudo apt install python3-pip**
-   b. navigate to /src/backend
-   c. use pip to install the requirements **pip install -r requirements.txt**
-   d. start the Django backend with the command **python3 manage.py runserver**
+   a. First make sure you have the pip installer **sudo apt install python3-pip**  
+   b. navigate to /src/backend  
+   c. use pip to install the requirements **pip install -r requirements.txt**  
+   d. start the Django backend with the command **python3 manage.py runserver**  
 5. For the frontend: (Open a second terminal window)
-   a. Make sure you have NPM installed - **sudo apt install npm**
-   b. navigate to /src/frontend
-   c. Install Nodemon **npm install nodemon**
-   d. Start the Node server with the command **npm start**
+   a. Make sure you have NPM installed - **sudo apt install npm**  
+   b. navigate to /src/frontend  
+   c. Install Nodemon **npm install nodemon**  
+   d. Start the Node server with the command **npm start**  
 6. Once both servers are running head to *localhost:3000* to view the webpage
 
 > *Note about flask: when you start the flask service it takes a moment to start, the new tab will say failed to connect briefly before it will display the UI*
-
-
