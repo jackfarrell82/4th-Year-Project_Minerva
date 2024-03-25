@@ -6,6 +6,7 @@ from chatterbot import filters
 import sys
 import logging
 from static.data.training_dict import trainset
+import text_to_sql_api as api
 
 app = Flask(__name__)
 DATABASE_FILE = "medical.sql"
@@ -71,12 +72,15 @@ def database_action():
     global DATABASE_FILE
     data = json.loads(request.data)
     databaseChoice = data["db_name"]
+    #  <option value="medical.sql">Medical Data (medical.sql)</option>
+    #  <option value="financial.sql">Finance Data (financial.sql)</option>
 
     if (databaseChoice != "") and (databaseChoice != DATABASE_FILE):
         DATABASE_FILE = databaseChoice
 
     return_json = {"db_name" : DATABASE_FILE}
     data = json.dumps(return_json)
+    api.swapDB()
     return data
 
 if sys.argv[1] == "deploy":
