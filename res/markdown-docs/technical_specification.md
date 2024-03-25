@@ -9,12 +9,12 @@
 ## Table of contents
 
 1. Introduction  
-   1.1 Overview
+   1.1 Overview  
    1.2 Glossary
 2. Motivation
-3. Research
-   3.1 Chatbot Research - Gareth
-   3.2 Text-to-SQL Research - Jack
+3. Research  
+   3.1. Chatbot Research - Gareth  
+   3.2 Text-to-SQL Research - Jack  
       - Few-Shot-NL2SQL
       - IRNet
       - SQLNet
@@ -22,10 +22,10 @@
 4. Design  
 5. Implementation  
 6. Problems and Solutions  
-7. Limitations
-   7.1 Chatterbot Downsides
-   7.2 Text-to-SQL API & MYSQL API Troubles
-   7.3 Hosting - A fruitless foray
+7. Limitations  
+   7.1 Chatterbot Downsides  
+   7.2 Text-to-SQL API & MYSQL API Troubles  
+   7.3 Hosting - A fruitless foray  
 8. Testing  
 9. Installation Guide  
 10. What we have learnt  
