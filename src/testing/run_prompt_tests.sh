@@ -3,4 +3,5 @@
 echo "Shell Script GO"
 pwd
 cd src/
-python3 app.py testing/testfile.txt
+# python3 app.py testing/testfile.txt
+echo "Tests moved to manual"

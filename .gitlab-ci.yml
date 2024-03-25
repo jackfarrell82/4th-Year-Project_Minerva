@@ -9,21 +9,21 @@ stages:
 run-tests:
   stage: run
   script:
-    - apt-get update -qy
-    - apt-get install -y --no-install-recommends git
-    - git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-    - export PATH="$HOME/.pyenv/bin:$PATH"
-    - eval "$(pyenv init -)"
-    - eval "$(pyenv virtualenv-init -)"
-    - pyenv install $PYTHON_VERSION
-    - pyenv global $PYTHON_VERSION
-    - export PATH="$HOME/.pyenv/versions/$PYTHON_VERSION/bin:$PATH"
-    - python --version  # Verify Python version
+    # - apt-get update -qy
+    # - apt-get install -y --no-install-recommends git
+    # - git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+    # - export PATH="$HOME/.pyenv/bin:$PATH"
+    # - eval "$(pyenv init -)"
+    # - eval "$(pyenv virtualenv-init -)"
+    # - pyenv install $PYTHON_VERSION
+    # - pyenv global $PYTHON_VERSION
+    # - export PATH="$HOME/.pyenv/versions/$PYTHON_VERSION/bin:$PATH"
+    # - python --version  # Verify Python version
 
-    ## install mysql
-    - pip install --upgrade pip
-    - pip install mysql-connector-python
-    - pip install flask
+    # ## install mysql
+    # - pip install --upgrade pip
+    # - pip install mysql-connector-python
+    # - pip install flask
 
     ## run tests
     - echo "Running prompt tests..."
