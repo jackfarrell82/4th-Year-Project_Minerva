@@ -39,7 +39,7 @@ body {
     flex-flow: column wrap;
     justify-content: space-between;
     width: 100%;
-    max-width: 867px;
+    max-width: 1000px;
     margin: 25px 10px;
     height: calc(100% - 50px);
     border: var(--border);
@@ -98,7 +98,8 @@ body {
 }
 
 .msg-bubble {
-    max-width: 450px;
+    margin-top: 5px;
+    max-width: 700px;
     padding: 15px;
     border-radius: 15px;
     background: var(--left-msg-bg);
@@ -278,7 +279,7 @@ body {
 .footnotes{
     position: fixed;
     bottom: 0;
-    padding: 15px;
+    padding: 10px;
     text-align: right;
 }
 
