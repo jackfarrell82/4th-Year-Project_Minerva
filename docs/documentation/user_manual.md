@@ -26,7 +26,8 @@ Before Minerva can be used she has to be set up and connected to the database. A
     - Database port (3360 is the default) <br>
     - Authorization token (used for the [text2sql-API](https://www.text2sql.ai/app)) <br>
 
-the Name and Schema of the databases will need to be added to the text_to_sql_api.py file in order connect to the database.
+<p> The Name and Schema of the databases will need to be added to the text_to_sql_api.py file in order connect to the database.
+</p>
 ---
 
 ## Web Page
