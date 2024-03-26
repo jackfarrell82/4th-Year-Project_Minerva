@@ -19,14 +19,12 @@
 
 ## Setting Up Minerva
 
-Before Minerva can be used she has to be set up and connected to the database. All of the code for Minerva can be found in the src directory along side the requirements.txt file which will download all the necessary modules. A config.env file has to be made with the following information in order for Minerva to be able to connect to the database. They are:  
-    - Database Username 
-    - Database Password
-    - Database IP Address (if the database is on the same system as Minerva than the device IPv4 address should be used)
-    - Database port (3360 is the default)
-    
-
-    - Authorization token (used for the [text2sql-API](https://www.text2sql.ai/app))
+Before Minerva can be used she has to be set up and connected to the database. All of the code for Minerva can be found in the src directory along side the requirements.txt file which will download all the necessary modules. A config.env file has to be made with the following information in order for Minerva to be able to connect to the database. They are:  <br>
+    - Database Username <br>
+    - Database Password <br>
+    - Database IP Address (if the database is on the same system as Minerva than the device IPv4 address should be used) <br>
+    - Database port (3360 is the default) <br>
+    - Authorization token (used for the [text2sql-API](https://www.text2sql.ai/app)) <br>
 
 the Name and Schema of the databases will need to be added to the text_to_sql_api.py file in order connect to the database.
 ---
