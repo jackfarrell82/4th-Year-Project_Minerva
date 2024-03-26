@@ -43,8 +43,11 @@ The system we have designed is called Minerva, the purpose of Minerva is to assi
 
 | Term | Description |
 | --- | ----------- |
+| Natural Language | Text written in language that humans naturally use |
 | Natural Language Processing (NLP) | NLP is a branch of artificial intelligence that enables computers to comprehend, generate and work with human languages |
 | Chatbot | A chatbot is a software app or web interface that is designed to mimic human conversation, it interacts with users in a conversational style|
+| Application Programming Interface (API) | An API enables two software components to communicate with one another using requests and responses |
+| Structured Query Language (SQL) | A  language used to build and search databases, it is also the language that Minerva translates natural language into. MYSQL is a version of SQL that we used |
 |||
 
 ## Motivation
