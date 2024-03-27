@@ -130,7 +130,7 @@ The first thing that we needed to do was set up the API in python. Having to lea
 
 The API needed different data in the "headers" and "data" sections. The header only had one piece of information and it was the Authorization key needed to give us access to the API while data included the "prompt" that we want to be translated, "type" indicated what language it is translating to, the type is hardcoded as it will always be translating into MYSQL. The last information included in data is the schema, The schema is used to let the model know what the column names are and what type of data is stored in them which helps in the creation of the MYSQL code.
 
-More information about how we developed this code and any problems we encountered will be discussed in [Text-to-SQL API & MYSQL API Troubles](###text-to-sql_api_mysql_api_troubles)
+More information about how we developed this code and any problems we encountered will be discussed in [Text-to-SQL API & MYSQL API Troubles](##text-to-sql_api_mysql_api_troubles)
 
 ---
 
