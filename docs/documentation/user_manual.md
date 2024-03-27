@@ -1,6 +1,6 @@
 # DCU CA400 - Final Year Project
 
-![Minerva Banner](../media/minerva_banner.png)
+![Minerva Banner](../../res/media/minerva_banner.png)
 
 >Gareth Hogan 20379616  & Jack Farrell 20352136
 
@@ -31,6 +31,7 @@ Before Minerva can be used she has to be set up and connected to the database. A
 ---
 
 ## Web Page
+
 Minerva's locally hosted web page consists of a text box where users can enter their questions alongside the chat history between Minerva and the user.
 
 ### Layout of the Web Page
@@ -39,9 +40,12 @@ Minerva's locally hosted web page consists of a text box where users can enter t
 ---
 
 ## Using Mineva
+Minerva is very simple to use even if users have never had experience with chatbots before. Minerva has two functions that users can use to interact with her and they are using the text box to enter in and submit questions and viewing the output of the questions in the chat history bo above. Once Minerva has been set up corectly users will open up the web page and be greated with the layout as described above in the [Layout of the Web Page](#layout-of-the-web-page).
 
 ### Entering your Questions
+Once there the user has arrived on the web page they will see the text box at the bottom, Users can click on the box and start typing in their question that they want Minerva to go and find. Similar to how sending messages works users will see their question be placed into the above chat history section before Minerva goes about getting that information from the connected databases. If Minerva does not understand the question or an error occured she may suggest you change the wording of the question this will be displayed to the user in the chat history.
 
 ### Viewing the Output
+If the users question was succesful Minerva will output the information in the chat history before asking the user if they would like to enter another question. Once there are enough mesages that they all cannot fit on the page the chat history will get a scroll wheel allowing the users to go back and see what questions they asked and what answers they got. Using that a user may be able to learn and ask different questions until they are satisfied with the infomation they recevied.
 
 ---
