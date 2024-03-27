@@ -1,17 +1,27 @@
 :root {
-    --body-bg: url("media/background.png");
-    --msger-bg: #fff;
+    --body-bg: url("media/background_blue.png");
     --border: 2px solid #ddd;
-    --left-msg-bg: #ececec;
-    --right-msg-bg: #2884fd;
-    --arrow-bg: #00334E;
-    --arrow-icon: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg);
-    --option-bg: #00334E;
-    --select-bg: #145374;
+
+    --dark: #00334E;
+    --med: #145374;
+    --light: #5588A3;
+    --grey: #E8E8E8;
+
+    /* --dark-red: #801010;
+    --med-red: #AA1414;
+    --light-red: #C33939; */
 }
 
-/* 2A2E45 Space Cadet Grey Blue Dark*/
-/* https://colorhunt.co/palette/e8e8e85588a314537400334e */
+/* Blue Palette https://colorhunt.co/palette/e8e8e85588a314537400334e */
+
+/* Dark Blue: 00334E */
+/* Medium Blue: 145374 */
+/* Light Blue: 5588A3 */
+/* Grey: E8E8E8 */
+/* Light Red: C33939 */
+/* Medium Red: AA1414 */
+/* Dark Red: 801010 */
+
 
 html {
     box-sizing: border-box;
@@ -44,18 +54,9 @@ body {
     height: calc(100% - 50px);
     border: var(--border);
     border-radius: 5px;
-    background: var(--msger-bg);
+    background: white;
     /* box-shadow: 5px 10px 15px -5px rgba(0, 0, 0, 0.2); */
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-}
-
-.msger-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: var(--border);
-    background: #eee;
-    color: #2A2E45;
 }
 
 .msger-chat {
@@ -102,7 +103,9 @@ body {
     max-width: 700px;
     padding: 15px;
     border-radius: 15px;
-    background: var(--left-msg-bg);
+    background: var(--grey);
+    /* outline: solid 1px black; */
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .msg-info {
@@ -130,7 +133,7 @@ body {
 }
 
 .right-msg .msg-bubble {
-    background: var(--right-msg-bg);
+    background: var(--dark);
     color: #fff;
     border-bottom-right-radius: 0;
 }
@@ -160,14 +163,14 @@ body {
 
 .msger-send-btn {
     margin-left: 10px;
-    background: #145374;
+    background: var(--med);
     color: #fff;
     font-weight: bold;
     cursor: pointer;
     transition: background 0.23s;
 }
 .msger-send-btn:hover {
-    background: #00334E;
+    background: var(--dark);
 }
 
 .msger-chat {
@@ -248,7 +251,7 @@ body {
 
 .suggestion:focus {
     outline: none;
-    border: 2px solid #4285f4;
+    border: 2px solid var(--light);
 }
 
 .suggestion:not(:disabled) {
@@ -272,8 +275,25 @@ body {
 }
 
 #QuerySub {
-    background-color: #145374;
+    background-color: var(--med);
     color: #E8E8E8;
+}
+
+.headnotes{
+    position: fixed;
+    top: 25px;
+    left: 15px;
+    padding: 10px;
+    border-radius: 15px;
+    background: var(--grey);
+    box-shadow: 5px 5px 5px 2px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    width: 180px;
+}
+
+#loadedDB{
+    color: var(--med);
+    font-style: italic;
 }
 
 .footnotes{
@@ -284,49 +304,49 @@ body {
 }
 
 .foot-button {
-  align-items: center;
-  appearance: none;
-  background-color: #145374;
-  border-radius: 4px;
-  border-width: 0;
-  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#5588A3 0 -3px 0 inset;
-  box-sizing: border-box;
-  color: #E8E8E8;
-  cursor: pointer;
-  display: inline-flex;
-  font-family: "JetBrains Mono",monospace;
-  height: 48px;
-  justify-content: center;
-  line-height: 1;
-  list-style: none;
-  overflow: hidden;
-  padding-left: 16px;
-  padding-right: 16px;
-  position: relative;
-  text-align: left;
-  text-decoration: none;
-  transition: box-shadow .15s,transform .15s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
-  will-change: box-shadow,transform;
-  font-size: 18px;
-  margin: 3px;
+    align-items: center;
+    appearance: none;
+    background-color: var(--med);
+    border-radius: 4px;
+    border-width: 0;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,var(--light) 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: var(--grey);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "JetBrains Mono",monospace;
+    height: 48px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s,transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow,transform;
+    font-size: 18px;
+    margin: 3px;
 }
 
 .foot-button:focus {
-  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
 }
 
 .foot-button:hover {
-  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
-  transform: translateY(-2px);
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    transform: translateY(-2px);
 }
 
 .foot-button:active {
-  box-shadow: #D6D6E7 0 3px 7px inset;
-  transform: translateY(2px);
+    box-shadow: #D6D6E7 0 3px 7px inset;
+    transform: translateY(2px);
 }
 
 .hidden {
@@ -339,8 +359,9 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black */
+    background-color: rgba(0, 0, 0, 0.85); /* semi-transparent black */
     z-index: 9998; /* below the floating element */
+    transition: opacity 1s ease-out;
 }
 
 #floatingElement {
@@ -355,6 +376,7 @@ body {
     z-index: 9999;
     width: 25%;
     height: 20%;
+    transition: opacity 1s ease-in;
 }
 
 #closeButton {
@@ -374,8 +396,8 @@ select {
     font: inherit;
     width: 20rem;
     padding: 1rem 4rem 1rem 1rem;
-    background: var(--arrow-icon) no-repeat right 0.8em center / 1.4em, linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
-    color: #E8E8E8;
+    background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg) no-repeat right 0.8em center / 1.4em, linear-gradient(to left, var(--dark) 3em, var(--med) 3em);
+    color: var(--grey);
     border-radius: 0.25em;
     box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
     cursor: pointer;
@@ -384,8 +406,9 @@ select {
         outline: none;
     }
     option {
-        color: inherit;
-        background-color: var(--option-bg);
+        color: black;
+        background-color: var(--grey);
+        padding: 10px;
     }
 }
 

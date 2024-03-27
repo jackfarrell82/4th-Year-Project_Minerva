@@ -17,20 +17,6 @@ msgerForm.addEventListener("submit", event => {
     botResponse(msgText);
 });
 
-document.getElementById("floater").addEventListener("click", function() {
-    var floatingElement = document.getElementById("floatingElement");
-    var overlay = document.getElementById("overlay");
-    floatingElement.classList.toggle("hidden");
-    overlay.classList.toggle("hidden");
-});
-
-document.getElementById("closeButton").addEventListener("click", function() {
-    var floatingElement = document.getElementById("floatingElement");
-    var overlay = document.getElementById("overlay");
-    floatingElement.classList.add("hidden");
-    overlay.classList.add("hidden");
-});
-
 var suggestion_buttons = document.querySelectorAll('.autosubmit');
 var inputField = document.getElementById('form-input');
 
@@ -76,6 +62,21 @@ function botResponse(input) {
 function loadDatabase(){
     var dropdown_selection = document.getElementById("dropdown").value;
     DB_change(dropdown_selection);
+
+    if(dropdown_selection == "medical.sql"){
+        document.getElementById("medical.sql").style.display = "none";
+        document.getElementById("financial.sql").style.display = "inline";
+        document.getElementById("loadedDB").innerHTML = "Metabolic Syndrome";
+    }
+    else{
+        document.getElementById("medical.sql").style.display = "inline";
+        document.getElementById("financial.sql").style.display = "none";
+        document.getElementById("loadedDB").innerHTML = "Stock Market Data";
+    }
+
+
+    close_DBSelect()
+    switch_Colour()
 }
 
 function DB_change(file){
@@ -84,6 +85,51 @@ function DB_change(file){
 
 function get(selector, root = document) {
     return root.querySelector(selector);
+}
+
+document.getElementById("closeButton").addEventListener("click", function(){
+    close_DBSelect();
+});
+
+document.getElementById("floater").addEventListener("click", function() {
+    var floatingElement = document.getElementById("floatingElement");
+    var overlay = document.getElementById("overlay");
+
+    floatingElement.style.opacity = 100;
+    overlay.style.opacity = 100;
+
+    floatingElement.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+});
+
+function close_DBSelect(){
+    var floatingElement = document.getElementById("floatingElement");
+    var overlay = document.getElementById("overlay");
+
+    floatingElement.style.opacity = 0;
+    overlay.style.opacity = 0;
+
+    setTimeout(() => {  
+        floatingElement.classList.add("hidden")
+        overlay.classList.add("hidden");
+    }, 800)
+}
+
+function switch_Colour(){
+    const root = document.documentElement;
+    var style = getComputedStyle(document.body);
+
+    if (style.getPropertyValue('--dark') == '#00334E') {
+        root.style.setProperty('--dark', '#801010'); // Red Dark
+        root.style.setProperty('--med', '#AA1414'); // Red Med
+        root.style.setProperty('--light', '#C33939'); // Red Light
+        root.style.setProperty('--body-bg', 'url("media/background_red.png")')
+    } else {
+        root.style.setProperty('--dark', '#00334E'); // Blue Dark
+        root.style.setProperty('--med', '#145374'); // Blue Med
+        root.style.setProperty('--light', '#5588A3'); // Blue Light
+        root.style.setProperty('--body-bg', 'url("media/background_blue.png")')
+    }
 }
 
 window.onload = function(){ 
