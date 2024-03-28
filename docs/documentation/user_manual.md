@@ -39,11 +39,11 @@ Minerva's locally hosted web page consists of a text box where users can enter t
 
 This is the layout of the web page that a user will see once they begin using Minerva, Here you can see Minerva greeting the user and the chat history where the user has asked Minerva "What can you do?". as shown, Minerva's response to the user will be in the chat history box similarly to how text messages and other messaging apps allow you to view the history of what was said by what person. Minerva answers the users question explaining to the user what she is and what she can do. Along the bottom of the web page we can see the text box that the user is currently typing in their next question to Minerva, this area is visibly shown to be different due to the background colour being different from the history box above. Once the user has finished typing in their question they can click on the send button found on the right hand side. Common user questions can be found just above the text box that allows users to ask them without having to type it out.
 
-On the far right hand side there is a "Change Database" button this will then bring up a list of databases allowing the user to change what database Minerva gets the information from.
 ![Web Page 2](../../res/media/layout2.png)
-This is what the user will see when they click on the Change Database button
+On the far right hand side there is a "Change Database" button this will then bring up a list of databases allowing the user to change what database Minerva gets the information from. Above is what the user will see when they click on the Change Database button.
 
 ![Web Page 3](../../res/media/layout3.png)
+
 When a user changes database the background changes to a different colour to easily and quickly tell the user that the database was changes succesfully. The top left corner also displays what the current database is if the user is unaware what colour is assigned to each database. In this screenshot it shows that Minerva can give you information about the database including what columns there are and what each column represents, this can assist the user in constructing their questions to get the information they want out of the database.
 ---
 
