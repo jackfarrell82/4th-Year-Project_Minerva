@@ -66,12 +66,12 @@ function loadDatabase(){
     if(dropdown_selection == "medical.sql"){
         document.getElementById("medical.sql").style.display = "none";
         document.getElementById("financial.sql").style.display = "inline";
-        document.getElementById("loadedDB").innerHTML = "Metabolic Syndrome";
+        document.getElementById("loadedDB").innerHTML = "Metabolic Syndrome Database";
     }
     else{
         document.getElementById("medical.sql").style.display = "inline";
         document.getElementById("financial.sql").style.display = "none";
-        document.getElementById("loadedDB").innerHTML = "Stock Market Data";
+        document.getElementById("loadedDB").innerHTML = "Stock Market Index Database";
     }
 
 

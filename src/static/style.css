@@ -287,13 +287,14 @@ body {
     border-radius: 15px;
     background: var(--grey);
     box-shadow: 5px 5px 5px 2px rgba(0, 0, 0, 0.3);
-    text-align: left;
+    text-align: center;
     width: 180px;
 }
 
 #loadedDB{
     color: var(--med);
     font-style: italic;
+    text-align: center;
 }
 
 .footnotes{
