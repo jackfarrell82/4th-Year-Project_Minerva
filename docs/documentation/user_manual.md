@@ -45,6 +45,7 @@ On the far right hand side there is a "Change Database" button this will then br
 ![Web Page 3](../../res/media/layout3.png)
 
 When a user changes database the background changes to a different colour to easily and quickly tell the user that the database was changes succesfully. The top left corner also displays what the current database is if the user is unaware what colour is assigned to each database. In this screenshot it shows that Minerva can give you information about the database including what columns there are and what each column represents, this can assist the user in constructing their questions to get the information they want out of the database.
+
 ---
 
 ## Using Mineva
