@@ -141,7 +141,7 @@ This section will go over the high-level design behind Minerva, how we planned i
 
 ### System Architecture
 
-[System Architecture Diagram]()
+![System Architecture Diagram]()
 
 Above is our System Architecture Diagram this shows a high-level overview of what Minerva is designed to do, how each is function is seperated into different components and what each one contains in order for the function to work. It also contains implementation details such as links and technologies present used in each component. Implementation will be covered in greater detail in the Implementation section.
 
@@ -153,6 +153,43 @@ In this section we will give an overview on how we designed Minerva and her indi
 The role of the frontend chatbot component is to render the web page and is the only point of access for the user to interact with Minerva. Through the frontend the user will be able to ask Minerva questions about the database, be given the infomation they are asking, and also be able change the database to be able to retrieve different information. It is throught he frontend that users gain access to the information stored in the backend. The questions users input into Minerva are sent to the backend where they will be translated and then queried to the database before the information is returned to the user on the front end.
 
 The backend is where the Text-to-SQL translation and the database api are located. Users utilise the back end through the front end when they ask Minerva a question or change the database using the buttons found on the web page. The main responsibilities are to process user input and send the processed question to the database, then returning the retrieved information to the frontend.
+
+### Frontend Architecture
+
+The frontend is responsible for everything the user sees and interacts with, its primary function is to be a user interface for the user and it is what allows the user to interact with Minerva. The main part of the frontend web page is the chat history and text box. These two sections take up the majority of the page with the rest being taken up by a Minerva logo, A box indicating what database is currently connected, a change database button, and quick access buttons allowing the user to auto fill common questions.
+The frontend is responsible for:
+
+- Present the webpage to the user
+- Allowing users to enter questions to Minerva
+- Telling Minerva what database they want information from
+- Sending the user input to the backend
+- Returning the database information to users
+
+Below you can view a use case model we made for the frontend, which shows you how a user interacts with the frontend.
+
+![Frontend Use Case Diagram]()
+
+From the above diagram you can see that user interaction with Minerva is very limited but the variety of questions that a user can ask is inumberable and Minerva will be able to cope and return the information to the user if the data is in the database. Most of the functions in the frontend interact with the backend as the frontend does not process inputted data but just displays it.
+
+### Backend Architecture
+
+The backend is responsible for handling all the data that the user will be accessing through Minerva by the use of API's for both the Text-to-SQL model and accessing the databases. Some of the data handled by the backend will not be visable to the user at all times. The responsiblitites of the backend are:
+
+- Translating the input into MYSQL code
+- Sending the generated SQL code to the database
+- Returning the database infomation to the frontend
+
+![Backend Sequence Diagram]()
+
+The sequence diagram above showcases the order of operations that occur when a user inputs their question on the frontend.
+
+**Description of the flow:**
+- Backend receives user input from the frontend
+- User input is then sent to the Text-to-SQL model via an API
+- Backend receives the translated user input 
+- Sends the user query to the database
+- Database returns the information that the query outlined
+- Backend sends the database information to the frontend for it to be displayed
 
 ---
 
