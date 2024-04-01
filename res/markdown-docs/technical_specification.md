@@ -247,6 +247,12 @@ If you would like to try out the system for yourself please follow these instruc
 
 <!-- What we would like to have worked on more, natural extensions that could be accomplished next, what could be added or polished -->
 
+If we were to continue development on Minerva and add additional functionality one of the first things that we would add would be an option for Minerva to show the user the translated SQL code. Currently Minerva takes the users question and returns to them the information from the database that answers the questiom, what this feature would do would be instead of returning the answer to the question Minerva would return the users question in SQL format. This would expand Minervas capabilities and would allow her to be used as a SQL learning assistant aswell as a tool used for getting information, allowing her to be useful in a wider variety of markets.
+
+Close to the end of the project jack toyed with the idea of having Minerva be able to access a database on a seperate machine, making it more realistic to how Minerva would be operating in a business setting. Due to the deadline approaching and the documentation still needing to be done we thought it would be best to focus on the documentation rather than add in a feature that we would have to spend large amounts of time researching and testing. Implementing this feature could also cause Minerva to no longer work meaning that if we didnt get it working by the deadline we would have to spend more time everting all the changes.
+
+When we started this project we had planned for Minerva to have the ability to visualise the data and output a variety of charts based on the data the user requested. Over the course of the project we focused on getting the core function up and running which was the ability for Minerva to translate natural language and return database information. This took up a lot of time combined with the research and testing it left us with very little time to reseach, lean, implement, and test the code necessary to get data visualisation working. Out of all of additional functionality we would like to implement this would be the one that we would most like to get functioning.
+
 ### Training and Intelligence
 
 ### Expanding Functionality
