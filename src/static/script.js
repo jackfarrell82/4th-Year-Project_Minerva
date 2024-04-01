@@ -133,7 +133,6 @@ function switch_Colour(){
 }
 
 window.onload = function(){ 
-    DB_change("");
     div = document.getElementById("hideAll");
 
     div.ontransitionend = () => {

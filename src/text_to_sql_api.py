@@ -36,6 +36,7 @@ data = {
 def setupDB():
     # default DB is medical
     global DB_LOADED, SCHEMA
+    print(DB_LOADED)
 
     load_dotenv("config.env")
     DB_USER = os.getenv("DB_USER")

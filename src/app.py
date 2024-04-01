@@ -51,6 +51,7 @@ if "train" in sys.argv:
 
 @app.route("/")
 def hello_world():
+    print(api.DB_LOADED)
     return render_template('index.html')
 
 @app.route("/get", methods=['POST'])

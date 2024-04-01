@@ -20,7 +20,7 @@ class QueryAdapter(LogicAdapter):
             transformation = data.pop()
             response = transformation + "<br>"
             if len(data) == 1:
-                response = response + "Answer Returned: " + str(data[0])
+                response = response + "Answer Returned: <b><font color='#50C878'>" + str(data[0]) + "</font></b>"
             else:
                 response = response + "Rows returned shown below: <br>"
                 for entry in data:
@@ -46,5 +46,5 @@ def processQuery(query):
     api.setupDB()
     transformed = api.toSQL(query)
     response = api.toDatabase(transformed) 
-    response.append("Query transformed into SQL: " + transformed)
+    response.append("Query transformed into SQL: <br> <font color='var(--med)'>" + transformed + "</font>")
     return response # response is a list
