@@ -136,6 +136,24 @@ More information about how we developed this code and any problems we encountere
 
 ## Design
 
+**What are we building?**  
+This section will go over the high-level design behind Minerva, how we planned it out into different components and what each is responsible for. We will walk you through some diagrams we have for the system design.
+
+### System Architecture
+
+[System Architecture Diagram]()
+
+Above is our System Architecture Diagram this shows a high-level overview of what Minerva is designed to do, how each is function is seperated into different components and what each one contains in order for the function to work. It also contains implementation details such as links and technologies present used in each component. Implementation will be covered in greater detail in the Implementation section.
+
+In this section we will give an overview on how we designed Minerva and her individual components. We designed Minerva with two main components in mind, they are:
+
+- Chatbot Frontend
+- Translation and Database Backend
+
+The role of the frontend chatbot component is to render the web page and is the only point of access for the user to interact with Minerva. Through the frontend the user will be able to ask Minerva questions about the database, be given the infomation they are asking, and also be able change the database to be able to retrieve different information. It is throught he frontend that users gain access to the information stored in the backend. The questions users input into Minerva are sent to the backend where they will be translated and then queried to the database before the information is returned to the user on the front end.
+
+The backend is where the Text-to-SQL translation and the database api are located. Users utilise the back end through the front end when they ask Minerva a question or change the database using the buttons found on the web page. The main responsibilities are to process user input and send the processed question to the database, then returning the retrieved information to the frontend.
+
 ---
 
 ## Implementation
@@ -303,7 +321,9 @@ If you would like to try out the system for yourself please follow these instruc
 
 <!-- What we would like to have worked on more, natural extensions that could be accomplished next, what could be added or polished -->
 
-If we were to continue development on Minerva and add additional functionality one of the first things that we would add would be an option for Minerva to show the user the translated SQL code. Currently Minerva takes the users question and returns to them the information from the database that answers the questiom, what this feature would do would be instead of returning the answer to the question Minerva would return the users question in SQL format. This would expand Minervas capabilities and would allow her to be used as a SQL learning assistant aswell as a tool used for getting information, allowing her to be useful in a wider variety of markets.
+<!-- she does this just want to double check with gareth before deleting anything
+
+if we were to continue development on Minerva and add additional functionality one of the first things that we would add would be an option for Minerva to show the user the translated SQL code. Currently Minerva takes the users question and returns to them the information from the database that answers the questiom, what this feature would do would be instead of returning the answer to the question Minerva would return the users question in SQL format. This would expand Minervas capabilities and would allow her to be used as a SQL learning assistant aswell as a tool used for getting information, allowing her to be useful in a wider variety of markets.-->
 
 Close to the end of the project Jack toyed with the idea of having Minerva be able to access a database on a seperate machine, making it more realistic to how Minerva would be operating in a business setting. Due to the deadline approaching and the documentation still needing to be done we thought it would be best to focus on the documentation rather than add in a feature that we would have to spend large amounts of time researching and testing. Implementing this feature could also cause Minerva to no longer work meaning that if we didnt get it working by the deadline we would have to spend more time everting all the changes.
 
