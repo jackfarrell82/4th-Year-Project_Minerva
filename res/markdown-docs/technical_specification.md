@@ -210,6 +210,62 @@ After much frustration and many experiments we decided to just stay on localhost
 
 ## Testing
 
+This section contains an overview of the testing practices we implemented for Minerva throughout the development. You can also read about our user testing at the end of this section and how we used the feedback to improve the final version of Minerva.
+
+### Git
+
+Throughout our project as required we used Gitlab to store our code. This was vital for working well together on the same set of files especially near the end of the project where we both we doing work on the same files every day. Every time we would finish our work for the day or complete a feature we would commit and push the changes to our repo and notify our partner.
+This flow of work helped make sure we had no major merge conflicts during this project and could work unimpeded, we also made sure to be in constant communication with each other about what we were doing and planning to do so that neither of us were implementing the same feature or writing the same section of a document.
+Below you can see two examples of the commits we made to the repo, when committing we tried to be as thorough in our commit message as we could, so that our partner could quickly identify what was done and in future we could easily search our logs for specific changes.
+
+![commit example one](../media/commit1.png)
+![commit example two](../media/commit2.png)
+
+### CI/CD Pipelines
+
+For most of the project we made use of gitlab pipelines to automate some of the testing of Minerva, these tests were used to confirm that Minerva was performing as expected and were run every time an update was pushed to our repo.
+These test were very useful during the prototyping stages of Minerva so that every time a change was made we could verify that Minerva was still responding correctly to the basic prompts we had made before. The tests were made to verify Minerva's answers to some example prompts, one of our early test files can be seen below, it is still located in the prototyping directory of res/gareth/gareth_prototyping/testing.
+
+![testfile proto](../media/pipelinePrompts.png)
+
+In the image above you can see the file is made of pairs of strings, where on the left is the prompt Minerva would receive and on the right is our expected output. Each time an update was pushed to our repo the pipeline would setup an environment with Chatterbot installed and run a shell script to check Minerva's responses to the prompts given and verify the answers.
+
+However as we approached the end of the project and we began linking things together it became evident that the automated pipeline was proving too much hassle to keep updating and fixing because of the complex relations of some of the dependencies in the docker environment it made on gitlab. To load the Chatterbot library we used an old docker image as we could not get chatterbot to install manually without this image, this presented problems however once MySQL was linked into the project as the code required a newer version of python than what was present in the Chatterbot image. We decided after more than thirty attempts to fix the pipeline that we would change our focus to less automated tests but have more manual tests in the form of unit tests and system tests that we could run ourselves. These new tests are outlined in the sections below.
+
+The pipeline file (.gitlab-ci.yml) is still present and can be viewed however the running of the prompt tests has been disabled.
+
+### Unit Testing
+
+The nature of Minerva is a user centric system, a lot of how the system works requires user input and interaction through the web interface, because of this we knew that we wouldn't be able to fully automate testing and instead wanted to focus efforts on producing a good unit testing system that we could expand and run as the systems evolved to maintain good coverage of all Minerva's features and verify they worked everytime we made changes or major updates.
+
+Our unit tests can be viewed in /src/testing/unit_tests.py
+
+We designed user tests with the default unittest python library.
+The tests are separated into two major sections, the first contained in the "TestTextToSQL" class deals with making sure that the API code that Jack created is functioning correctly and translating natural language to SQL as expected. This class has three main tests, one to check that the database loading and changing is done correctly, then we have a set of example prompts for the medical database, and some for the financial database, each set is executed and checked against expected output, an example is seen below.
+
+![TextToSQL Test](../media/test1.png)
+
+The second class is "TestMinervaPrompts", this class contains the test dealing with Minerva, inputting example prompts and checking that Minerva is responding correctly by checking against expected output. An example of a testcase can be seen below.
+
+![MinervaPrompt Test](../media/test1.png)
+
+These unit tests can be run by just entering the src/testing directory and running "python3 unit_tests.py -v". We try to run these tests as often as we make changes to the system code, and we also tried to make sure we expanded these tests and example prompts as Minerva grew and gained more training data. The unit tests are also executed by querying our flask application that hosts Minerva, which must be running to execute the tests, this means that they mimic a request from the UI as closely as possible and provide a good verification of Minerva's status.
+If all is working well an output like below should be seen.
+
+![Unit Test Results](../media/testSuccess.png)
+
+### System Testing
+
+The unit tests and automated testing we implemented help a lot with verifying the integrity of Minerva and noticing quickly any bugs or inconsistencies introduced after major changes. However to fully and rigourously test Minerva we need to do a lot of manual Ad-Hoc testing and system tests, interacting with Minerva through the web interface.
+A lot of the system is regularly tested and put through its paces due to the nature of development and how we do a lot of Ad-Hoc testing as we go along and add new features, testing new prompts, new buttons, new javascript functions.
+However as we approached the end of the project we wanted to implement more standardised and repeatable system walkthroughs/tests, these would include multiple prompts and interactions from loading Minerva to getting a final results, that way we can step through the system as a user would want to checking along the way for any bugs or errors.
+An example of a system test we have outline is seen below.
+
+![]()
+
+These walkthroughs are varied and allow us to make sure we have checked each and every part of Minerva by executing each one. This is important to find and solve bugs in areas of Minerva that we implemented a long time ago or do not use as much. These also help us prepare for demonstrating Minerva at the end of our project.
+
+### User Testing
 <!-- Methods we had to use -->
 <!-- User centric so not a lot of automatic testing -->
 <!-- Ethics, results and analysis -->
@@ -249,7 +305,7 @@ If you would like to try out the system for yourself please follow these instruc
 
 If we were to continue development on Minerva and add additional functionality one of the first things that we would add would be an option for Minerva to show the user the translated SQL code. Currently Minerva takes the users question and returns to them the information from the database that answers the questiom, what this feature would do would be instead of returning the answer to the question Minerva would return the users question in SQL format. This would expand Minervas capabilities and would allow her to be used as a SQL learning assistant aswell as a tool used for getting information, allowing her to be useful in a wider variety of markets.
 
-Close to the end of the project jack toyed with the idea of having Minerva be able to access a database on a seperate machine, making it more realistic to how Minerva would be operating in a business setting. Due to the deadline approaching and the documentation still needing to be done we thought it would be best to focus on the documentation rather than add in a feature that we would have to spend large amounts of time researching and testing. Implementing this feature could also cause Minerva to no longer work meaning that if we didnt get it working by the deadline we would have to spend more time everting all the changes.
+Close to the end of the project Jack toyed with the idea of having Minerva be able to access a database on a seperate machine, making it more realistic to how Minerva would be operating in a business setting. Due to the deadline approaching and the documentation still needing to be done we thought it would be best to focus on the documentation rather than add in a feature that we would have to spend large amounts of time researching and testing. Implementing this feature could also cause Minerva to no longer work meaning that if we didnt get it working by the deadline we would have to spend more time everting all the changes.
 
 When we started this project we had planned for Minerva to have the ability to visualise the data and output a variety of charts based on the data the user requested. Over the course of the project we focused on getting the core function up and running which was the ability for Minerva to translate natural language and return database information. This took up a lot of time combined with the research and testing it left us with very little time to reseach, lean, implement, and test the code necessary to get data visualisation working. Out of all of additional functionality we would like to implement this would be the one that we would most like to get functioning.
 
