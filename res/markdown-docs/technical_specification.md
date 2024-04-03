@@ -195,6 +195,26 @@ The sequence diagram above showcases the order of operations that occur when a u
 
 ## Implementation
 
+**How did we build it?** 
+The design section above describes what our system should be able to do, and a high-level view of how it would do things. This section describes how we implemented Minerva. We will go through the libraries and languages we used and give some code samples throughout.
+
+### Frontend Implementation
+
+The frontend is responsible for the user interface and rendering of the webpage alongside being how users interact with Minerva. This is done useing a Flask framework 
+
+### Backend Implementation
+
+The backend is responsible for handling the data that it receives from the user and the frontend. The types of data that the backend would be receiving would be user query's, and database changes with the queries being the most common data the backend will receive. 
+
+The backend is constructed of multiple functions which allowed gareth to easily connect the backend to the frontend and allowed the easier transfer of queries into the backend via function arguments.
+
+**How is the query translated to SQL?**
+Once the users question has been received the first thing that is done is that the backend translates the users query into SQL so the database will be able to understand and return the necessary information. We used the requests library to make the set up of the API easier in python as the only experience we had using API's was in javascript. The translation is done by sending the users query through an API to the Text-to-SQL model that we used and explained in detail in earlier in this document. The API requires specific data to be inputted which is the Authorization token which is resonsible for allowing the use of the Text-to-sql Model as without it we would not be allowed to use the mode. The API also requires the prompt, type, and database schema so it can make the SQL as accurate as possible and work when we send it to the database. The model returns the translated query alongside other syntax which is then needed to be remove so it is just the SQL query, this is done through the strip() and split() functions as the additional syntax will cause errors to occur at other parts of the backend.
+
+**Sending the query to the database**
+
+Once the translated query has been returned we then send the query to the database that the user has selected via the mysql library. The mysql library  is what is needed to use the mysql API as stated on the mysql website. Similarly to the Text-to-sql API we need 
+
 ---
 
 ## Problems and Solutions
@@ -333,7 +353,7 @@ These walkthroughs are varied and allow us to make sure we have checked each and
 <!-- SKills, tech and teamwork stuff, planning etc -->
 We learnt a lot over the course of this project, of course we learnt a lot in our specific sections Gareth with Chatbots and hosting, Jack with Text-to-SQL models and API's. Thats not only what each of us learnt we also learnt about each others sections when it came to combining are parts and testing Minerva.
 
-When we started this project both Jack and Gareth had very similar experience with databases and API's alongside gareth having worked with chatbots before. Now after completing the project both of us have gained valuable insights into the operations and development of chatbots and API's. What Jack learnt most was database and API interaction and gained a deeper insight into how databases work and how they can be manipulated. Gareth learned what gareth learned *plz write what you learned :)*. 
+When we started this project both Jack and Gareth had very similar experience with databases and API's alongside gareth having worked with chatbots before. Now after completing the project both of us have gained valuable insights into the operations and development of chatbots and API's. What Jack learnt most was database and API interaction and gained a deeper insight into how databases work and how they can be manipulated. <!-- Gareth learned what gareth learned *plz write what you learned :)*. 
 
 Teamwork, planning and communication where all skills that we developed as part of this project, having worked with each other before we knew what to expect from the other person but having this project have such influence over our final grade we pushed ourselves to improve every aspect on how we work together. We did this not only so the project would run more smoothly but also to improve our skills for when we start our jobs as we would have to develop these skills anyway and getting a head start doesn't hurt.
 
