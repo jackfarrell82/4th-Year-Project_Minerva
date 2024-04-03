@@ -33,6 +33,21 @@ document.getElementById("QuerySub").addEventListener('click', function() {
     inputField.value = buttonText;
 });
 
+function showMetaInfo() {
+    var otherpopup = document.getElementById("StockPopup");
+    otherpopup.classList.remove("show");
+    var popup = document.getElementById("MetaPopup");
+    popup.classList.toggle("show");
+
+}
+
+function showStockInfo() {
+    var otherpopup = document.getElementById("MetaPopup");
+    otherpopup.classList.remove("show");
+    var popup = document.getElementById("StockPopup");
+    popup.classList.toggle("show");
+}
+
 function appendMessage(name, side, text) {
     const msgHTML = `
     <div class="msg ${side}-msg">
@@ -66,12 +81,12 @@ function loadDatabase(){
     if(dropdown_selection == "medical.sql"){
         document.getElementById("medical.sql").style.display = "none";
         document.getElementById("financial.sql").style.display = "inline";
-        document.getElementById("loadedDB").innerHTML = "Metabolic Syndrome Database";
+        document.getElementById("loadedDB").innerHTML = "Metabolic Syndrome";
     }
     else{
         document.getElementById("medical.sql").style.display = "inline";
         document.getElementById("financial.sql").style.display = "none";
-        document.getElementById("loadedDB").innerHTML = "Stock Market Index Database";
+        document.getElementById("loadedDB").innerHTML = "Stock Market Index";
     }
 
 
