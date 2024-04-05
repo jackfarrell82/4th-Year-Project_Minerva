@@ -13,7 +13,7 @@ trainset = {
     ["Help", "I need help", "I am lost", "I am stuck", "Help me"],
     # How do you work
     "To submit a query to the database simple enter the word 'Query' followed by your query, I will send this to the database and return the results right to you! I can also answer some other simple questions, ask me what I can do to find them." :
-    ["How do you work?", "How do I send a query?", "How do I submit a query?", "How to I use the database?", "Submitting a query", "How to I ask the database something", "How do I use you?", "How does this work?", "How do I use this system?"],
+    ["How do you work?", "How do I send a query?", "How do I submit a query?", "How do I use the database?", "Submitting a query", "How do I ask the database something", "How do I use you?", "How does this work?", "How do I use this system?"],
     # What is SQL
     "Structure Query Language (SQL) is a programming language that is used to interact with and retrieve data from large relational databases, with my help you don't need to know any SQL, I can translate your query into SQL":
     ["SQL", "SQL?", "What is SQL", "Structured Query Language", "Do I need to know SQL", "Do I need SQL", "Do you use SQL", "How does SQL work", "SQL question", "Do you make SQL", "Can you translate to SQL"],
@@ -29,4 +29,7 @@ trainset = {
     # Financial Database
     "The financial database is filled with daily price data from indexes tracking stock exchanges from all over the world (United States, China, Canada, Germany, Japan, and more), you can view the <a href='https://www.kaggle.com/datasets/mattiuzc/stock-exchange-data' target=”_blank”>source here</a> <br> The columns in this database are described below: <br> <i>Index: Ticker symbol for indexes</i><br><i>Date: Date of observation</i><br><i>Open: Opening price</i><br><i>High: Highest price during trading day</i><br><i>Low: Lowest price during trading day</i><br><i>Close: Closing price</i><br><i>Adj Close: Closing price adjusted for dividends and stock splits</i><br><i>Volume: Number of shares traded during trading day</i><br><i>CloseUSD: Close price in terms-of USD</i><br>":
     ["What is the financial database", "What is in the finance database", "What data is in the financial database", "What are the columns in the financial database", "What is the stock market database", "What is in the stock market database", "What data is in the stock market database", "What are the columns in the stock market database"],
+    # Thanks
+    "You're very welcome, I'm glad I could be of assistance." : 
+    ["Thanks", "Thank you", "Thx", "Ty", "Thank", "Thank you for the help", "Thanks for the assistance", "Thank you very much", "Much appreciated", "Thanks Minerva"],
 }

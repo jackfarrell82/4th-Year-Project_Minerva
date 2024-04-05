@@ -11,6 +11,7 @@ import text_to_sql_api as api
 app = Flask(__name__)
 DATABASE_FILE = "medical.sql"
 
+# logging.basicConfig(level=logging.INFO) # uncomment to enable lots of log info in terminal
 
 #### CHATBOT ##########################
 
@@ -51,7 +52,6 @@ if "train" in sys.argv:
 
 @app.route("/")
 def hello_world():
-    print(api.DB_LOADED)
     return render_template('index.html')
 
 @app.route("/get", methods=['POST'])
