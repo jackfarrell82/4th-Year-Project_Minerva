@@ -7,6 +7,7 @@ import sys
 import logging
 from static.data.training_dict import trainset
 import text_to_sql_api as api
+import adapter
 
 app = Flask(__name__)
 DATABASE_FILE = "medical.sql"
@@ -58,7 +59,8 @@ def hello_world():
 def get_bot_response():
     data = json.loads(request.data)
     userText = data["msg"]
-    
+    adapter.SQLcheck(data["sql"])
+
     bot_resp = bot.get_response(userText)    
     
     return_json = {
@@ -85,7 +87,7 @@ def database_action():
     return data
 
 if sys.argv[1] == "deploy":
-    app.run(host="127.0.0.1", port=5000, debug=False)
+    app.run(host="127.0.0.1", port=5000, debug=True)
 else:
     for arg in sys.argv[1:]:
         print("Test File Started: ", arg)

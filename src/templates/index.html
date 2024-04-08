@@ -4,6 +4,8 @@
         <title>Minerva</title>
         <link rel="icon" type="image/png" href="/static/media/robot.png">
         <link rel="stylesheet" type="text/css" href="/static/style.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     </head>
     <body>
         <section>
@@ -14,22 +16,24 @@
                 <h4>Loaded Database:</h4>
                 <h4 id="loadedDB">Metabolic Syndrome</h4>
             </div>
-            <div class="headnotes info-button popup" onclick="showMetaInfo()" style="top: 300px;">
+            <button class="headnotes info-button" id="floater" style="top: 300px;">Change Database</button>
+            <div class="headnotes info-button popup" onclick="showMetaInfo()" style="top: 345px;">
                 <h4>Metabolic Database Info</h4>
                 <span class="popuptext" id="MetaPopup">
                     This database is populated with data records tracking the risk factors and health indicators associated with Metabolic Syndrome, a complex medical condition associated with risk factors for cardiovascular diseases and type 2 diabetes. <br>
                     If you want to know more about what data is in the database, ask Minerva "What is in the medical database?"
                 </span>
             </div>
-            <div class="headnotes info-button popup" onclick="showStockInfo()" style="top: 365px;">
+            <div class="headnotes info-button popup" onclick="showStockInfo()" style="top: 410px;">
                 <h4>Financial Database Info</h4>
                 <span class="popuptext" id="StockPopup">
                     This database is populated with daily price data for indexes tracking stock exchanges from all over the world. The data was collected from Yahoo Finance, which had several decades of data available.<br>
                     If you want to know more about what data is in the database, ask Minerva "What is in the financial database?"
                 </span>
             </div>
+
         </section>
-        <div style="display: block" id="hideAll">&nbsp;</div>
+        <!-- <div style="display: block" id="hideAll">&nbsp;</div> -->
         <div id="floatingElement" class="hidden">
             <h3>Change Database</h3>
             <button id="closeButton">×</button>
@@ -38,10 +42,16 @@
                 <option value="medical.sql" id="medical.sql" style="display: none;">Metabolic Syndrome Dataset</option>
                 <option value="financial.sql" id="financial.sql">Stock Market Dataset</option>
             </select>
-
         </div>
         <div id="overlay" class="hidden"></div>
         <section class="msger">
+            <a id="delete-icon" title="Clear Chat" onclick="clearChat()"><span class="material-symbols-outlined" style="font-size: 36px; color: var(--dark);">delete</span></a>
+            <a id="info-icon" title="Helpful Information"><span class="material-symbols-outlined" style="font-size: 36px; color: var(--dark);">help</span></a>
+            <div id="helpFloater" class="hidden">
+                <h3>Change Database</h3>
+                <button id="closeButtonH">×</button>
+                <br>
+            </div>
             <main class="msger-chat" id="msgerChat">
                 <!-- Left Side (Minerva) -->
                 <div class="msg left-msg">                
@@ -68,21 +78,21 @@
                 </div> -->
             </main>
             <div class="suggestions">
+                <button class="suggestion" id="QuerySub">Query:</button>
                 <button class="suggestion autosubmit">What are you?</button>
                 <button class="suggestion autosubmit">What can you do?</button>
                 <button class="suggestion autosubmit">How do I send a query?</button>
                 <button class="suggestion autosubmit">I need help.</button>
-                <button class="suggestion" id="QuerySub">Query:</button>
             </div>
             <form class="msger-inputarea" id="form" autocomplete="off">
                 <input type="text" class="msger-input" placeholder="Enter your message..." id="form-input">
-                <button type="submit" class="msger-send-btn" id="send-msg">Send</button>
+                <button type="submit" class="msger-send-btn" id="send-msg" style="padding: 0px 10px;"><i class="material-icons">send</i></button>
             </form>
         </section>
         <section>
             <div class="footnotes">
+                <button class="foot-button" id="SQLButton">Show SQL: <span id="SQLStatus" class="material-symbols-outlined" style="font-size: 36px; color:green;">check</span></button>
                 <a href="../static/media/MinervaPrompts.pdf" target="_blank"><button class="foot-button">Example Prompts</button></a>
-                <button class="foot-button" id="floater">Change Database</button>
                 <a href="https://gitlab.computing.dcu.ie/hogang22/2024-ca400-hogang22-farrej82" target="_blank"><button class="foot-button">Source Code</button></a>
             </div>
         </section>

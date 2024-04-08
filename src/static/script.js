@@ -4,6 +4,7 @@ const msgerChat = document.getElementById("msgerChat");
 
 const BOT_NAME = "Minerva";
 const PERSON_NAME = "User";
+SQL_FLAG = "on";
 
 msgerForm.addEventListener("submit", event => {
     event.preventDefault();
@@ -67,7 +68,7 @@ function appendMessage(name, side, text) {
 
 function botResponse(input) {
     // get response from Minerva
-    fetch("/get", {method: "POST", body: JSON.stringify({"msg":input})})
+    fetch("/get", {method: "POST", body: JSON.stringify({"msg":input, "sql":SQL_FLAG})})
 	.then(response => response.json())
 	.then(data => {
         appendMessage(BOT_NAME, "left", data.msg);
@@ -98,12 +99,30 @@ function DB_change(file){
     fetch("/database", {method: "POST", body: JSON.stringify({"db_name":file})})
 }
 
-function get(selector, root = document) {
-    return root.querySelector(selector);
-}
 
-document.getElementById("closeButton").addEventListener("click", function(){
-    close_DBSelect();
+
+document.getElementById("info-icon").addEventListener("click", function(){
+    var overlay = document.getElementById("overlay");
+    var element = document.getElementById("helpFloater")
+    
+    overlay.style.opacity = 100;
+    overlay.classList.remove("hidden");
+
+    element.style.opacity = 100;
+    element.classList.remove("hidden");
+});
+
+document.getElementById("closeButtonH").addEventListener("click", function(){
+    var element = document.getElementById("helpFloater");
+    var overlay = document.getElementById("overlay");
+
+    element.style.opacity = 0;
+    overlay.style.opacity = 0;
+
+    setTimeout(() => {  
+        element.classList.add("hidden")
+        overlay.classList.add("hidden");
+    }, 800)
 });
 
 document.getElementById("floater").addEventListener("click", function() {
@@ -117,6 +136,10 @@ document.getElementById("floater").addEventListener("click", function() {
     overlay.classList.remove("hidden");
 });
 
+document.getElementById("closeButton").addEventListener("click", function(){
+    close_DBSelect();
+});
+
 function close_DBSelect(){
     var floatingElement = document.getElementById("floatingElement");
     var overlay = document.getElementById("overlay");
@@ -128,6 +151,10 @@ function close_DBSelect(){
         floatingElement.classList.add("hidden")
         overlay.classList.add("hidden");
     }, 800)
+}
+
+function clearChat(){
+    document.getElementById("msgerChat").innerHTML = '<div class="msg left-msg">                <div class="msg-bubble"> <div class="msg-info"><div class="msg-info-name">Minerva  </div> </div><div class="msg-text">    Hello, welcome, my name is Minerva 👋</div></div></div>'
 }
 
 function switch_Colour(){
@@ -146,6 +173,23 @@ function switch_Colour(){
         root.style.setProperty('--body-bg', 'url("media/background_blue.png")')
     }
 }
+
+document.getElementById("SQLButton").addEventListener("click", function(){
+    stat = document.getElementById("SQLStatus")
+    
+    if(stat.innerHTML == "check"){
+        stat.innerHTML = "close"
+        stat.style.color = "red"
+        SQL_FLAG = "off"
+    }
+    else{
+        stat.innerHTML = "check"
+        stat.style.color = "green"
+        SQL_FLAG = "on"
+    }
+    console.log(SQL_FLAG);
+
+});
 
 window.onload = function(){ 
     div = document.getElementById("hideAll");
