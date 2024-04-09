@@ -48,7 +48,22 @@
             <a id="delete-icon" title="Clear Chat" onclick="clearChat()"><span class="material-symbols-outlined" style="font-size: 36px; color: var(--dark);">delete</span></a>
             <a id="info-icon" title="Helpful Information"><span class="material-symbols-outlined" style="font-size: 36px; color: var(--dark);">help</span></a>
             <div id="helpFloater" class="hidden">
-                <h3>Change Database</h3>
+                <h3 style="text-decoration: underline;">Helpful Information</h3>
+                <h4>&nbsp;</h4>
+                <text>
+                    <b>Hello there and welcome to the Minerva system.</b><br>
+                    Minerva is a chatbot here to assist you with data retrieval from large relational databases.
+                    <h6>&nbsp;</h6>
+                    You can ask Minerva questions about the databases and what she can do by sending them from the box at the bottom of the screen.<br>
+                    &nbsp; <i style="color: var(--dark);">For example: "What can you do?"</i>
+                    <h6>&nbsp;</h6>
+                    If you want to submit a query to the database you just have to put <i>Query:</i> in front of the query you wish to submit.<br>
+                    &nbsp; <i style="color: var(--dark);">For example: "Query: What is the average BMI in the database?"</i>
+                    You can view some example queries using the button in the bottom right.
+                    <h6>&nbsp;</h6>
+                    You can view information about the databases using buttons on the left and change between the available options.
+
+                </text>
                 <button id="closeButtonH">×</button>
                 <br>
             </div>
@@ -91,7 +106,7 @@
         </section>
         <section>
             <div class="footnotes">
-                <button class="foot-button" id="SQLButton">Show SQL: <span id="SQLStatus" class="material-symbols-outlined" style="font-size: 36px; color:green;">check</span></button>
+                <button class="foot-button" id="SQLButton">Show SQL: <span id="SQLStatus" class="material-symbols-outlined" style="font-size: 36px; color:red;">close</span></button>
                 <a href="../static/media/MinervaPrompts.pdf" target="_blank"><button class="foot-button">Example Prompts</button></a>
                 <a href="https://gitlab.computing.dcu.ie/hogang22/2024-ca400-hogang22-farrej82" target="_blank"><button class="foot-button">Source Code</button></a>
             </div>

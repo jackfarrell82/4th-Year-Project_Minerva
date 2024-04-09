@@ -6,16 +6,16 @@ trainset = {
     "My Name is Minerva, I am a chatbot created by Gareth & Jack, I can help you access data in your databases" :
     ["Who are you?", "What are you?", "What is this?", "What is Minerva", "Who is there?", "Who?"],
     # What can you do?
-    "I am a chatbot that assists with accessing databases, I can help you retrieve and filter data from the databases that are loaded. <br> You don't need any SQL knowledge with my help, try submitting a query by sending me 'Query: <i>your query here</i>' <br> I can also answer some simple questions about the databases and SQL, ask me 'What is SQL' or 'What datasets are available'" :
+    "I am a chatbot that assists with accessing databases, I can help you retrieve and filter data from the databases that are loaded. <br> You don't need any SQL knowledge with my help, try submitting a query by sending me 'Query: <i>your query here</i>' <br> I can also answer some simple questions about the databases and SQL, ask me 'What is SQL' or 'What datasets are available'<br> You can also view some starter tips and information by pressing the help icon at the top right of our chat." :
     ["What can you do?", "What functions do you do?", "Available commands", "What commands can you do?", "What functionalities do you have?", "What stuff can you do?", "What can you do with the database?"],
     # Response to Help
-    "I'm very sorry you are struggling to get what you want, I am still in beta and learning new things. If you want to know what I can do at the moment just ask me “What can you do?”" :
+    "I'm very sorry you are struggling to get what you want, I am still in beta and learning new things. <br>If you are a new user you can check the helpful information by clicking the help icon in the top right of the chat. <br>If you want to know more about the databases see the information on the left or ask me about them. <br>If you aren't sure what to ask or queries to send, see our example prompts sheet in the bottom right or ask me 'What can you do?'<br> If you are having more serious problems please contact my creators." :
     ["Help", "I need help", "I am lost", "I am stuck", "Help me"],
     # How do you work
     "To submit a query to the database simple enter the word 'Query' followed by your query, I will send this to the database and return the results right to you! I can also answer some other simple questions, ask me what I can do to find them." :
     ["How do you work?", "How do I send a query?", "How do I submit a query?", "How do I use the database?", "Submitting a query", "How do I ask the database something", "How do I use you?", "How does this work?", "How do I use this system?"],
     # What is SQL
-    "Structure Query Language (SQL) is a programming language that is used to interact with and retrieve data from large relational databases, with my help you don't need to know any SQL, I can translate your query into SQL":
+    "Structure Query Language (SQL) is a programming language that is used to interact with and retrieve data from large relational databases, with my help you don't need to know any SQL, I can translate your query into SQL <br> If you want to see what SQL your query is transfromed into, click the Show SQL button in the lower righthand corner.":
     ["SQL", "SQL?", "What is SQL", "Structured Query Language", "Do I need to know SQL", "Do I need SQL", "Do you use SQL", "How does SQL work", "SQL question", "Do you make SQL", "Can you translate to SQL"],
     # What databases are available
     "In my Beta version I have access to two databases: <br> The default database is a medical dataset that contains information on individuals with metabolic syndrome, you can view the <a href='https://www.kaggle.com/datasets/antimoni/metabolic-syndrome'>source here</a><br> You can also swap to our finance dataset, which is full of numbers that describe the daily index prices for different stock exchanges, you can view the <a href='https://www.kaggle.com/datasets/mattiuzc/stock-exchange-data' target=”_blank”>source here</a>":
@@ -32,4 +32,10 @@ trainset = {
     # Thanks
     "You're very welcome, I'm glad I could be of assistance." : 
     ["Thanks", "Thank you", "Thx", "Ty", "Thank", "Thank you for the help", "Thanks for the assistance", "Thank you very much", "Much appreciated", "Thanks Minerva"],
+    # Who created you
+    "I was created by two students at DCU for their final year project, their names are Gareth Hogan and Jack Farrell":
+    ["Who made you?", "Who created you", "Where did you come from", "What made you", "How were you made", "How did you come to be", "How were you created?"],
+    # What do all the buttons do
+    "The buttons on the left of the chat allow you to change the loaded database and also give some information on the available databases. <br> The buttons on the right allow you to toggle whether you wish to see the SQL code I make, and link to some example prompts and my source code. <br> Above text entry box you can see some quick suggestion buttons to quickly ask me questions and to start off your query. <br> And at the very top of the chat you can click the trashcan icon to clear the chat, or the help icon to see some tips and helpful info for new users.":
+    ["What are all the buttons", "What does everything do?", "What do all the buttons do?", "What does the SQL button do?", "What does the button do?", "What button do?", "What does each button do?"],
 }

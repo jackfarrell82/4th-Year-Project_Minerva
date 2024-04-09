@@ -4,7 +4,7 @@ const msgerChat = document.getElementById("msgerChat");
 
 const BOT_NAME = "Minerva";
 const PERSON_NAME = "User";
-SQL_FLAG = "on";
+SQL_FLAG = "off";
 
 msgerForm.addEventListener("submit", event => {
     event.preventDefault();
@@ -40,6 +40,9 @@ function showMetaInfo() {
     var popup = document.getElementById("MetaPopup");
     popup.classList.toggle("show");
 
+    setTimeout(() => {  
+        popup.classList.toggle("show")
+    }, 7000)
 }
 
 function showStockInfo() {
@@ -47,6 +50,10 @@ function showStockInfo() {
     otherpopup.classList.remove("show");
     var popup = document.getElementById("StockPopup");
     popup.classList.toggle("show");
+
+    setTimeout(() => {  
+        popup.classList.toggel("show")
+    }, 7000)
 }
 
 function appendMessage(name, side, text) {
