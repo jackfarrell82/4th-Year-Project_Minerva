@@ -74,7 +74,8 @@ def toSQL(prompt):
     resp_list = response.split('"') # modify the output to be just the SQL query
     response = resp_list[3]
     response = response.replace("\\n", " ")
-    return response
+    package = [response, DB_LOADED]
+    return package
 
 def toDatabase(query):
     try: # error handling for database

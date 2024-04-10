@@ -3,6 +3,10 @@ import text_to_sql_api as api
 from text_to_sql_api import *
 
 SQL_FLAG = "on"
+DB = ""
+
+schema_F = "Ticker Symbol for Index | Date | Opening Price | Highest Price | Lowest Price | Closing Price | Adjusted Closing Price | Volume Traded | Close price in USD"
+schema_M = "Patient ID | Age | Sex | Marital Status | Income | Race | Waist Circumference | BMI | Albumin Level | Urinary Albumin-to-Creatine ratio | Uric Acid | Blood Glucose | Cholesterol Level | Triglyceride Level | Metabolic Syndrome"
 
 class QueryAdapter(LogicAdapter):
     def __init__(self, chatbot, **kwargs):
@@ -18,18 +22,32 @@ class QueryAdapter(LogicAdapter):
         
         # Submit the query to another function and get the response
         try:
-            data = processQuery(query)
+            data = processQuery(query) # data is a list of all rows (tuples) returned
+            response = "<i>I've submitted your query to the database, here is the data I got back:</i><br><font color='#50C878'>"
+            
             if SQL_FLAG == "on":
                 transformation = data.pop()
-                response = transformation + "<br>"
-            else:
-                response = ""
+                response = response + "<font color='black'>" + transformation + "</font><br>"
+            
             if len(data) == 1:
-                response = response + "Answer Returned: <b><font color='#50C878'>" + str(data[0]) + "</font></b>"
+                answer = data[0]
+                if len(answer) == 1:
+                    response = response + "<font color='black'>Answer:</font> <b>" + str(answer[0]) + "</b>"
+                elif len(answer) == 9 and DB == "financial":
+                    response = response + "<font color='black'>Data Legend:</font><br>"
+                    response = response + "<font color='#801010' size=2px>" + schema_F + "</font><br>"
+                    response = response + "<font color='black'>Answer:</font> <b><br>" + str(answer) + "</b>"
+                elif len(answer) == 15 and DB == "metabolic_syndrome":
+                    response = response + "<font color='black'>Data Legend:</font><br>"
+                    response = response + "<font color='#00334E' size=2px>" + schema_M + "</font><br>"
+                    response = response + "<font color='black'>Answer:</font> <b><br>" + str(answer) + "</b>"
+                else:
+                    response = response + "<font color='black'>Answer:</font> <b>" + str(answer) + "</b>"
             else:
-                response = response + "Rows returned shown below: <br>"
                 for entry in data:
-                    response = response + str(entry) + "<br>"
+                    response = response + str(entry)[1:-1] + "<br>"
+
+            response = response + "</font>"
 
         except Exception as e:
             response = "Oh dear, something went wrong when I went to process this query! <br>" + "ERROR: " + str(e)
@@ -51,9 +69,11 @@ def SQLcheck(flag):
     SQL_FLAG = flag
 
 def processQuery(query):
-    global SQL_FLAG
+    global SQL_FLAG, DB
     api.setupDB()
-    transformed = api.toSQL(query)
+    package = api.toSQL(query)
+    transformed = package[0]
+    DB = package[1]
     response = api.toDatabase(transformed)
     if(SQL_FLAG == "on"):
         response.append("Query transformed into SQL: <br> <font color='var(--med)'>" + transformed + "</font>")
