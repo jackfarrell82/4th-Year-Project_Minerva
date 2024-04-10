@@ -332,19 +332,21 @@ If all is working well an output like below should be seen.
 ### System Testing
 
 The unit tests and automated testing we implemented help a lot with verifying the integrity of Minerva and noticing quickly any bugs or inconsistencies introduced after major changes. However to fully and rigourously test Minerva we need to do a lot of manual Ad-Hoc testing and system tests, interacting with Minerva through the web interface.
-A lot of the system is regularly tested and put through its paces due to the nature of development and how we do a lot of Ad-Hoc testing as we go along and add new features, testing new prompts, new buttons, new javascript functions.
+A lot of the system is regularly tested and put through its paces due to the nature of development and we do a lot of Ad-Hoc testing as we go along and add new features, testing new prompts, new buttons, new javascript functions.
 However as we approached the end of the project we wanted to implement more standardised and repeatable system walkthroughs/tests, these would include multiple prompts and interactions from loading Minerva to getting a final results, that way we can step through the system as a user would want to checking along the way for any bugs or errors.
 An example of a system test we have outline is seen below.
 
-![]()
+![System Test Walkthrough](../media/SystemTest.png)
 
-These walkthroughs are varied and allow us to make sure we have checked each and every part of Minerva by executing each one. This is important to find and solve bugs in areas of Minerva that we implemented a long time ago or do not use as much. These also help us prepare for demonstrating Minerva at the end of our project.
+These walkthroughs also allowed us to vary the inputs and tests we did instead of relying on a small set of queries we quickly test with. Executing all of them also makes sure we have checked each and every button, menu and query type. This is important to find and solve bugs in areas of Minerva that we implemented a long time ago or do not use as much. These also help us prepare for demonstrating Minerva at the end of our project.
 
 ### User Testing
-<!-- Methods we had to use -->
-<!-- User centric so not a lot of automatic testing -->
-<!-- Ethics, results and analysis -->
-<!-- Outcomes -->
+
+Minerva is a heavily user centric system, and so User testing is extremely important to our project. We wanted to complete user testing to enable us to get feedback on the systems design, look and feel. It is important to get an external opinion on the system because as developers we have learned exactly what works and doesn't, how Minerva works and have become biased to believe that everything is working and looking good.
+
+First we had to complete and submit our ethics approval forms, this was pretty straightforward as we had done this before last year. During this time we decided that for the testing we would want to give users the chance to use Minerva, give them a couple of set tasks to complete and also let them experiment with the system. This would be accompanied by an anonymous survey where the participants can give feedback on how the tasks were, what they found difficult and general feedback.
+
+The results collected form the forms can be found in *res/testing_results*
 
 ---
 
@@ -363,16 +365,18 @@ This project was a great opportunity for us, not only did we get to expand our k
 
 ## Installation Guide
 
-If you would like to try out the system for yourself please follow these instructions:
+If you would like to try out the system for yourself please follow these instructions, however it requires a bit of work to get working, including getting the databases set up in MySQL yourself and your own access to the text-to-sql model:
 > *These instructions were made and tested in a fresh Ubuntu environment, your system may already have some of these libraries installed*
 
 1. First make sure you have Git installed (sudo apt install git)
 2. Clone our repo
 3. Navigate to /src in your terminal
-   a. Make sure you have pip installed **sudo apt install ptyhon3-pip**
+   a. Make sure you have pip installed **sudo apt install python3-pip**
    b. Install the requirements for Minerva with **pip install -r requirements.txt**
-4. Start the flask application by running the command "python3 app.py deploy"
-5. This will power up Minerva and you can head to *127.0.0.1:5000* on your browser to open up Minerva's interface 
+4. Create your own *config.env* file in /src following the format seen below, this contains your database host IP address, database password, the user, the MySQL port and the auth token for the text-to-sql model.
+   ![Config.env file](../media/configenv.png)
+5. Start the flask application by running the command "python3 app.py deploy"
+6. This will power up Minerva and you can head to *127.0.0.1:5000* on your browser to open up Minerva's interface 
 
 ## Future Work
 
@@ -387,7 +391,25 @@ Close to the end of the project Jack toyed with the idea of having Minerva be ab
 When we started this project we had planned for Minerva to have the ability to visualise the data and output a variety of charts based on the data the user requested. Over the course of the project we focused on getting the core function up and running which was the ability for Minerva to translate natural language and return database information. This took up a lot of time combined with the research and testing it left us with very little time to reseach, lean, implement, and test the code necessary to get data visualisation working. Out of all of additional functionality we would like to implement this would be the one that we would most like to get functioning.
 
 ### Training and Intelligence
+<!-- 
+Making Minerva better able to converse 
+Conversation tracking, options change as conversation does
+interactive back and forth, refine data queries and offer more functions
+-->
 
 ### Expanding Functionality
 
-### Deployment
+<!-- 
+Graphing
+Deployment
+Distributed Database
+Data Analysis
+-->
+
+### Out of Scope Improvements
+
+<!-- 
+Things that we didn't plan to do for project but are natural extensions
+Custom Databases, load any database, generality of function
+User login and saving chats, circle back, save results and data
+-->
