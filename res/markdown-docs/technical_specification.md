@@ -382,13 +382,7 @@ If you would like to try out the system for yourself please follow these instruc
 
 <!-- What we would like to have worked on more, natural extensions that could be accomplished next, what could be added or polished -->
 
-<!-- she does this just want to double check with gareth before deleting anything
-
-if we were to continue development on Minerva and add additional functionality one of the first things that we would add would be an option for Minerva to show the user the translated SQL code. Currently Minerva takes the users question and returns to them the information from the database that answers the questiom, what this feature would do would be instead of returning the answer to the question Minerva would return the users question in SQL format. This would expand Minervas capabilities and would allow her to be used as a SQL learning assistant aswell as a tool used for getting information, allowing her to be useful in a wider variety of markets.-->
-
-Close to the end of the project Jack toyed with the idea of having Minerva be able to access a database on a seperate machine, making it more realistic to how Minerva would be operating in a business setting. Due to the deadline approaching and the documentation still needing to be done we thought it would be best to focus on the documentation rather than add in a feature that we would have to spend large amounts of time researching and testing. Implementing this feature could also cause Minerva to no longer work meaning that if we didnt get it working by the deadline we would have to spend more time everting all the changes.
-
-When we started this project we had planned for Minerva to have the ability to visualise the data and output a variety of charts based on the data the user requested. Over the course of the project we focused on getting the core function up and running which was the ability for Minerva to translate natural language and return database information. This took up a lot of time combined with the research and testing it left us with very little time to reseach, lean, implement, and test the code necessary to get data visualisation working. Out of all of additional functionality we would like to implement this would be the one that we would most like to get functioning.
+In this section we are going to outline some things that we did not get done during the project that would've helped make Minerva an even better system, we will also outline a few extensions and additional functions that could be added to Minerva to increase her value and usefulness to users.
 
 ### Training and Intelligence
 <!-- 
@@ -397,7 +391,13 @@ Conversation tracking, options change as conversation does
 interactive back and forth, refine data queries and offer more functions
 -->
 
-### Expanding Functionality
+One thing we would have loved to improve upon is Minerva's conversational skill and intelligence, this aspect of any chatbot is constantly evolving as the chatbot grows, gains more functions and is trained with more data. Unfortunately because of the time restraints and the limitations of the Chatterbot library Minerva is more limited than we first envisioned.
+
+If we had more time we would've liked to redesign the base of Minerva to involve the user in a more conversational style of dialogue, where the user could ask follow-up questions and each response from Minerva was not just a static template. With these improvements it would make the system much more easier to use and sleeker in design, Minerva could handle and respond to many more types of prompts and some of the workarounds and extra features we implemented could be consolidated under Minerva's control, allowing her to change database when asked, provide links, interpret queries without the keyword present and respond to follow-up questions on database retrievals.
+
+This type of redesign would also help to improve Minerva's maintainability and scalability, right now some of Minerva's functionality is coded into the interface or the backend functions splitting where the system does work. In an ideal system all of the possible functionality could be controlled through Minerva, instead of having to do additional manual filtering like we do for the query extraction and database access functions.
+
+### Graphing & Data Analysis
 
 <!-- 
 Graphing
@@ -406,10 +406,20 @@ Distributed Database
 Data Analysis
 -->
 
-### Out of Scope Improvements
+One feature we initially had plans to maybe implement if we had time was further data analysis and graphing on top of database retrieval. Minerva is capable of filtering and retrieving a lot of useful information in her current state, but there is no major transformations being done to the data beyone what SQL can do. If the resulting data is more than a few rows long it quickly becomes hard to read and meaningless to the user.
+
+We would love to see Minerva be able to transform and manipulate the data retrieved for the user according to follow up questions and instructions from the user, for example a complex set of stock market data could be transformed into a line graph plotted over time to better facilitate viewing trends and patterns. Graphing would just be the start as many other functions could be added overtime to increase Minerva's analysis capabilities, the system being based in Python and having access to tools like Pandas would enable Minerva to become a powerful analysis tool as well as retrieval. In the metabolic syndrome database for example, Minerva could be employed to retrieve a specific set of records based on patient attributes and then conduct a deeper analysis into the similarities and differences of the rows and relate this to whether each patient has been diagnosed with Metabolic Syndrome or not.
+
+### Distributed Database & Deployment
 
 <!-- 
 Things that we didn't plan to do for project but are natural extensions
 Custom Databases, load any database, generality of function
 User login and saving chats, circle back, save results and data
 -->
+
+Some natural advancements for Minerva would include opening up the system to a wider range of databases and also hosting the system online to allow for anyone to use and test it instead of hosting it locally. These are upgrades that would be easy to implement with more time and resources but we never planned to implement them as they fall out of scope of what we wanted to build and show off.
+
+We briefly did look at trying to host Minerva online so that she could be accessed from any device, however doing this proved to be too much hassle for what its worth. However in the future it would be a necessary step in improving Minerva, deploying Minerva online would open up the door for many more users to be able to access the system, it could also be used as an oppurtunity to expand functionality and add things like user login, where each user can save their chats, save data and load their own databases.
+
+Our aim with Minerva was also to create a generic system that was not tied to any database, for the purposes of the demonstration and scope of our project we focused this version on using two databases. However in future versions Minerva would be unlinked from our two demonstration databases and would be able to access and work with any database a user could want to load in. This could be very easily done with a little work, all the user would need to provide would be the actual database and a schema describing the columns in the database (this schema could probably even be extracted automatically from the file).

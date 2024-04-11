@@ -87,7 +87,7 @@ def database_action():
     return data
 
 if sys.argv[1] == "deploy":
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    app.run(host="127.0.0.1", port=5000, debug=False)
 else:
     for arg in sys.argv[1:]:
         print("Test File Started: ", arg)
