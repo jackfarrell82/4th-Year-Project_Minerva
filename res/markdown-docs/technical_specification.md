@@ -141,7 +141,7 @@ This section will go over the high-level design behind Minerva, how we planned i
 
 ### System Architecture
 
-![System Architecture Diagram]()
+![System Architecture Diagram](../media/System_Architecture.png)
 
 Above is our System Architecture Diagram this shows a high-level overview of what Minerva is designed to do, how each is function is seperated into different components and what each one contains in order for the function to work. It also contains implementation details such as links and technologies present used in each component. Implementation will be covered in greater detail in the Implementation section.
 
@@ -167,7 +167,7 @@ The frontend is responsible for:
 
 Below you can view a use case model we made for the frontend, which shows you how a user interacts with the frontend.
 
-![Frontend Use Case Diagram]()
+![Frontend Use Case Diagram](../media/use_case.png)
 
 From the above diagram you can see that user interaction with Minerva is very limited but the variety of questions that a user can ask is inumberable and Minerva will be able to cope and return the information to the user if the data is in the database. Most of the functions in the frontend interact with the backend as the frontend does not process inputted data but just displays it.
 
