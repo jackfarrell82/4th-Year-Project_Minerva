@@ -143,20 +143,24 @@ This section will go over the high-level design behind Minerva, how we planned i
 
 ![System Architecture Diagram](../media/System_Architecture.png)
 
-Above is our System Architecture Diagram this shows a high-level overview of what Minerva is designed to do, how each is function is seperated into different components and what each one contains in order for the function to work. It also contains implementation details such as links and technologies present used in each component. Implementation will be covered in greater detail in the Implementation section.
+Above is our **System Architecture Diagram** this shows a high-level overview of what Minerva is designed to do, how each is function is seperated into different components and what each one contains in order for the function to work. It also contains implementation details such as links and technologies present used in each component. Implementation will be covered in greater detail in the Implementation section.
 
-In this section we will give an overview on how we designed Minerva and her individual components. We designed Minerva with two main components in mind, they are:
+You can see in the above section that we divided Minerva into two major components:
 
 - Chatbot Frontend
 - Translation and Database Backend
 
-The role of the frontend chatbot component is to render the web page and is the only point of access for the user to interact with Minerva. Through the frontend the user will be able to ask Minerva questions about the database, be given the infomation they are asking, and also be able change the database to be able to retrieve different information. It is throught he frontend that users gain access to the information stored in the backend. The questions users input into Minerva are sent to the backend where they will be translated and then queried to the database before the information is returned to the user on the front end.
+The role of the **frontend chatbot** component is to act as the interface between the user and the backend functionality of the system. The frontend contains the code to render and present the UI to users in the form of a webpage, and can take in chat input from there. This interface will handle collecting and processing the prompts that users input in their conversations with Minerva, it is where the conversational chatbot code will be working on processing and interpreting what needs to be done based on a users input, for simple queries that Minerva can respond to immediately she can respond without involving the backend, if Minerva recognises that further computation or database access is being asked for she can then preprocess the query and send it to the backend via an API endpoint. Results that are created in the backend are also pushed back to the user via the frontend interface, raw data returned can be processed and transformed into the format that users can easily read and view on the webpage.
 
-The backend is where the Text-to-SQL translation and the database api are located. Users utilise the back end through the front end when they ask Minerva a question or change the database using the buttons found on the web page. The main responsibilities are to process user input and send the processed question to the database, then returning the retrieved information to the frontend.
+The **backend** is where the Text-to-SQL translation and Database accessing occurs. Users cannot directly interact with the backend or database, rather Minerva is the one who directs queries and functions calls to be executed. The backends major responsibilities include translating user queries into appropriate SQL queries and then applying these to the database via an API before returning the retrieved data so it can be shown to the user.
 
 ### Frontend Architecture
 
-The frontend is responsible for everything the user sees and interacts with, its primary function is to be a user interface for the user and it is what allows the user to interact with Minerva. The main part of the frontend web page is the chat history and text box. These two sections take up the majority of the page with the rest being taken up by a Minerva logo, A box indicating what database is currently connected, a change database button, and quick access buttons allowing the user to auto fill common questions.
+The frontend is responsible for everything the user sees and interacts with, its primary function is to be an interface for the user and it is what allows the user to interact with Minerva. Our vision for this UI was to keep it as clear and easy to use as possible, focusing on allowing Minerva to run most of the functionality which leaves the UI clean and easy to read.
+
+The main protion of the UI will be taken up by the chatbox where a user can converse with Minerva, showing their previous messages and a textbox at the bottom of the screen to input prompts. 
+
+The main part of the frontend web page is the chat history and text box. These two sections take up the majority of the page with the rest being taken up by a Minerva logo, A box indicating what database is currently connected, a change database button, and quick access buttons allowing the user to auto fill common questions.
 The frontend is responsible for:
 
 - Present the webpage to the user
@@ -167,9 +171,13 @@ The frontend is responsible for:
 
 Below you can view a use case model we made for the frontend, which shows you how a user interacts with the frontend.
 
-![Frontend Use Case Diagram](../media/use_case.png)
+![Frontend Use Case Diagram]()
 
 From the above diagram you can see that user interaction with Minerva is very limited but the variety of questions that a user can ask is inumberable and Minerva will be able to cope and return the information to the user if the data is in the database. Most of the functions in the frontend interact with the backend as the frontend does not process inputted data but just displays it.
+
+The frontend UI will be presented in the form of a website, this will be styled and designed to be easy to use and navigate for users, below you can see an early sketch of how we were envisioning the Minerva interface to look like:
+
+![Website Design Sketch]()
 
 ### Backend Architecture
 
@@ -202,6 +210,8 @@ The design section above describes what our system should be able to do, and a h
 ### Frontend Implementation
 
 The frontend is responsible for the user interface and rendering of the webpage alongside being how users interact with Minerva. This is done useing a Flask framework
+
+![Frontend Design](../media/frontendExample.png)
 
 ### Backend Implementation
 
