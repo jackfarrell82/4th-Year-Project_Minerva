@@ -187,7 +187,7 @@ The backend is responsible for handling all the data that the user will be acces
 - Sending the generated SQL code to the database
 - Returning the database infomation to the frontend
 
-![Backend Sequence Diagram]()
+![Backend Sequence Diagram](../media/sequence_diagram.png)
 
 The sequence diagram above showcases the order of operations that occur when a user inputs their question on the frontend.
 
