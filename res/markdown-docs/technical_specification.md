@@ -112,7 +112,7 @@ According to the README file the setup only required running the requirements.tx
 After going through the other models before settling on our final choice we came back to this to try testing it out, Jack paid a small amount of money for us to test out the model before making a final decision. The model did work but was very limited to the questions that were alredy assigned to it as it appeared the data that it was using for translating the questions was hard coded into the model itself. This would mean that we would have to manually change all of the data in the model to be relevant to the database's that we want Minerva to pull information from and due to the large amount of time Jack spent researching all these different models, we decided to not pursue this model and instead go with the text2sql-API.
 
 **SQLNet**
-When we first moved on from the Few-Shot-NL2SQL model this was the next model that was found, similarly to the previous model it requied cloning the github repo but unlike the previous one it does not require an api to function. This would have allowed us to use this model completly offline and without encountering a pay wall. SQLNet uses Python and pytorch in order to operate but an issue was encountered very early on into testing with this model as it uses python 2 as opposed to python 3. We thought that this would only be a small problem but as Jack looked into the model more and tried to get it functioning we realised how much of a problem this actually was. 
+When we first moved on from the Few-Shot-NL2SQL model this was the next model that was found, similarly to the previous model it requied cloning the github repo but unlike the previous one it does not require an api to function. This would have allowed us to use this model completly offline and without encountering a pay wall. SQLNet uses Python and pytorch in order to operate but an issue was encountered very early on into testing with this model as it uses python 2 as opposed to python 3. We thought that this would only be a small problem but as Jack looked into the model more and tried to get it functioning we realised how much of a problem this actually was.
 
 The biggest problem caused by the older version of python is that [pytorch](https://pytorch.org/), an open source machine learning framework, has been updated since this model was made seven years ago and now only supports python 3. Without pytorch the model will not work as there will be no framework for the model to build off of. The 2 solutions to this problem is to either update the code to python 3 or to download an older version of pytorch that could possibly run with python 2.
 
@@ -184,9 +184,10 @@ The backend is responsible for handling all the data that the user will be acces
 The sequence diagram above showcases the order of operations that occur when a user inputs their question on the frontend.
 
 **Description of the flow:**
+
 - Backend receives user input from the frontend
 - User input is then sent to the Text-to-SQL model via an API
-- Backend receives the translated user input 
+- Backend receives the translated user input
 - Sends the user query to the database
 - Database returns the information that the query outlined
 - Backend sends the database information to the frontend for it to be displayed
@@ -195,16 +196,16 @@ The sequence diagram above showcases the order of operations that occur when a u
 
 ## Implementation
 
-**How did we build it?** 
+**How did we build it?**
 The design section above describes what our system should be able to do, and a high-level view of how it would do things. This section describes how we implemented Minerva. We will go through the libraries and languages we used and give some code samples throughout.
 
 ### Frontend Implementation
 
-The frontend is responsible for the user interface and rendering of the webpage alongside being how users interact with Minerva. This is done useing a Flask framework 
+The frontend is responsible for the user interface and rendering of the webpage alongside being how users interact with Minerva. This is done useing a Flask framework
 
 ### Backend Implementation
 
-The backend is responsible for handling the data that it receives from the user and the frontend. The types of data that the backend would be receiving would be user query's, and database changes with the queries being the most common data the backend will receive. 
+The backend is responsible for handling the data that it receives from the user and the frontend. The types of data that the backend would be receiving would be user query's, and database changes with the queries being the most common data the backend will receive.
 
 The backend is constructed of multiple functions which allowed gareth to easily connect the backend to the frontend and allowed the easier transfer of queries into the backend via function arguments.
 
@@ -212,22 +213,14 @@ The backend is constructed of multiple functions which allowed gareth to easily 
 Once the users question has been received the first thing that is done is that the backend translates the users query into SQL so the database will be able to understand and return the necessary information. We used the requests library to make the set up of the API easier in python as the only experience we had using API's was in javascript. The translation is done by sending the users query through an API to the Text-to-SQL model that we used and explained in detail in earlier in this document. The API requires specific data to be inputted which is the Authorization token which is resonsible for allowing the use of the Text-to-sql Model as without it we would not be allowed to use the mode. The API also requires the prompt, type, and database schema so it can make the SQL as accurate as possible and work when we send it to the database. The model returns the translated query alongside other syntax which is then needed to be remove so it is just the SQL query, this is done through the strip() and split() functions as the additional syntax will cause errors to occur at other parts of the backend.
 
 **Sending the query to the database**
-
-Once the translated query has been returned we then send the query to the database that the user has selected via the mysql library. The mysql library  is what is needed to use the mysql API as stated on the mysql website. Similarly to the Text-to-sql API we need 
-
----
-
-## Problems and Solutions
-
-<!-- *Problems we could solve, small bits* -->
-In this section we will highlight some of the problems we encountered over the course of Minerva's development, unique problems that we needed to solve and how we went about doing it.
+Once the translated query has been returned we then send the query to the database that the user has selected via the mysql library. The mysql library  is what is needed to use the mysql API as stated on the mysql website. Similarly to the Text-to-sql API we need.
 
 ---
 
-## Limitations
+## Problems and Limitations
 
 <!-- *Limitations be imposed on us by bad libary, bad model, etc.* -->
-In this section we talk about some of the blockers we encountered during development of Minerva, these were things that caused significant delays, redesigns or things we generally couldn't fix or avoid. We will outline the problems we had and how they impacted on the final version of Minerva, and what we might have done to fix them.
+In this section we talk about some of the major problems and blockers we encountered during development of Minerva, these were things that caused significant delays, redesigns or things we generally couldn't fix or avoid. We will outline the problems we had and how they impacted the development of Minerva, and how we tried to work around and solve each one.
 
 ### Chatterbot Downsides
 
@@ -355,7 +348,7 @@ The results collected form the forms can be found in *res/testing_results*
 <!-- SKills, tech and teamwork stuff, planning etc -->
 We learnt a lot over the course of this project, of course we learnt a lot in our specific sections Gareth with Chatbots and hosting, Jack with Text-to-SQL models and API's. Thats not only what each of us learnt we also learnt about each others sections when it came to combining are parts and testing Minerva.
 
-When we started this project both Jack and Gareth had very similar experience with databases and API's alongside gareth having worked with chatbots before. Now after completing the project both of us have gained valuable insights into the operations and development of chatbots and API's. What Jack learnt most was database and API interaction and gained a deeper insight into how databases work and how they can be manipulated. <!-- Gareth learned what gareth learned *plz write what you learned :)*. 
+When we started this project both Jack and Gareth had very similar experience with databases and API's alongside gareth having worked with chatbots before. Now after completing the project both of us have gained valuable insights into the operations and development of chatbots and API's. What Jack learnt most was database and API interaction and gained a deeper insight into how databases work and how they can be manipulated. <!-- Gareth learned what gareth learned *plz write what you learned :)*.
 
 Teamwork, planning and communication where all skills that we developed as part of this project, having worked with each other before we knew what to expect from the other person but having this project have such influence over our final grade we pushed ourselves to improve every aspect on how we work together. We did this not only so the project would run more smoothly but also to improve our skills for when we start our jobs as we would have to develop these skills anyway and getting a head start doesn't hurt.
 
@@ -376,7 +369,7 @@ If you would like to try out the system for yourself please follow these instruc
 4. Create your own *config.env* file in /src following the format seen below, this contains your database host IP address, database password, the user, the MySQL port and the auth token for the text-to-sql model.
    ![Config.env file](../media/configenv.png)
 5. Start the flask application by running the command "python3 app.py deploy"
-6. This will power up Minerva and you can head to *127.0.0.1:5000* on your browser to open up Minerva's interface 
+6. This will power up Minerva and you can head to *127.0.0.1:5000* on your browser to open up Minerva's interface
 
 ## Future Work
 
