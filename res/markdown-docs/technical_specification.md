@@ -345,11 +345,35 @@ These walkthroughs also allowed us to vary the inputs and tests we did instead o
 
 ### User Testing
 
+> Resources and files relating to user testing, including results and copies of the google form and consent documents can be found in */res/testing-results
+
 Minerva is a heavily user centric system, and so User testing is extremely important to our project. We wanted to complete user testing to enable us to get feedback on the systems design, look and feel. It is important to get an external opinion on the system because as developers we have learned exactly what works and doesn't, how Minerva works and have become biased to believe that everything is working and looking good.
 
 First we had to complete and submit our ethics approval forms, this was pretty straightforward as we had done this before last year. During this time we decided that for the testing we would want to give users the chance to use Minerva, give them a couple of set tasks to complete and also let them experiment with the system. This would be accompanied by an anonymous survey where the participants can give feedback on how the tasks were, what they found difficult and general feedback.
 
 The results collected form the forms can be found in *res/testing_results*
+
+For our testing we conducted the tests over the period of a week, this allowed us to treat the first test or two as pilot tests, and we could implement changes and improvements between each tests both to Minerva but also how we ran the tests to make it as simple as possible for participants to complete and follow along.
+
+Some good feedback we got about the testing process that we acted upon was:
+
+- Adding example prompts
+- Clearer instructions for tasks to be completed
+- Clarifying what Minerva can do and the scope of the system
+
+The more tests we completed the better the system looked and felt to the participants especially because they were new users, after spending so much time with Minerva ourselves we had become biased and it was hard to see the system as a new user would so the user testing was invaluable to get that feedback.
+
+During this time we had a very constructive meeting with our supervisor and got a lot of feedback based on actual UI design principles and rules on how to improve out interface, we coupled this feedback with the user feedback to make a lot of good changes to the styling.
+
+We also worked out quite a few bugs during this period aswell, the amount of runs and prompts we went through on Minerva helped reveal some little bugs that we were quick to squash. Below you can see a list of the bugs fixed and suggestions implemented thanks to the user testing period.
+
+![User Testing Bugs Fixed/Feautres Added List](../media/Bugs&Features.png)
+
+Overall we had good feedback on the feel and design of the system, and especially on the viability of Minerva as a system that would be useful to potential database users. Below you can see some of the results that we got from our user testing form, it shows that Minerva has a lot of potential for helping people and that the people participating in our study did think that Minerva could be a viable solution for non-technical users to be able to better utilise databases.
+
+![Question Reponse 1](../media/question1.png)
+![Question Reponse 2](../media/question2.png)
+![Question Reponse 3](../media/question3.png)
 
 ---
 
