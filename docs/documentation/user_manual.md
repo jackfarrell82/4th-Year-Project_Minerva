@@ -30,7 +30,7 @@ please follow these instructions to get Minerva set up, it does requires a bit o
    a. Make sure you have pip installed **sudo apt install python3-pip**
    b. Install the requirements for Minerva with **pip install -r requirements.txt**
 4. Create your own *config.env* file in /src following the format seen below, this contains your database host IP address, database password, the user, the MySQL port and the auth token for the text-to-sql model.
-   ![Config.env file](../media/configenv.png)
+   ![Config.env file](../../res/media/configenv.png)
 5. Start the flask application by running the command "python3 app.py deploy"
 6. This will power up Minerva and you can head to *127.0.0.1:5000* on your browser to open up Minerva's interface
 ---
