@@ -342,15 +342,15 @@ As seen in the design, the backend consists of functions to translate prompts in
 
 The backend was created using the following major technologies:
 
-- Python
+- Python Code
 - Text-to-SQL
 - MYSQL
 
 ![Backend Tech Logos](../media/BackendLogos.png)
 
-#### Code
+#### Python Code
 
-The code of the backend is all written in python 3 as it is what we agreed on when we started the project. Having the backend in the same language as the frontend avoids unecessary conflicts that could occur when dealing with different languages. All the code for the backend to function is in the `text_to_sql_api.py` file as it is responsible for for the text-to-sql translation model API and the API for the mysql database. 
+The code of the backend is all written in python 3 as it is what we agreed on when we started the project. Having the backend in the same language as the frontend avoids unecessary conflicts that could occur when dealing with different languages. All the code for the backend to function is in the text_to_sql_api.py file as it is responsible for the text-to-sql translation model api and the api for the mysql database. 
 
 **Libraries**
 
@@ -360,20 +360,20 @@ The text_to_sql_api.py uses a series of libraries in order for it to be able to 
 
 - the `requests` library is required for python to be able to send HTTP requests which we then used for the api responsible for accessing the Text-to-SQL model that we used
 - the `sys` library is to check the arguments when the file is run in the command line and not when Minerva calls the functions present in the file.
-- the `os` library allows us to use os.getenv() and is used so we can get the password for the database passed into the text_to_sql_api.py file without having it hard coded. Instead we have a config.sys file that contains all the information. More details about the config.env file will be covered later on in this section.
+- the `os` library allows us to use `os.getenv()` and is used so we can get the password for the database passed into the text_to_sql_api.py file without having it hard coded. Instead we have a config.sys file that contains all the information. More details about the config.env file will be covered later on in this section.
 - `mysql` library is what is needed to use the mysql api
-- `from mysql.connector import errorcode` is also used for the mysql api but allows us to use the error checker that was present on the api website.
-- `from dotenv import load_dotenv` similarly to the os libary this is what is used to allow us to use a config file for sensitive information than hard coding it into the file
+- `mysql.connector` is also used for the mysql api but allows us to use the error checker that was present on the api website.
+- `dotenv` similarly to the os libary this is what is used to allow us to use a config file for sensitive information than hard coding it into the file
 
 **Database Information**
 
-In order for the text-to-sql model to create sql queries that work and make use of the database schema we need to pass that information to the model throught the API. The exact way the api works will be covered in the Text-to-SQL API section.
+In order for the text-to-sql model to create sql queries that work and make use of the database schema we need to pass that information to the model throught the api. The exact way the api works will be covered in the [Text-to-SQL API](#text-to-sql-api) section.
 
-Due to this information not being dynamic and will be staying the same we have these pieces of information hard coded into the backend as show below.
+Due to the information below not being dynamic we have these pieces of information hard coded as show below.
 
 ![Database name and Schema](../media/database_name_and_schema.png)
 
-This section also has the DB_LOADED and SCHEMA variables equal to the metabolic_syndrome database, this makes it so when Minerva is first booted up the user is presented with a database instead of them having to pick a database before they can begin asking questions.
+This section also has the `DB_LOADED` and `SCHEMA` variables equal to the "metabolic_syndrome" database, this makes it so when Minerva is first booted up the user is presented with a database instead of them having to pick a database before they can begin asking questions.
 
 **setupDB**
 
@@ -381,11 +381,11 @@ This section also has the DB_LOADED and SCHEMA variables equal to the metabolic_
 
 Above is the code for the `setupDB` function. As the name suggests this function is responsible for setting up the database and getting it connected to Minerva.
 
-The first few lines of code dont do much, the global DB_LOADED, SCHEMA line is what allows the function to access the information of DB_LOADED and SCHEMA that are not present in the function.
+The first few lines of code dont do much, the `global DB_LOADED, SCHEMA` line is what allows the function to access the information of `DB_LOADED` and `SCHEMA` that are not present in the function.
 
-The `load_dotenv("config.env")` loads the config file and opens it allowing us to use `os.getenv("DB_USER")` to get this information and assign it to DB_USER.
+The `load_dotenv("config.env")` loads the config file and opens it allowing us to use `os.getenv("DB_USER")` to get this information and assign it to `DB_USER`.
 
-We then assign DB_USER to user in the config, this config isnt config.env, even though they have the same names, instead this config is for the mysql api. We will go into more detail about the mysql api in its later section but for now all that is important is that we are grabbing the information present in the config.env file and assigning it to specific sections for the mysql api.
+We then assign `DB_USER`to user in the config, this config isn't config.env, even though they have the same names, instead this config is for the mysql api. We will go into more detail about the mysql api in the [MYSQL API](#mysql-api) section but for now all that is important is that we are grabbing the information present in the config.env file and assigning it to specific sections for the mysql api.
 
 This process then repeats for all information present in the config.env file. In some areas we dont assign the information to config but instead we assign it to headers and data, both of those are for the text-to-sql api and function identically to the mysql api.
 
@@ -393,52 +393,52 @@ This process then repeats for all information present in the config.env file. In
 
 ![swapDB](../media/swapDB.png)
 
-SwapDb is the function that Minerva calls when a user wants to change what database they are currently connecting to and pulling information from.
+`SwapDb` is the function that Minerva calls when a user wants to change what database they are currently connecting to and pulling information from.
 
-we start with a global DB_LOADED, SCHEMA which allows the function to access the information stored in those variables that are outside the function. We then check what database is currently loaded and, with there only being two databases to pick from, swap the database information currently in the variable with the other database information. We also make sure to chang ethis information for our API's as without that we would end up with incorrect translated SQL code or trying to search for tables that do not exist.
+we start with a `global DB_LOADED, SCHEMA` which allows the function to access the information stored in those variables that are outside the function. We then check what database is currently loaded and, with there only being two databases to pick from, swap the database information currently in the variable with the other database information. We also make sure to chang ethis information for our api's as without that we would end up with incorrect translated sql code or trying to search for tables that do not exist.
 
 **Additional Functionality**
 
-At the bottom of the text_to_sql_api.py there is code present that is only ran if the actual file itself is run in the command prompt alongside arguments.
+At the bottom of the `text_to_sql_api.py` there is code present that is only ran if the actual file itself is run in the command prompt alongside arguments.
 
 ![Additional code](../media/additional_code.png)
 
-Going through the code presented above it starts with setting up the database which goes thorugh everything mention in the setupDB section above before moving on to the if statement.
+Going through the code presented above it starts with setting up the database which goes thorugh everything mention in the `setupDB` section above before moving on to the if statement.
 
-The if statment is there to determine what database and schema shouold be loaded and this is based on whether the argument entered in with the file was "medical" or "financial" and loads the corresponding database.
+The if statment is there to determine what database and schema shouold be loaded and this is based on whether the argument entered in with the file was *"medical"* or *"financial"* and loads the corresponding database.
 
-It then prints the loaded database to the command line before asking the user for a prompt. The prompt in this case is a natural language questions that can then be turned into sql code and sent to the database to return some information present in it. An example prompt for the medical database would be "how many pateints are under the age of 40?".
+It then prints the loaded database to the command line before asking the user for a prompt. The prompt in this case is a natural language questions that can then be turned into sql code and sent to the database to return some information present in it. An example prompt for the medical database would be *"how many pateints are under the age of 40?"*.
 
-Once it has received the prompt it then sends the prompt to the text-to-sql model using the toSQL() function that will be gone into more detail in the next section. The prompt and the translated prompt are printed to the command line before the translated prompt is sent to the database and all information returned is printed.
+Once it has received the prompt it then sends the prompt to the text-to-sql model using the `toSQL()` function that will be gone into more detail in the next section. The prompt and the translated prompt are printed to the command line before the translated prompt is sent to the database and all information returned is printed.
 
-The swapDB() function is then ran and similarly to what previously happened it asks the user for a prompt and returns the datbase information.
+The `swapDB()` function is then ran and similarly to what previously happened it asks the user for a prompt and returns the datbase information.
 
 This section of the text_to_sql_api.py file was mainly used for when we were testing the file to ensure it was fully functional before we had combined it with Minerva.
 
 #### Text-to-SQL API
-In order for the text-to-sql API to work the api has to be given a series of information in the "headers" and "data" field.
+In order for the text-to-sql api to work the api has to be given a series of information in the *"headers"* and *"data"* field.
 
 ![Headers and data](../media/headers_and_data.png)
 
-From the above image you can see what information is needed in each section. The data that is unique to each user is left blank while the "type" field is hardcoded to be mysql as we designed minerva to be combatable with mysql databases. The fields that are left blank are filled in during setupDB() with the information found in the "config.env" file. 
+From the above image you can see what information is needed in each section. The data that is unique to each user is left blank while the *"type"* field is hardcoded to be mysql as we designed minerva to be combatable with mysql databases. This field can be changed to other database languages that the model supports. The fields that are left blank are filled in during `setupDB()` with the information found in the *"config.env"* file. 
 
-Once all the necessary data has been placed into the necessary fields the toSQL() function, more specifically the text-to-sql API, is now functional and will reutrn the trsanslated prompt as opposed to errors. 
+Once all the necessary data has been placed into the necessary fields the `toSQL()` function, more specifically the text-to-sql api, is now functional and will reutrn the trsanslated prompt as opposed to errors. 
 
 ![toSQL](../media/toSQL.png)
 
-Since the text_to_sql_api.py file is made of many functions that can be called outside of the file itself it allows Minerva to very easily pass in the user query as the function argument "prompt". 
+Since the text_to_sql_api.py file is made of many functions that can be called outside of the file itself it allows Minerva to very easily pass in the user query as the function argument *"prompt"*. 
 
-From the above screenshot of the toSQL() function we can see how it operates. The first thing that happens is that the prompt entered when Minerva calls the function is added to the data field before a get request is sent to the text-to-sql model.
+From the above screenshot of the `toSQL()` function we can see how it operates. The first thing that happens is that the prompt entered when Minerva calls the function is added to the data field before a get request is sent to the text-to-sql model.
 
 The get request consists of 3 fields, the first one is the website that hosts the text-to-sql model, the second is the header that sends all the information in the header to the model and the third is similar put passes in all the information in the data field. The get requests response is placed into the response variable before we then go about manipulating the returned response so we are just left with the translated statement.
 
-The first thing that we do after sending the get request is make sure the response is the text version and not any code or metadata version that it could be. we then use the split() command to break up the output into seperate sections before picking the one that only has the translated sql query. Finally we do some replacing of new line characters (\n) so there is no unecessary characters in the query being sent to the database.
+The first thing that we do after sending the get request is make sure the response is the text version and not any code or metadata version that it could be. we then use the `split()` command to break up the output into seperate sections before picking the one that only has the translated sql query. Finally we do some replacing of new line characters (\n) so there is no unecessary characters in the query being sent to the database.
 
-Once all the modifications have been made to the returned query we then return a package containing the response and the DB_LOADED to where the toSQL() function was called from.
+Once all the modifications have been made to the returned query we then return a package containing the response and the `DB_LOADED` to where the `toSQL()` function was called from.
 
 #### MYSQL API
 
-Similarly to the Text-to-SQL api with its "headers" and "data", the mysql api needs the config field in order to let the database know that the get request is valid and allowed to access the information. Below you can see the config field and all the information that it needs along side explanations of the data.
+Similarly to the Text-to-SQL api with its *"headers"*and *"data"*, the mysql api needs the config field in order to let the database know that the get request is valid and allowed to access the information. Below you can see the config field and all the information that it needs along side explanations of the data.
 
 ![Config field](../media/config.png)
 
@@ -449,21 +449,21 @@ Similarly to the Text-to-SQL api with its "headers" and "data", the mysql api ne
 - `database` the name of the database that we are currently getting information from.
 - `raise_on_warnings` having this be True allowed us to use the example error handler.
 
-All the information that is left blank is filled in during the setupDB() function where all the info is gotten from the config.env file and then placed into their respective sections.
+All the information that is left blank is filled in during the `setupDB()` function where all the info is gotten from the *config.env* file and then placed into their respective sections.
 
-Next we will go over the toDatabase() function.
+Next we will go over the `toDatabase()` function.
 
 ![toDatabase](../media/toDatabase.png)
 
-Unlike the Text-to-sql api this api doesnt use the request library but instead uses the mysql and mysql.connector library. This difference causes the code to look different but functionally it is identical to the previous one.
+Unlike the text-to-sql api this api doesnt use the request library but instead uses the mysql and mysql.connector library. This difference causes the code to look different but functionally it is identical to the previous one.
 
-The query is passed in similarly to how "prompt" was passed into the toSQL() function, this makes it very simple for Minerva to send exactly what is needed to the database.
+The query is passed in similarly to how *"prompt"* was passed into the `toSQL()` function, this makes it very simple for Minerva to send exactly what is needed to the database.
 
 The first thing that is done is we start with a try and except, this is done for our error checking. We try to connect to the database by passing in the config that, as we covered already, has all the information needed to tell the API to connect to the correct database. If an error were to return we can return an error stating if the error was caused with the database name or with the username or password given.
 
-If all is succesfull we then move on opening up a cursor and then executing the query which, in simple terms, sends that query to the database and executes it like how a human would do it. We then fetchall() the rows and place them in a rows variable before closing our connections and returning the data we got to where the function was originally called from.
+If all is succesfull we then move on opening up a cursor and then executing the query which, in simple terms, sends that query to the database and executes it like how a human would do it. We then `fetchall()` the rows and place them in a rows variable before closing our connections and returning the data we got to where the function was originally called from.
 
-Unlike the text-to-SQL api no manipulation has to be done to the returned data in the backend as the data is being sent straight to the fron end where manipulation might be done to it to improve the look of the data when it is being presented to the end user.
+Unlike the text-to-sql api no manipulation has to be done to the returned data in the backend as the data is being sent straight to the fron end where manipulation might be done to it to improve the look of the data when it is being presented to the end user.
 
 ---
 
