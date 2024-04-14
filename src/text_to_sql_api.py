@@ -15,9 +15,9 @@ DB_LOADED = database_M
 SCHEMA = schema_M
 
 config = {
-'user': "", #Device Name, keep it as root but make sure the data base has all permisions
-'password': "", # need to find a way to have this not be just written in a file
-'host': "", #Device ipv4 address 192.168.0.150
+'user': "", #User Name, keep it as root but make sure the data base has all permisions
+'password': "", 
+'host': "", #database ipv4 address
 'port': "",
 'database': "", #What database we are sending our query too
 'raise_on_warnings': True,
