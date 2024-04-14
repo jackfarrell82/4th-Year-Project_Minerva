@@ -147,56 +147,78 @@ Above is our **System Architecture Diagram** this shows a high-level overview of
 
 You can see in the above section that we divided Minerva into two major components:
 
-- Chatbot Frontend
+- Chatbot and UI Frontend
 - Translation and Database Backend
 
-The role of the **frontend chatbot** component is to act as the interface between the user and the backend functionality of the system. The frontend contains the code to render and present the UI to users in the form of a webpage, and can take in chat input from there. This interface will handle collecting and processing the prompts that users input in their conversations with Minerva, it is where the conversational chatbot code will be working on processing and interpreting what needs to be done based on a users input, for simple queries that Minerva can respond to immediately she can respond without involving the backend, if Minerva recognises that further computation or database access is being asked for she can then preprocess the query and send it to the backend via an API endpoint. Results that are created in the backend are also pushed back to the user via the frontend interface, raw data returned can be processed and transformed into the format that users can easily read and view on the webpage.
+The role of the **frontend** component is to act as the interface between the user and the backend functionality of the system. The frontend contains the code to render and present the UI to users in the form of a webpage, and also holds the chatbot code that is used to process user input. Users will be able to interact with Minerva through the website interface, prompts can then be interpreted by Minerva and the appropriate actions completed and results displayed back to the user.
 
-The **backend** is where the Text-to-SQL translation and Database accessing occurs. Users cannot directly interact with the backend or database, rather Minerva is the one who directs queries and functions calls to be executed. The backends major responsibilities include translating user queries into appropriate SQL queries and then applying these to the database via an API before returning the retrieved data so it can be shown to the user.
+The **backend** is where the Text-to-SQL translation and Database access occurs. Users cannot directly interact with the backend or database, rather Minerva is the one who directs queries and functions calls to be executed. The backends major responsibilities include translating user queries into appropriate SQL queries and then applying these to the database via an API before returning the retrieved data so it can be shown to the user.
 
 ### Frontend Architecture
 
-The frontend is responsible for everything the user sees and interacts with, its primary function is to be an interface for the user and it is what allows the user to interact with Minerva. Our vision for this UI was to keep it as clear and easy to use as possible, focusing on allowing Minerva to run most of the functionality which leaves the UI clean and easy to read.
+The frontend is responsible for everything the user sees and interacts with. The main responsibilites of the frontend are to be the point of contact with the user, displaying the system to the user via a webpage, updating it whenever Minerva sends a response to the users and allowing the user to interact with Minerva through the text interface and various other links and buttons.
 
-The main protion of the UI will be taken up by the chatbox where a user can converse with Minerva, showing their previous messages and a textbox at the bottom of the screen to input prompts. 
-
-The main part of the frontend web page is the chat history and text box. These two sections take up the majority of the page with the rest being taken up by a Minerva logo, A box indicating what database is currently connected, a change database button, and quick access buttons allowing the user to auto fill common questions.
-The frontend is responsible for:
+The core functions of the frontend are:
 
 - Present the webpage to the user
 - Allowing users to enter questions to Minerva
-- Telling Minerva what database they want information from
-- Sending the user input to the backend
-- Returning the database information to users
+- Displaying tips and information to users on how to use the system
+- Presenting information on the databases available to use
+- Changing some settings of Minerva such as what database is loaded
+- Interpreting user inputs and responding
+- Sending prompts and function calls to the backend to be processed
+- Presenting data returned from the backend to the User
 
 Below you can view a use case model we made for the frontend, which shows you how a user interacts with the frontend.
 
-![Frontend Use Case Diagram]()
+![Frontend Use Case Diagram](../media/FrontEndUseCase.png)
 
-From the above diagram you can see that user interaction with Minerva is very limited but the variety of questions that a user can ask is inumberable and Minerva will be able to cope and return the information to the user if the data is in the database. Most of the functions in the frontend interact with the backend as the frontend does not process inputted data but just displays it.
+From the above diagram you can see that types of ways that the User can interact with the frontend, it may seem like a limited set of features but the "Enter Prompts" and "Submit Database Queries" are open ended functions that allow users to enter any question or query they might have and Minerva will process it and hopefully will be able to provide an appropriate answer to a wide selection of questions related to the system and the databases.
+Other functions include some helper functionalities and settings such as allowing the user to change the database. As well as the option to view some tips to get them started as well as descriptions of what each database is which can allow users to formulate their queries for the database.
 
-The frontend UI will be presented in the form of a website, this will be styled and designed to be easy to use and navigate for users, below you can see an early sketch of how we were envisioning the Minerva interface to look like:
+Below you can see a simple data flow diagram for the frontend, this helps visualise how exactly the users prompts would be processed and dealt with.
 
-![Website Design Sketch]()
+![Frontend Data Flow Diagram](../media/FrontendDataFlow.png)
+
+You can see the user at the top of the diagram, the main input that the system is concerned with is the users prompts, these are taken in from the website text box and will be sent directly to Minerva where they can be interpreted, then once Minerva knows what to do with them she can perform some preprocessing and send it to the backend as a query to be translated and sent to the database, or she can formulate her own response to send back to the user. Simpler functions like changing the database simply have to take in the value from the website and then send it back to be updated in the backend so the next queries inputted can be processed using the chosen database.
+
+#### Frontend Interface Design
+
+We always knew that we wanted to present Minerva via a web interface, below you can see an early sketch of the bare essentials we have planned to display.
+
+![Website Design Sketch](../media/MinervaUISketch.jpg)
+
+When thinking of the design for the user interface we wanted to keep it basic, we wanted to focus on factors like:
+
+- Simplicity
+- Usability
+- Readability
+
+Minerva was always envisioned to be a solution to a non-technical persons problem, so we knew that we wanted to present it in the cleanest way possible, no complicated navigation or features, just a simple one page interface so users can get into the system and use it quick and easy. Most of the functionality of the system would be embedded into the conversational element with Minerva, this removes the need for complex menus, lots of buttons and submenus, forms to fill in and selections to make. All a user should need to do is load the page, type in a suitable query and gain instant value.
 
 ### Backend Architecture
 
-The backend is responsible for handling all the data that the user will be accessing through Minerva by the use of API's for both the Text-to-SQL model and accessing the databases. Some of the data handled by the backend will not be visable to the user at all times. The responsiblitites of the backend are:
+The backend is responsible for handling all the data that the user will be accessing through Minerva by the use of API's for both the Text-to-SQL model and accessing the databases. The backend is not directly accesible to the user, instead it contains functions and services that Minerva can employ from the frontend to satisfy the users needs.
 
-- Translating the input into MYSQL code
-- Sending the generated SQL code to the database
-- Returning the database infomation to the frontend
+The main responsibilities of the backend are:
 
-![Backend Sequence Diagram](../media/sequence_diagram.png)
+- Translating given prompts into MYSQL code
+- Connecting to the loaded database
+- Querying the database with SQL queries
+- Returning data retrieved to the frontend
 
-The sequence diagram above showcases the order of operations that occur when a user inputs their question on the frontend.
+Below you can see a simple sequence diagram which depicts a user query being taken in, translated and used to query the database.
+
+![Backend Sequence Diagram](../media/BackendTranslationSD.png)
+
+You can see in the diagram that the backend takes a preprocessed query as input, this would come from Minerva in the frontend, this query is then translated to SQL and then used to query the database, the data retrieved from the database is then packaged up and handed back to the frontend and Minerva to be displayed for the user.
 
 **Description of the flow:**
 
-- Backend receives user input from the frontend
-- User input is then sent to the Text-to-SQL model via an API
-- Backend receives the translated user input
-- Sends the user query to the database
+- Backend receives user prompt from the frontend as a preprocessed string.
+- User prompt is then sent to the Text-to-SQL model via an API
+- The model translates the prompt into an approriate SQL query and returns it
+- Backend sends this SQL query to the database
 - Database returns the information that the query outlined
 - Backend sends the database information to the frontend for it to be displayed
 
@@ -205,15 +227,118 @@ The sequence diagram above showcases the order of operations that occur when a u
 ## Implementation
 
 **How did we build it?**
-The design section above describes what our system should be able to do, and a high-level view of how it would do things. This section describes how we implemented Minerva. We will go through the libraries and languages we used and give some code samples throughout.
+The design section above describes what our system should be able to do, and a high-level view of how it would do things. Now we're gonna get into the nitty gritty bits, this section describes how we implemented Minerva. We will go over the technologies user, major libraries and give some examples and walkthroughs of the biggest parts of Minerva.
+
+> All other code can be seen in */src* we will only be touching on the biggest parts of Minerva's code in this section
 
 ### Frontend Implementation
 
-The frontend is responsible for the user interface and rendering of the webpage alongside being how users interact with Minerva. This is done useing a Flask framework
+As explained in the design, the frontend components consist of the Minerva chatbot, and the interface through which users can interact with the system. These components were designed and developed by Gareth.
 
-![Frontend Design](../media/frontendExample.png)
+The frontend was created using the following major technologies:
+
+- Flask
+- Chatterbot
+- HTML, CSS & JS
+- Python
+
+![Frontend Tech Logos](../media/frontendLogos.png)
+
+#### Flask Application
+
+> Our Flask application can be seen in the file *src/app.py*, the HTML in *src/templates/index.html* and the CSS and JS in *src/static*
+
+<!-- Application, Webpage, Endpoints -->
+**Application**
+For the system we decided *Python* would be our main language of choice, it is a language we are both familiar with and have strong skills in, it is also the language of choice for a lot of natural language applications as well as data processing, our system fits strongly withing both of these categories so it was the natural choice for us.
+
+To contain the system we created a Flask application, we chose Flask as we knew it was an easy to use framework for creating small contained apps, it is easier to use and more suited to the Minerva system than a larger backend focused framework like Django, and we did not need a complex frontend system like React as our webpage is designed to be small, simple and clean.
+
+The Flask application contains all the different components of our system, the chatbot is set up and initialised inside *app.py* and the different backend functions are imported from the other python files in our repo.
+
+Starting Minerva is easy with Flask, all that is needed is to run the command `python3 app.py deploy` in the /src directory, this deploys and makes Minerva available at <http://127.0.0.1:5000/>
+
+![Flask Deploy](../media/FlaskDeploy.png)
+
+**Visuals**
+Our UI has been designed and styled using a combination of HTML, CSS & JS. An example of what the website looks like when in use can be seen below.
+![Website Preview](../media/frontendExample.png)
+
+When making the website we tried to keep is as simple and clean as possible, our main concerns were **simplicity** and **usability** catering towards first time and non-technical users.
+
+During the devleopment the design improved and evolved a lot, especially towards the end of the project when we were conducting user testing, we also took time to review some of the UI design rules such as the *Gestalt principles* after some very good feedback from our supervisor on how we could improve the interface
+
+We kept the colour schemes simple and consistent, we even created an alternate colour scheme which is displayed when the database is swapped from the default to alternate option.
+
+![Colour Palettes](../media/FrontendColourPalette&Switch.png)
+
+**Endpoints**
+Communication between the python code and the webpage is done via requests in the javascript to the various endpoints set up in our flask application.
+
+For example, when the user sends a message into the chat it triggers the *botResponse* function (seen below). This function takes in the text that the user typed in and sends it to the python code via the */get* endpoint, included in this request is the users message and a flag to determine if the user wants to see any translated SQL code. The message the user typed is then placed onto the screen with *appendMessage*.
+![Bot Response Function](../media/JSBotResponse.png)
+
+We designed Minerva to handle most of the processing so in total we only have two major endpoints that are used to communicate between the webpage and the python code, */get* is used to send user messages back and */database* is used to swap the loaded database. Both can be seen commented out below.
+![Endpoint Code](../media/Endpoints.png)
+
+#### Minerva Chatbot
+
+<!-- Setup, Flow, Custom Adapter, training -->
+
+The major component developed for the frontend is of course the chatbot core of Minerva. We have implemented Minerva using the chatterbot library for python, you can view the documentation for Chatterbot [here](https://chatterbot.readthedocs.io/en/stable/index.html).
+
+What the chatterbot library allows us to do is to create a chatbot object that has built in capabilities and methods such as taking in a message and selecting the response statement that has the highest confidence value. Below you can see the initialisation of Minerva as an object in our *app.py* code.
+![Minerva Object Creation](../media/ChatbotCreation.png)
+
+In the code we create a bot object, this object is what we can call and use methods from in other parts of the code to get Minerva to do things.
+
+Logic adapters determine how the bot selects a response to a given statement, we made out own custom logic adapter called **QueryAdapter** (You'll hear more about this later), the other adapter is a default one that compares the input message to all that it has been trained on before, and selects the response with the highest confidence value. If it does not have a confidence value of above 0.8, then Minerva instead will send back a message explaining that she does not understand.
+
+The filters argument is empty because we do not want any filter acting upon the responses Minerva can give, we had a big problem with a default filter being applied without our knowledge, you can read more about this later in [problems and limitations.](#problems-and-limitations)
+
+The database_uri specifies the database where Minerva will store all her knowledge, this is where all her past conversations are and trained responses are stored, this is where the best match logic adapter looks to find the best response for each statement.
+
+> You can see our database file at */src/static/data/db.sqlite3*
+
+Below is a helpful diagram from the Chatterbot Documentation that makes it easier to understand the flow of how the chatbot processes each input statement.
+![Dialog Flow in Chatbot](../media/dialog-processing-flow.svg)
+
+#### Query Adapter
+
+To enable Minerva to recognise when a user wants to submit a database query we built this custom logic adapter, it takes priority over the best match filter for selecting the correct response. It is not the perfect solution but we had to do it this way due to some limitations we found with the chatterbot library (these are expanded on in [problems and limitations](#problems-and-limitations)).
+
+> The QueryAdapter is a python class and can be found in */src/adapter.py*
+
+The adapter starts off by checking if the input statement from the user can be processed by this adapter, in this case, it checks to see if the users message begins with "query" which indicates they want to submit to the database.
+![Can Process Check](../media/adapterCanProcess.png)
+
+Once the adapter accepts a query to be processed it starts to work with the backend to transform and submit the query to the database.
+![Process Query Function](../media/adapterProcessQuery.png)
+
+In the above code the *api* that many methods are being called using refers to the backend code imported from */src/text_to_sql_api.py*, this will be explained more in the [backend implementation](#backend-implementation).
+
+The flow of how the query is processed is as follows:
+
+1. The API sets up the database to be queried
+2. The query is passed to be transformed to SQL code
+3. The transformed SQL query is then passed to be sent to the database
+4. The data returned from the database is passed back to be used further, if the user wants to see SQL this is also appended on
+
+After this raw data is retrieved Minerva's response begins to be formulated, this response is made in the format of a HTML string, so that when we add it back to the website it will be styled nicely and easy to read for the user. You can see the code to formulate the response below.
+![Formulate Response](../media/HTMLStringStyling.png)
+
+#### Training
+
+The logic adapter we made that is described above deals with interacting with the backend when a user wants to query the database, however there are also a lot of simple questions and queries that Minerva can answer instantly. These responses are trained into Minerva and are selected using the best match method to get the response with the highest confidence.
+
+> You can see our full training data at *src/static/data/training_dict.py*
+
+Minerva is constantly training with each conversation she has, but most of her knowledge has been pretrained into her, the responses she can say and which questions to response with which answers. You can run a training cycle using the flask application with the command `python3 app.py train`. You can see what code this runs and a sample of the training data below.
+![Training Method & Data](../media/TrainingMethod&Data.png)
 
 ### Backend Implementation
+
+As seen in the design, the backend consists of functions to translate prompts into SQL prompts and to query the database and retrieve data for Minerva. These components were designed and developed by Jack.
 
 The backend is responsible for handling the data that it receives from the user and the frontend. The types of data that the backend would be receiving would be user query's, and database changes with the queries being the most common data the backend will receive.
 
@@ -223,7 +348,7 @@ The backend is constructed of multiple functions which allowed gareth to easily 
 Once the users question has been received the first thing that is done is that the backend translates the users query into SQL so the database will be able to understand and return the necessary information. We used the requests library to make the set up of the API easier in python as the only experience we had using API's was in javascript. The translation is done by sending the users query through an API to the Text-to-SQL model that we used and explained in detail in earlier in this document. The API requires specific data to be inputted which is the Authorization token which is resonsible for allowing the use of the Text-to-sql Model as without it we would not be allowed to use the mode. The API also requires the prompt, type, and database schema so it can make the SQL as accurate as possible and work when we send it to the database. The model returns the translated query alongside other syntax which is then needed to be remove so it is just the SQL query, this is done through the strip() and split() functions as the additional syntax will cause errors to occur at other parts of the backend.
 
 **Sending the query to the database**
-Once the translated query has been returned we then send the query to the database that the user has selected via the mysql library. The mysql library  is what is needed to use the mysql API as stated on the mysql website. Similarly to the Text-to-sql API we need.
+Once the translated query has been returned we then send the query to the database that the user has selected via the mysql library. The mysql library is what is needed to use the mysql API as stated on the mysql website. Similarly to the Text-to-sql API we need.
 
 ---
 
@@ -327,7 +452,7 @@ The second class is "TestMinervaPrompts", this class contains the test dealing w
 
 ![MinervaPrompt Test](../media/test1.png)
 
-These unit tests can be run by just entering the src/testing directory and running "python3 unit_tests.py -v". We try to run these tests as often as we make changes to the system code, and we also tried to make sure we expanded these tests and example prompts as Minerva grew and gained more training data. The unit tests are also executed by querying our flask application that hosts Minerva, which must be running to execute the tests, this means that they mimic a request from the UI as closely as possible and provide a good verification of Minerva's status.
+These unit tests can be run by just entering the src/testing directory and running `python3 unit_tests.py -v`. We try to run these tests as often as we make changes to the system code, and we also tried to make sure we expanded these tests and example prompts as Minerva grew and gained more training data. The unit tests are also executed by querying our flask application that hosts Minerva, which must be running to execute the tests, this means that they mimic a request from the UI as closely as possible and provide a good verification of Minerva's status.
 If all is working well an output like below should be seen.
 
 ![Unit Test Results](../media/testSuccess.png)
@@ -402,7 +527,7 @@ If you would like to try out the system for yourself please follow these instruc
    b. Install the requirements for Minerva with **pip install -r requirements.txt**
 4. Create your own *config.env* file in /src following the format seen below, this contains your database host IP address, database password, the user, the MySQL port and the auth token for the text-to-sql model.
    ![Config.env file](../media/configenv.png)
-5. Start the flask application by running the command "python3 app.py deploy"
+5. Start the flask application by running the command `python3 app.py deploy`
 6. This will power up Minerva and you can head to *127.0.0.1:5000* on your browser to open up Minerva's interface
 
 ## Future Work
