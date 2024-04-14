@@ -1,6 +1,6 @@
 # DCU CA400 - Final Year Project
 
-![Minerva Banner](../res/media/minerva_banner.png)
+![Minerva Banner](../media/minerva_banner.png)
 
 >Gareth Hogan 20379616  & Jack Farrell 20352136
 
@@ -30,7 +30,7 @@ please follow these instructions to get Minerva set up, it does requires a bit o
    a. Make sure you have pip installed **sudo apt install python3-pip**
    b. Install the requirements for Minerva with **pip install -r requirements.txt**
 4. Create your own *config.env* file in /src following the format seen below, this contains your database host IP address, database password, the user, the MySQL port and the auth token for the text-to-sql model.
-   ![Config.env file](../res/media/configenv.png)
+   ![Config.env file](../media/configenv.png)
 5. Start the flask application by running the command "python3 app.py deploy"
 6. This will power up Minerva and you can head to *127.0.0.1:5000* on your browser to open up Minerva's interface
 ---
@@ -40,16 +40,17 @@ please follow these instructions to get Minerva set up, it does requires a bit o
 Minerva's locally hosted web page consists of a text box where users can enter their questions alongside the chat history between Minerva and the user.
 
 ### Layout of the Web Page
-![Web Page 1](../res/media/layout1.png)
+
+![Web Page 1](../media/layout1.png)
 
 This is the layout of the web page that a user will see once they begin using Minerva, Here you can see Minerva greeting the user and the chat history where the user has asked Minerva "What can you do?". as shown, Minerva's response to the user will be in the chat history box similarly to how text messages and other messaging apps.
 
 Minerva answers the users question, explaining to the user what she is and what she can do. Along the bottom of the web page we can see the text box that the user is currently typing in. This area is visibly shown to be different due to the background colour being different from the history box above. Once the user has finished typing in their question they can click on the send button found on the right hand side. Common user questions can be found just above the text box that allows users to ask them without having to type it out.
 
-![Web Page 2](../res/media/layout2.png)
+![Web Page 2](../media/layout2.png)
 On the left hand side there is a "Change Database" button found under the box that tells the user what database is currently loaded. This will then bring up a list of databases allowing the user to change what database Minerva gets the information from. Above is what the user will see when they click on the Change Database button.
 
-![Web Page 3](../res/media/layout3.png)
+![Web Page 3](../media/layout3.png)
 
 When a user changes database the background changes to a different colour to easily and quickly tell the user that the database was changes succesfully. The top left corner also displays what the current database is if the user is unaware what colour is assigned to each database. In this screenshot it shows that Minerva can give you information about the database including what columns there are and what each column represents, this can assist the user in constructing their questions to get the information they want out of the database.
 
