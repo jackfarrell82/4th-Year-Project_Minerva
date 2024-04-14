@@ -350,17 +350,17 @@ The backend was created using the following major technologies:
 
 #### Python Code
 
-The code of the backend is all written in python 3 as it is what we agreed on when we started the project. Having the backend in the same language as the frontend avoids unecessary conflicts that could occur when dealing with different languages. All the code for the backend to function is in the text_to_sql_api.py file as it is responsible for the text-to-sql translation model api and the api for the mysql database. 
+The code of the backend is all written in python 3 as it is what we agreed on when we started the project. Having the backend in the same language as the frontend avoids unecessary conflicts that could occur when dealing with different languages. All the code for the backend to function is in the *text_to_sql_api.py* file as it is responsible for the text-to-sql translation model api and the api for the mysql database. 
 
 **Libraries**
 
-The text_to_sql_api.py uses a series of libraries in order for it to be able to gain full functionality. A list of all libraries can be found below 
+The *text_to_sql_api.py* uses a series of libraries in order for it to be able to gain full functionality. A list of all libraries can be found below 
 
 ![Imports](../media/imports.png)
 
 - the `requests` library is required for python to be able to send HTTP requests which we then used for the api responsible for accessing the Text-to-SQL model that we used
 - the `sys` library is to check the arguments when the file is run in the command line and not when Minerva calls the functions present in the file.
-- the `os` library allows us to use `os.getenv()` and is used so we can get the password for the database passed into the text_to_sql_api.py file without having it hard coded. Instead we have a config.sys file that contains all the information. More details about the config.env file will be covered later on in this section.
+- the `os` library allows us to use `os.getenv()` and is used so we can get the password for the database passed into the *text_to_sql_api.py* file without having it hard coded. Instead we have a config.sys file that contains all the information. More details about the config.env file will be covered later on in this section.
 - `mysql` library is what is needed to use the mysql api
 - `mysql.connector` is also used for the mysql api but allows us to use the error checker that was present on the api website.
 - `dotenv` similarly to the os libary this is what is used to allow us to use a config file for sensitive information than hard coding it into the file
@@ -373,7 +373,7 @@ Due to the information below not being dynamic we have these pieces of informati
 
 ![Database name and Schema](../media/database_name_and_schema.png)
 
-This section also has the `DB_LOADED` and `SCHEMA` variables equal to the "metabolic_syndrome" database, this makes it so when Minerva is first booted up the user is presented with a database instead of them having to pick a database before they can begin asking questions.
+This section also has the `DB_LOADED` and `SCHEMA` variables equal to the *"metabolic_syndrome"* database, this makes it so when Minerva is first booted up the user is presented with a database instead of them having to pick a database before they can begin asking questions.
 
 **setupDB**
 
@@ -385,9 +385,9 @@ The first few lines of code dont do much, the `global DB_LOADED, SCHEMA` line is
 
 The `load_dotenv("config.env")` loads the config file and opens it allowing us to use `os.getenv("DB_USER")` to get this information and assign it to `DB_USER`.
 
-We then assign `DB_USER`to user in the config, this config isn't config.env, even though they have the same names, instead this config is for the mysql api. We will go into more detail about the mysql api in the [MYSQL API](#mysql-api) section but for now all that is important is that we are grabbing the information present in the config.env file and assigning it to specific sections for the mysql api.
+We then assign `DB_USER`to user in the config, this config isn't *config.env*, even though they have the same names, instead this config is for the mysql api. We will go into more detail about the mysql api in the [MYSQL API](#mysql-api) section but for now all that is important is that we are grabbing the information present in the *config.env* file and assigning it to specific sections for the mysql api.
 
-This process then repeats for all information present in the config.env file. In some areas we dont assign the information to config but instead we assign it to headers and data, both of those are for the text-to-sql api and function identically to the mysql api.
+This process then repeats for all information present in the *config.env* file. In some areas we dont assign the information to config but instead we assign it to headers and data, both of those are for the text-to-sql api and function identically to the mysql api.
 
 **swapDB**
 
