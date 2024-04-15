@@ -579,6 +579,8 @@ An example of a system test we have outline is seen below.
 
 These walkthroughs also allowed us to vary the inputs and tests we did instead of relying on a small set of queries we quickly test with. Executing all of them also makes sure we have checked each and every button, menu and query type. This is important to find and solve bugs in areas of Minerva that we implemented a long time ago or do not use as much. These also help us prepare for demonstrating Minerva at the end of our project.
 
+> You can view our system walkthroughs in */res/testing-results/walkthroughts.xlsx*
+
 ### User Testing
 
 > Resources and files relating to user testing, including results and copies of the google form and consent documents can be found in */res/testing-results
