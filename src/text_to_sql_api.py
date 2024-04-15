@@ -97,7 +97,7 @@ def toDatabase(query):
         cnx.close()
         return rows
 
-## this is where shit happens when this file is run, not when it is imported into Minerva
+## this is where stuff happens when this file is run, not when it is imported into Minerva
 if __name__ == "__main__":
     setupDB()
 
