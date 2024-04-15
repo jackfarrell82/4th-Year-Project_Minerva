@@ -36,7 +36,7 @@ This document will present a walkthrough of the different use cases Minerva is a
 
 Below you can see two examples of use cases that Minerva was designed to help in, the scenario of the nurse and the financial analyst.
 
-![Use Case Gif](../media/UseCaseGIF.gif)
+![Use Case Gif](../media/UseCaseGraphic.png)
 
 **Nurse with Patient Records**
 The potential value found in the records of medical patients is huge, and the databases containing the thousands of patients and all their data is massive. Each patient has their basic details like age, name, address recorded, but also all their symptoms, prescriptions, conditions, blood type, etc. The potential for finding analysis is huge and there are many ways to utilise this data.
@@ -56,23 +56,23 @@ In this scenario Minerva can help to speed up the retrieval and analysis of data
 
 This section will walk you through the web interface of Minerva, what it looks like, what everything does and how it works. Below you can see the main page that will open when you load up Minerva.
 
-![Opening Minerva](../media/OpeningMinerva.gif)
+![Opening Minerva](../media/OpeningMinerva.png)
 
 Once loaded you can see the features of Minerva, it is all based on this screen so no need to navigate different pages and menus. In the very centre of the page is the main chatbox where you can converse with Minerva by entering your messages at the bottom.
 
 **Information and tips**
 Before you get started it is a good idea to look at the helpful information accessed by the help icon at the top right. This will explain the very basics of what Minerva does, how to submit a query to the database or a question for Minerva.
 
-![Help Menu](../media/HelpMenuMinerva.gif)
+![Help Menu](../media/HelpMenuMinerva.png)
 
 The demo version is outfitted with two different databases for you to explore, you can view information on what each database contains by pressing the buttons on the left of the screen.
 
-![Database Info](../media/DatabaseInfoMinerva.gif)
+![Database Info](../media/DatabaseInfoMinerva.png)
 
 **Changing the database**
 To change between the two databases available you can simple open the change database menu with the button on the left and select the database to be loaded, the website colour scheme will switch indicating which database you have loaded, the current database is also displayed on the left of the chat.
 
-![Change Database GIF](../media/ChangeDBMinerva.gif)
+![Change Database GIF](../media/ChangeDBMinerva.png)
 
 **Conversing with Minerva**
 You can also get help and ask Minerva questions about how the system works and what she can do instead of reading the different info menus. Some common and helpful questions would include:
@@ -85,7 +85,7 @@ You can also get help and ask Minerva questions about how the system works and w
 You can also click the quick suggestions above the text input box to quickly ask a simple question.
 For example below you can see Minerva describing what datasets are available and then what exactly is in the medical database.
 
-![Database Question and Info](../media/DatabaseInfoQuestionMinerva.gif)
+![Database Question and Info](../media/DatabaseInfoQuestionMinerva.png)
 
 **Database Queries**
 To submit a query to the loaded database you just have to indicate it using the query keyword at the start of your message. For example you can see two examples being submitted to the two databases.
@@ -93,8 +93,8 @@ To submit a query to the loaded database you just have to indicate it using the 
 - Query: How many patients are above 50 and male?
 - Query: What is the highest volume of shares traded?
 
-![Medical Query](../media/MedicalQueryMinerva.gif)
-![Financial Query](../media/FinancialQueryMinerva.gif)
+![Medical Query](../media/MedicalQueryMinerva.png)
+![Financial Query](../media/FinancialQueryMinerva.png)
 
 **Advanced Options**
 For this demo version there are also some advanced options to explore using the buttons in the bottom right of the screen.
