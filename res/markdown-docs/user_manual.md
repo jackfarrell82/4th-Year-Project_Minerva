@@ -1,6 +1,6 @@
 # DCU CA400 - Final Year Project
 
-![Minerva Banner](../media/minerva_banner.png)
+![Minerva Banner](../media/ManualBanner.png)
 
 >Gareth Hogan 20379616  & Jack Farrell 20352136
 
@@ -8,67 +8,106 @@
 
 ## Table of contents
 
-1. Setting Up Minerva 
-2. Web Page
-    - Layout of the Web Page
+1. About Minerva
+2. Use Case Scenarios
+    - Nurse with Patient Records
+    - Financial analyst
 3. Using Minerva
-    - Entering your Questions
-    - Viewing the Output
-    - Database Information
+    - Information and Tips
     - Changing Database
+    - Conversing with Minerva
+    - Database Queries
+    - Advanced Options
+4. Further Examples
 
 ---
 
-## Setting Up Minerva
+## About Minerva
 
-please follow these instructions to get Minerva set up, it does requires a bit of work to get working, including getting the databases set up in MySQL yourself and your own access to the text-to-sql model:
-> *These instructions were made and tested in a fresh Ubuntu environment, your system may already have some of these libraries installed*
+Welcome to Minerva.
 
-1. First make sure you have Git installed (sudo apt install git)
-2. Clone our repo
-3. Navigate to /src in your terminal
-   a. Make sure you have pip installed **sudo apt install python3-pip**
-   b. Install the requirements for Minerva with **pip install -r requirements.txt**
-4. Create your own *config.env* file in /src following the format seen below, this contains your database host IP address, database password, the user, the MySQL port and the auth token for the text-to-sql model.
-   ![Config.env file](../media/configenv.png)
-5. Start the flask application by running the command "python3 app.py deploy"
-6. This will power up Minerva and you can head to *127.0.0.1:5000* on your browser to open up Minerva's interface
----
+Minerva is a new solution developed to help demystify the complex formatting of SQL and relational database access, Minerva is a conversational chatbot that is trained to help you access and gain value from large stores of data without any prior knowledge of the technology or queries that are normally used to retrieve data.
 
-## Web Page
+Through conversation with Minerva you will be able to learn about, access and even analyse data from a loaded database, all without the burden of creating complex queries. Minerva uses natural language and translation technology to turn your questions into functional SQL queries that can retrieve the data you describe from our loaded database.
 
-Minerva's locally hosted web page consists of a text box where users can enter their questions alongside the chat history between Minerva and the user.
+This document will present a walkthrough of the different use cases Minerva is aimed at being deployed into, it will also walk you through how exactly Minerva is used and give you plenty of examples of the system in use.
 
-### Layout of the Web Page
+### Use Case Scenarios
 
-![Web Page 1](../media/layout1.png)
+Below you can see two examples of use cases that Minerva was designed to help in, the scenario of the nurse and the financial analyst.
 
-This is the layout of the web page that a user will see once they begin using Minerva, Here you can see Minerva greeting the user and the chat history where the user has asked Minerva "What can you do?". as shown, Minerva's response to the user will be in the chat history box similarly to how text messages and other messaging apps.
+![Use Case Gif](../media/UseCaseGIF.gif)
 
-Minerva answers the users question, explaining to the user what she is and what she can do. Along the bottom of the web page we can see the text box that the user is currently typing in. This area is visibly shown to be different due to the background colour being different from the history box above. Once the user has finished typing in their question they can click on the send button found on the right hand side. Common user questions can be found just above the text box that allows users to ask them without having to type it out.
+**Nurse with Patient Records**
+The potential value found in the records of medical patients is huge, and the databases containing the thousands of patients and all their data is massive. Each patient has their basic details like age, name, address recorded, but also all their symptoms, prescriptions, conditions, blood type, etc. The potential for finding analysis is huge and there are many ways to utilise this data.
 
-![Web Page 2](../media/layout2.png)
-On the left hand side there is a "Change Database" button found under the box that tells the user what database is currently loaded. This will then bring up a list of databases allowing the user to change what database Minerva gets the information from. Above is what the user will see when they click on the Change Database button.
+In this scenario the best people to analyse and interpret findings are the nurses and doctors trained to recognise symptoms and causes to diagnose what's wrong and administer treatment. However nurses do not have the time or the technical knowledge to be trawling through millions of data points trying to find what they need. With Minerva a nurse can simply ask Minerva to query the database for what they need and describe it in just a few words, for example a nurse could ask Minerva to "Show me the patients with Uric Acid levels more than 8 mg/DL".
 
-![Web Page 3](../media/layout3.png)
+> This scenario can be explored further by using the Metabolic Syndrome database in the system, this is the default loaded database.
 
-When a user changes database the background changes to a different colour to easily and quickly tell the user that the database was changes succesfully. The top left corner also displays what the current database is if the user is unaware what colour is assigned to each database. In this screenshot it shows that Minerva can give you information about the database including what columns there are and what each column represents, this can assist the user in constructing their questions to get the information they want out of the database.
+**Finanical Analyst**
+Financial data is vast, and to the untrained eye it is just a blur of numbers, share prices, closing prices, adjusted values. Hidden in these values is a lot of valuable knowledge, patterns and trends to be discovered. But even for an expert who understands the numbers, these data sources coming from stock markets across the globe pump out so much data it can be impossible to view everything.
 
----
+In this scenario Minerva can help to speed up the retrieval and analysis of data by analysts and stock market employees, making their lives much easier. Analysts can focus instead on finding the trends and patterns in the data instead of spending time learning and applying SQL queries or trawling through subsections of data manually. Minerva can easily divide data into sections and return only the rows that interest an analyst, for example "Which indexes had a closing price in USD of over 5000?"
 
-## Using Mineva
-Minerva is very simple to use even if users have never had experience with chatbots before. Minerva has two functions that users can use to interact with her and they are using the text box to enter in and submit questions and viewing the output of the questions in the chat history bo above. Once Minerva has been set up corectly users will open up the web page and be greated with the layout as described above in the [Layout of the Web Page](#layout-of-the-web-page).
+> This scenario can be explored further by using the Financial database in the system, which is the alternate database and can be switched to.
 
-### Entering your Questions
-Once there the user has arrived on the web page they will see the text box at the bottom, Users can click on the box and start typing in their question that they want Minerva to go and find. If a user wants to ask Minerva a question they can enter it in normally before hitting send, if the user wants Minerva to get information from the database they need to add "Query:" to the begining of their question. A query button is available allowing users to just click it instead of typing out "Query:" every time. Similar to how sending messages works users will see their question be placed into the above chat history section before Minerva goes about getting that information from the connected databases. If users are unsure on what questions would require a Query to be placed infront of it they can click on the "Example Prompts" button in the bottom right corner to view a pdf outlining some example questions.
+### Using Minerva
 
-### Viewing the Output
-If the users question was succesful Minerva will output the information in the chat history before asking the user if they would like to enter another question. Once there are enough mesages that they all cannot fit on the page the chat history will get a scroll wheel allowing the users to go back and see what questions they asked and what answers they got. Using that a user may be able to learn and ask different questions until they are satisfied with the infomation they recevied.
+This section will walk you through the web interface of Minerva, what it looks like, what everything does and how it works. Below you can see the main page that will open when you load up Minerva.
 
-### Database Information
-Information about the databases can be found by clicking on the "Metabolic Database Info" or the "Financial Database Info" for respective information. The information provided from the buttons gives a high level overview of the each database such as basic information and where the information was gotten from. More detailed information about the databases such as column titles and what they represent can be gotten by asking Minerva "What is in the metabolic/financial database?".
+![Opening Minerva](../media/OpeningMinerva.gif)
 
-### Changing Database
-Changing the database the Minerva is currently connected to and will be pulling the information from is very simple. Users will see on the left side of their screen a "Change Database" button that they can click on, This will present them with a drop down menu clearly visable in the centre of their screen where they can then select the new database that they would like to connect to. Once the user has clicked on the new database they will be returned to the webpage that has the text box and chat history and can proceed with their queries for information from the new database.
+Once loaded you can see the features of Minerva, it is all based on this screen so no need to navigate different pages and menus. In the very centre of the page is the main chatbox where you can converse with Minerva by entering your messages at the bottom.
 
----
+**Information and tips**
+Before you get started it is a good idea to look at the helpful information accessed by the help icon at the top right. This will explain the very basics of what Minerva does, how to submit a query to the database or a question for Minerva.
+
+![Help Menu](../media/HelpMenuMinerva.gif)
+
+The demo version is outfitted with two different databases for you to explore, you can view information on what each database contains by pressing the buttons on the left of the screen.
+
+![Database Info](../media/DatabaseInfoMinerva.gif)
+
+**Changing the database**
+To change between the two databases available you can simple open the change database menu with the button on the left and select the database to be loaded, the website colour scheme will switch indicating which database you have loaded, the current database is also displayed on the left of the chat.
+
+![Change Database GIF](../media/ChangeDBMinerva.gif)
+
+**Conversing with Minerva**
+You can also get help and ask Minerva questions about how the system works and what she can do instead of reading the different info menus. Some common and helpful questions would include:
+
+- What can you do?
+- How do I send a query?
+- What do all the buttons do?
+- What datasets are available?
+
+You can also click the quick suggestions above the text input box to quickly ask a simple question.
+For example below you can see Minerva describing what datasets are available and then what exactly is in the medical database.
+
+![Database Question and Info](../media/DatabaseInfoQuestionMinerva.gif)
+
+**Database Queries**
+To submit a query to the loaded database you just have to indicate it using the query keyword at the start of your message. For example you can see two examples being submitted to the two databases.
+
+- Query: How many patients are above 50 and male?
+- Query: What is the highest volume of shares traded?
+
+![Medical Query](../media/MedicalQueryMinerva.gif)
+![Financial Query](../media/FinancialQueryMinerva.gif)
+
+**Advanced Options**
+For this demo version there are also some advanced options to explore using the buttons in the bottom right of the screen.
+
+- The Show SQL button allows you to toggle whether Minerva displays the SQL that was created for your database queries
+
+![Show SQL On](../media/SQLButtonON.png)
+
+- If you are struggling to think of prompts to test Minerva with you can open our example document with the example prompts button
+- If you wanted to learn more about Minerva and the code behind her you can open our Gitlab Repo with the source code link
+
+### Further Examples
+
+In this section you can view and explore below some additional examples which showcase different prompts and queries sent into Minerva.
+
+![Further Examples](../media/FurtherExamples.png)

@@ -41,7 +41,7 @@ function showMetaInfo() {
     popup.classList.toggle("show");
 
     setTimeout(() => {  
-        popup.classList.toggle("show")
+        popup.classList.remove("show")
     }, 7000)
 }
 
@@ -52,7 +52,7 @@ function showStockInfo() {
     popup.classList.toggle("show");
 
     setTimeout(() => {  
-        popup.classList.toggel("show")
+        popup.classList.remove("show")
     }, 7000)
 }
 
