@@ -126,15 +126,3 @@ if __name__ == "__main__":
     resp = toDatabase(response)
     for r in resp:
         print(r)
-
-#### STORE EXAMPLES TO TEST HERE IN COMMENTS
-## MEDICAL
-# how many patients are there below 40
-# how many have a marital status of single
-# show me all the records for Males
-    
-
-## FINANCIAL
-# how many have a high price greater than 700
-# how many close at over 2000
-# what trades have 0 volume

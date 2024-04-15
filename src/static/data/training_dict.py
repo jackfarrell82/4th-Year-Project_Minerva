@@ -1,3 +1,4 @@
+## Training Data is stored in a python dict which is used in app.py to train Minervas responses
 trainset = {
     # Greetings
     "Hi there, I am Minerva, how can I help you?" : 

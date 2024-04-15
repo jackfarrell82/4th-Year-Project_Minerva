@@ -26,9 +26,9 @@ bot = ChatBot('Minerva',
                 'import_path': 'adapter.QueryAdapter' # Custom logic adapter to recognise database queries
             },
             {
-                'import_path': 'chatterbot.logic.BestMatch',
+                'import_path': 'chatterbot.logic.BestMatch', # Best match adapter chooses from Minerva's pretrained answers
                 'default_response': "I'm sorry but I don't understand your message, I am still learning. If you don't know what to ask just ask me “What can you do?” and I will be able to show you!",
-                'maximum_similarity_threshold': 0.80
+                'maximum_similarity_threshold': 0.80 # if unconfident in answer Minerva will say she doesn't understand
             }
         ],
     filters=[],
@@ -39,8 +39,7 @@ bot = ChatBot('Minerva',
 
 if "train" in sys.argv:
     trainer = ListTrainer(bot)
-    # trainer.train("chatterbot.corpus.english")
-    # Training with the trainset
+    # Training with the trainset imported 
     for resp in trainset:
         query_list = trainset[resp]
         for q in query_list:
@@ -50,15 +49,16 @@ if "train" in sys.argv:
                 trainer.train([q.title(), resp])
 
 #######################################
+# FLASK ENDPOINTS
 
-@app.route("/")
+@app.route("/") # Default endpoint to load webpage
 def hello_world():
     return render_template('index.html')
 
-@app.route("/get", methods=['POST'])
+@app.route("/get", methods=['POST']) # Get a response to statement
 def get_bot_response():
     data = json.loads(request.data) # decode the request from json into a python dict
-    userText = data["msg"] 
+    userText = data["msg"] # take users message out
     adapter.SQLcheck(data["sql"])   # update the SQL flag
 
     bot_resp = bot.get_response(userText) # send the users message to Minerva
@@ -70,7 +70,7 @@ def get_bot_response():
     data = json.dumps(return_json) # transform the response into json
     return data                     
 
-@app.route("/database", methods=['POST'])
+@app.route("/database", methods=['POST']) # change the database
 def database_action():
     global DATABASE_FILE # the database file that is currently loaded
     data = json.loads(request.data) # decode message
