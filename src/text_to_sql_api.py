@@ -35,17 +35,17 @@ data = {
 
 def setupDB():
     # default DB is medical
-    global DB_LOADED, SCHEMA
+    global DB_LOADED, SCHEMA # access the DB_LOADED and SCHEMA variables that are outside the function
     print(DB_LOADED)
 
-    load_dotenv("config.env")
-    DB_USER = os.getenv("DB_USER")
+    load_dotenv("config.env") # loads the config.env file allowing its data to be read
+    DB_USER = os.getenv("DB_USER") # assign DB_USER in the config.env file to DB_USER in this function
     DB_PORT = os.getenv("DB_PORT")
-    config["user"] = DB_USER
+    config["user"] = DB_USER # assigns DB_USER to user in the config field
     config["port"] = DB_PORT
 
     AUTH_TOKEN = os.getenv("AUTH_TOKEN")
-    headers["Authorization"] = AUTH_TOKEN
+    headers["Authorization"] = AUTH_TOKEN # assigns AUTH_TOKEN to Authorization in the headers field
 
     HOST = os.getenv("DB_HOST")
     PASSWORD = os.getenv("DB_PASSWORD")
@@ -53,40 +53,40 @@ def setupDB():
     config["host"] = HOST
 
     config["database"] = DB_LOADED
-    data["schema"] = SCHEMA
+    data["schema"] = SCHEMA # assigns SCHEMA to schema in the data field
 
 def swapDB():
-    global DB_LOADED, SCHEMA
-    if DB_LOADED == database_M:
-        DB_LOADED = database_F
+    global DB_LOADED, SCHEMA # access the DB_LOADED and SCHEMA variables that are outside the function
+    if DB_LOADED == database_M: # checks to see if the metabolic database is the database currently loaded
+        DB_LOADED = database_F # if it is then we replace DB_LOADED and SCHEMA with the financial database and schema
         SCHEMA = schema_F
     else:
-        DB_LOADED = database_M
+        DB_LOADED = database_M # if the financial database is loaded then we replace DB_LOADED and SCHEMA with the metabolic database and schema
         SCHEMA = schema_M
 
-    config["database"] = DB_LOADED
+    config["database"] = DB_LOADED # we then assign the new database and schema to the necessary fields which is necessary for the api's to function
     data["schema"] = SCHEMA
 
 def toSQL(prompt):
-    data["prompt"] = prompt
+    data["prompt"] = prompt # puts the prompt into the data field
     response = requests.get("https://www.text2sql.ai/api/sql/generate", headers=headers, data=data) # send it to the api
     response = response.text # get the text version back
     resp_list = response.split('"') # modify the output to be just the SQL query
     response = resp_list[3]
     response = response.replace("\\n", " ")
-    package = [response, DB_LOADED]
+    package = [response, DB_LOADED] # packages up the response and the database that is currently loaded
     return package
 
 def toDatabase(query):
     try: # error handling for database
-        cnx = mysql.connector.connect(**config, auth_plugin='mysql_native_password')
-    except mysql.connector.Error as err:
-        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+        cnx = mysql.connector.connect(**config, auth_plugin='mysql_native_password') # attempts to connect to the database
+    except mysql.connector.Error as err: # if an error occurs we then go here
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR: # if access is denied
             print("Something is wrong with your user name or password")
-        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+        elif err.errno == errorcode.ER_BAD_DB_ERROR: # if the database name is incorrecct
             print("Database does not exist")
         else:
-            print(err)
+            print(err) # print the error
     else:
         cursor = cnx.cursor(buffered=True)
 
@@ -99,25 +99,25 @@ def toDatabase(query):
 
 ## this is where stuff happens when this file is run, not when it is imported into Minerva
 if __name__ == "__main__":
-    setupDB()
+    setupDB() # calls the setupDB function
 
-    if "medical" in sys.argv:
+    if "medical" in sys.argv: # determines which database to load first based on the argument passed 
         DB_LOADED = database_M
         SCHEMA = schema_M   
     if "financial" in sys.argv:
         DB_LOADED = database_F
         SCHEMA = schema_F
 
-    print("Database = " + DB_LOADED)
-    prompt = input("Input a prompt: ")
+    print("Database = " + DB_LOADED) # prints the loaded database name to the command line
+    prompt = input("Input a prompt: ") # asks user for a prompt
 
-    response = toSQL(prompt)
-    print("Prompt: " + prompt + " transformed into: " + response)
-    resp = toDatabase(response)
-    for r in resp:
+    response = toSQL(prompt) # translates the prompt to sql
+    print("Prompt: " + prompt + " transformed into: " + response) # prints the prompt and its translation to the command line
+    resp = toDatabase(response) # sends the translated query to the database
+    for r in resp: # prints the data retrieved from the database
         print(r)
 
-    swapDB()
+    swapDB() # changes the database to the one that was not intially loaded, before repeating the same code
     print("Database = " + DB_LOADED)
     prompt = input("Input a prompt: ")
 
