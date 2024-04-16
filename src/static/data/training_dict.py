@@ -39,4 +39,7 @@ trainset = {
     # What do all the buttons do
     "The buttons on the left of the chat allow you to change the loaded database and also give some information on the available databases. <br> The buttons on the right allow you to toggle whether you wish to see the SQL code I make, and link to some example prompts and my source code. <br> Above text entry box you can see some quick suggestion buttons to quickly ask me questions and to start off your query. <br> And at the very top of the chat you can click the trashcan icon to clear the chat, or the help icon to see some tips and helpful info for new users.":
     ["What are all the buttons", "What does everything do?", "What do all the buttons do?", "What does the SQL button do?", "What does the button do?", "What button do?", "What does each button do?"],
+    # Switching the DB
+    "To switch the database you can press the button on the left of the screen and select the database you wish to switch to.":
+    ["How do I switch the database?", "Switch database", "Can you switch the database", "Change database", "Change database to financial", "Change to medical datbase", "Change to the other database", "Swap database", "Change to alternate data", "Change to alternate database", "Please swap the database", "Load the other database", "Change databases please", "Try the other database", "Try using the other data"],
 }
