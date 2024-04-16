@@ -598,6 +598,7 @@ Some good feedback we got about the testing process that we acted upon was:
 - Adding example prompts
 - Clearer instructions for tasks to be completed
 - Clarifying what Minerva can do and the scope of the system
+- Adding additional responses to Minerva, such as how to switch the database
 
 The more tests we completed the better the system looked and felt to the participants especially because they were new users, after spending so much time with Minerva ourselves we had become biased and it was hard to see the system as a new user would so the user testing was invaluable to get that feedback.
 
