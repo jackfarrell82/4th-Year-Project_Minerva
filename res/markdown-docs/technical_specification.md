@@ -141,7 +141,7 @@ This section will go over the high-level design behind Minerva, how we planned i
 
 ### System Architecture
 
-![System Architecture Diagram](../media/System_Architecture.png)
+![System Architecture Diagram](../media/SystemArchitecture.png)
 
 Above is our **System Architecture Diagram** this shows a high-level overview of what Minerva is designed to do, how each function is separated into different components and what each one contains for the function to work. It also contains implementation details such as links and technologies used in each component. Implementation will be covered in greater detail in the Implementation section.
 
