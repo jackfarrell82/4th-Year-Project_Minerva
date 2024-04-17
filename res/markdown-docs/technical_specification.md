@@ -301,7 +301,8 @@ The database_uri specifies the database where Minerva will store all her knowled
 > You can see our database file at */src/static/data/db.sqlite3*
 
 Below is a helpful diagram from the Chatterbot Documentation that makes it easier to understand the flow of how the chatbot processes each input statement.
-![Dialog Flow in Chatbot](../media/dialog-processing-flow.svg)
+![Dialog Flow in Chatbot](../media/dialog-processing-flow.png)
+<div style="page-break-after: always;"></div>
 
 #### Query Adapter
 
