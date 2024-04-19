@@ -14,7 +14,7 @@ The final deliverables as listed at <https://www.computing.dcu.ie/~mscriney/ca40
 2. Video Walkthrough - in **/docs/video-walkthrough**
 3. User Manual - in **/docs/documentation**, markdown source file in **/res/markdown-docs**
 4. Technical Specification - in **/docs/documentation**, markdown source file in **/res/markdown-docs**
-5. Testing Documentation - Raw files and results in **/res/testing-results**, read more about strategy in our technical specification
+5. Testing Documentation - Raw files and results of user and system testing in **/res/testing-results**, read more about strategy in our technical specification, unit tests can be read in **/src/testing**
 6. Expo Poster - PNG and PDF versions found in **/res**
 7. Development Blog - Seen in **/res**
 
