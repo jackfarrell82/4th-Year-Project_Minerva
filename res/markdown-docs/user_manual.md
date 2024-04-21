@@ -110,4 +110,11 @@ For this demo version, there are also some advanced options to explore using the
 
 In this section, you can view and explore some additional examples which showcase different prompts and queries sent into Minerva.
 
-![Further Examples](../media/FurtherExamples.png)
+![Further Examples](../media/FurtherExamples1.png)
+![Further Examples](../media/FurtherExamples2.png)
+![Further Examples](../media/FurtherExamples3.png)
+![Further Examples](../media/FurtherExamples4.png)
+![Further Examples](../media/FurtherExamples5.png)
+![Further Examples](../media/FurtherExamples6.png)
+![Further Examples](../media/FurtherExamples7.png)
+![Further Examples](../media/FurtherExamples8.png)

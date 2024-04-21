@@ -6,6 +6,13 @@
 
 ---
 
+## Abstract
+
+Minerva is a system developed to try to help bridge the gap between SQL database access and non-technical users through the use of natural language processing and translation technologies presented through a web chatbot interface. We hoped to provide a view into a solution to help access the value that big data has for those who do not have the means to access it.
+This technical specification outlines the development of Minerva from the research and design of the system to the final implementation and testing of Minerva, showing what we initially planned to achieve and what emerged in our final system.
+
+---
+
 ## Table of contents
 
 1. Introduction  
@@ -13,33 +20,40 @@
    1.2 Glossary
 2. Motivation
 3. Research  
-   3.1. Chatbot Research - Gareth  
+   3.1 Chatbot Research - Gareth  
    3.2 Text-to-SQL Research - Jack  
-      - Few-Shot-NL2SQL
-      - IRNet
-      - SQLNet
-      - text2sql-API
 4. Design  
-5. Implementation  
+   4.1 System Architecture
+   4.2 Frontend Architecture
+   4.3 Backend Architecture
+5. Implementation
+   5.1 Frontend Implementation
+   5.2 Backend Implementation  
 6. Problems and Solutions  
-7. Limitations  
-   7.1 Chatterbot Downsides  
-   7.2 Text-to-SQL API & MYSQL API Troubles  
-   7.3 Hosting - A fruitless foray  
-8. Testing  
+   6.1 Chatterbot Downsides
+   6.2 Text-to-SQL API & MYSQL API Troubles
+   6.3 Hosting
+7. Testing  
+   7.1 Git
+   7.2 Unit Testing
+   7.3 System Testing
+   7.4 User Testing
+8. What we have learnt  
 9. Installation Guide  
-10. What we have learnt  
-11. Future Work
+10. Future Work
+   10.1 Training & Intelligence
+   10.2 Graphing & Data Analysis
+   10.3 Distributed Database & Deployment
 
 ---
 
-## Introduction
+## 1. Introduction
 
-### Overview
+### 1.1 Overview
 
 The system we have designed is called Minerva, the purpose of Minerva is to assist inexperienced users with accessing and utilising databases in their workplace or everyday life. Minerva is an interactive chatbot solution, users can chat with her and ask questions about using the database whilst also submitting queries through the chat interface to the database. Minerva works using Chatbot and Natural Language technologies to interact and answer user questions and can translate queries that the user has into SQL queries for the database, the data can then be returned and displayed to the users. Minerva is accessed through a simple, low-tech webpage, she abstracts away a lot of the complexity of using databases and SQL queries and allows users to focus on asking for what they really need. The system can be loaded with multiple SQL databases that can be switched anytime, Minerva is not tied to a specific database and can be used with many types of databases.
 
-### Glossary
+### 1.2 Glossary
 
 | Term | Description |
 | --- | ----------- |
@@ -48,9 +62,12 @@ The system we have designed is called Minerva, the purpose of Minerva is to assi
 | Chatbot | A chatbot is a software app or web interface that is designed to mimic human conversation, it interacts with users in a conversational style|
 | Application Programming Interface (API) | An API enables two software components to communicate with one another using requests and responses |
 | Structured Query Language (SQL) | A  language used to build and search databases, it is also the language that Minerva translates natural language into. MYSQL is a version of SQL that we used |
-|||
+| Text-to-SQL | A process of transforming natural language sentences into equivalent SQL queries for a database |
+| Conversational Interface | A way of interacting with a system via talking to it, through a text like interface or sometimes speech |
+| (User) Prompt | Piece of input that a user sends into the system |
+| Database Schema | A blueprint that shows the different tables, columns and types of data in the database |
 
-## Motivation
+## 2. Motivation
 
 **How did we come up with the idea?**
 We started brainstorming ideas for this project during the summer whilst on our INTRA placements, we wanted to get an early start on formulating an idea. We initially looked into what kind of technology areas we both were interested in and how we could combine these into a project. Jack was interested in doing something along the lines of databases, data analysis or data mining, this would be chosen as the base of the project, we wanted to solve a problem that used data. Gareth was interested in the use of AI and Chatbot technology for user interaction, this provided a good partnership with the data analysis core of the project, we would present the system through a chatbot conversational interface, easy for users to interact with and interesting for us to work with and create. These two parts came together to form the seeds of Minerva, our database assistant, named after the Roman goddess of wisdom.
@@ -65,13 +82,13 @@ When finding a potential supervisor we looked into a few candidates and consulte
 
 ---
 
-## Research
+## 3. Research
 
 In this section we will describe some of the research we conducted before starting the sections of this project we had never done before. We will also include some links to our sources.
 
 The two main components of Minerva that needed to be researched for this project were the creation of the chatbot for interacting with users, which was done by Gareth, and the database access and Text-to-SQL, done by Jack.
 
-### Chatbot Research - Gareth
+### 3.1 Chatbot Research - Gareth
 
 Gareth conducted a lot of research into creating a chatbot and what the best approach to do this would be for our project. The chatbot being able to converse and talk to the user was a vital part of the project and without it, the UI would never have worked as intended.
 
@@ -93,7 +110,7 @@ Aside from the Chatterbot library there actually was a surprising lack of tools 
 - [IBM Watson Assistant](https://www.ibm.com/products/watsonx-assistant)
 - [Chatbot.com](https://www.chatbot.com/)
 
-### Text-to-SQL Research - Jack
+### 3.2 Text-to-SQL Research - Jack
 
 Jack was in charge of the back end of the project which included that database and the Text-to-SQL system which was the largest part of the backend. Having dealt with MYSQL databases in second year and feeling confident with the notes provided that a lot of the research that we focused on was for the Text-to-SQL system and how we go about implementing it into our project.
 
@@ -130,16 +147,16 @@ The first thing that we needed to do was set up the API in Python. Having to lea
 
 The API needed different data in the "headers" and "data" sections. The header only had one piece of information and it was the Authorization key needed to give us access to the API data including the "prompt" that we want to be translated, "type" indicates what language it is translating to, the type is hardcoded as it will always be translating into MYSQL. The last information included in the data is the schema, The schema is used to let the model know what the column names are and what type of data is stored in them which helps in the creation of the MYSQL code.
 
-More information about how we developed this code and any problems we encountered will be discussed in [Text-to-SQL API & MYSQL API Troubles](#text-to-sql-api--mysql-api-troubles)
+More information about how we developed this code and any problems we encountered will be discussed in [Text-to-SQL API & MYSQL API Troubles](#62-text-to-sql-api--mysql-api-troubles)
 
 ---
 
-## Design
+## 4. Design
 
 **What are we building?**  
 This section will go over the high-level design behind Minerva, how we planned it out into different components and what each is responsible for. We will walk you through some diagrams we have for the system design.
 
-### System Architecture
+### 4.1 System Architecture
 
 ![System Architecture Diagram](../media/SystemArchitecture.png)
 
@@ -154,7 +171,7 @@ The role of the **frontend** component is to act as the interface between the us
 
 The **backend** is where the Text-to-SQL translation and Database access occurs. Users cannot directly interact with the backend or database, rather Minerva is the one who directs queries and function calls to be executed. The backend's major responsibilities include translating user queries into appropriate SQL queries and then applying these to the database via an API before returning the retrieved data so it can be shown to the user.
 
-### Frontend Architecture
+### 4.2 Frontend Architecture
 
 The frontend is responsible for everything the user sees and interacts with. The main responsibilities of the frontend are to be the point of contact with the user, display the system to the user via a webpage, update it whenever Minerva sends a response to the users and allow the user to interact with Minerva through the text interface and various other links and buttons.
 
@@ -196,7 +213,7 @@ When thinking of the design for the user interface we wanted to keep it basic, w
 
 Minerva was always envisioned to be a solution to a non-technical person’s problem, so we knew that we wanted to present it in the cleanest way possible, with no complicated navigation or features, just a simple one-page interface so users can get into the system and use it quick and easy. Most of the functionality of the system would be embedded into the conversational element with Minerva, this removes the need for complex menus, lots of buttons and submenus, forms to fill in and selections to make. All a user should need to do is load the page, type in a suitable query and gain instant value.
 
-### Backend Architecture
+### 4.3 Backend Architecture
 
 The backend is responsible for handling all the data that the user will be accessing through Minerva by the use of APIs for both the Text-to-SQL model and accessing the databases. The backend is not directly accessible to the user, instead, it contains functions and services that Minerva can employ from the frontend to satisfy the user's needs.
 
@@ -224,14 +241,14 @@ You can see in the diagram that the backend takes a preprocessed query as input,
 
 ---
 
-## Implementation
+## 5. Implementation
 
 **How did we build it?**
 The design section above describes what our system should be able to do, and a high-level view of how it would do things. Now we're gonna get into the nitty gritty bits, this section describes how we implemented Minerva. We will go over the technologies users, and major libraries and give some examples and walkthroughs of the biggest parts of Minerva.
 
 > All other code can be seen in */src* we will only be touching on the biggest parts of Minerva's code in this section
 
-### Frontend Implementation
+### 5.1 Frontend Implementation
 
 As explained in the design, the frontend components consist of the Minerva chatbot and the interface through which users can interact with the system. These components were designed and developed by Gareth.
 
@@ -283,8 +300,6 @@ We designed Minerva to handle most of the processing so in total we only have tw
 
 #### Minerva Chatbot
 
-<!-- Setup, Flow, Custom Adapter, training -->
-
 The major component developed for the front end is of course the chatbot core of Minerva. We have implemented Minerva using the Chatterbot library for Python, you can view the documentation for Chatterbot [here](https://chatterbot.readthedocs.io/en/stable/index.html).
 
 What the chatterbot library allows us to do is to create a chatbot object that has built-in capabilities and methods such as taking in a message and selecting the response statement that has the highest confidence value. Below you can see the initialisation of Minerva as an object in our *app.py* code.
@@ -294,7 +309,7 @@ In the code we create a bot object, this object is what we can call and use meth
 
 Logic adapters determine how the bot selects a response to a given statement, we made our own custom logic adapter called **QueryAdapter** (You'll hear more about this later), and the other adapter is a default one that compares the input message to all that it has been trained on before, and selects the response with the highest confidence value. If it does not have a confidence value of above 0.8, then Minerva instead will send back a message explaining that she does not understand.
 
-The filter argument is empty because we do not want any filter acting upon the responses Minerva can give, we had a big problem with a default filter being applied without our knowledge, you can read more about this later in [problems and limitations.](#problems-and-limitations)
+The filter argument is empty because we do not want any filter acting upon the responses Minerva can give, we had a big problem with a default filter being applied without our knowledge, you can read more about this later in [problems and limitations.](#6-problems-and-limitations)
 
 The database_uri specifies the database where Minerva will store all her knowledge, this is where all her past conversations and trained responses are stored, this is where the best match logic adapter looks to find the best response for each statement.
 
@@ -306,7 +321,7 @@ Below is a helpful diagram from the Chatterbot Documentation that makes it easie
 
 #### Query Adapter
 
-To enable Minerva to recognise when a user wants to submit a database query we built this custom logic adapter, it takes priority over the best match filter for selecting the correct response. It is not the perfect solution but we had to do it this way due to some limitations we found with the chatterbot library (these are expanded on in [problems and limitations](#problems-and-limitations)).
+To enable Minerva to recognise when a user wants to submit a database query we built this custom logic adapter, it takes priority over the best match filter for selecting the correct response. It is not the perfect solution but we had to do it this way due to some limitations we found with the chatterbot library (these are expanded on in [problems and limitations](#6-problems-and-limitations)).
 
 > The QueryAdapter is a Python class and can be found in */src/adapter.py*
 
@@ -316,7 +331,7 @@ The adapter starts off by checking if the input statement from the user can be p
 Once the adapter accepts a query to be processed it starts to work with the backend to transform and submit the query to the database.
 ![Process Query Function](../media/adapterProcessQuery.png)
 
-In the above code, the *api* that many methods are being called using refers to the backend code imported from */src/text_to_sql_api.py*, this will be explained more in the [backend implementation](#backend-implementation).
+In the above code, the *api* that many methods are being called using refers to the backend code imported from */src/text_to_sql_api.py*, this will be explained more in the [backend implementation](#52-backend-implementation).
 
 The flow of how the query is processed is as follows:
 
@@ -337,7 +352,7 @@ The logic adapter we made that is described above deals with interacting with th
 Minerva is constantly trained with each conversation she has, but most of her knowledge has been retrained, the responses she can say and which questions to respond to with which answers. You can run a training cycle using the flask application with the command `python3 app.py train`. You can see what code this runs and a sample of the training data below.
 ![Training Method & Data](../media/TrainingMethod&Data.png)
 
-### Backend Implementation
+### 5.2 Backend Implementation
 
 As seen in the design, the backend consists of functions to translate prompts into SQL prompts to query the database and retrieve data for Minerva. These components were designed and developed by Jack.
 
@@ -375,6 +390,7 @@ Due to the information below not being dynamic, we have these pieces of informat
 This section also has the `DB_LOADED` and `SCHEMA` variables equal to the *"metabolic_syndrome"* database, this makes it so when Minerva is first booted up the user is presented with a database instead of having to pick a database before they can begin asking questions.
 
 **setupDB**
+
 ![setupDB](../media/setupDB.png)
 
 Above is the code for the `setupDB` function. As the name suggests this function is responsible for setting up the database and getting it connected to Minerva.
@@ -388,6 +404,7 @@ We then assign `DB_USER`to user in the config, this config isn't *config.env*, e
 This process then repeats for all information present in the *config.env* file. In some areas, we don't assign the information to config but instead, we assign it to headers and data, both of which are for the text-to-SQL API and function identically to the mysql API.
 
 **swapDB**
+
 ![swapDB](../media/swapDB.png)
 
 `SwapDb` is the function that Minerva calls when a user wants to change what database they are currently connecting to and pulling information from.
@@ -464,12 +481,12 @@ Unlike the text-to-SQL API, no manipulation has to be done to the returned data 
 
 ---
 
-## Problems and Limitations
+## 6. Problems and Limitations
 
 <!-- *Limitations be imposed on us by bad library, bad model, etc.* -->
 In this section we talk about some of the major problems and blockers we encountered during the development of Minerva, these were things that caused significant delays, redesigns or things we generally couldn't fix or avoid. We will outline the problems we had, how they impacted the development of Minerva, and how we tried to work around and solve each one.
 
-### Chatterbot Downsides
+### 6.1 Chatterbot Downsides
 
 <!-- Talk about how shit CHatterbot is -->
 One major component of this project that limited us was the Chatterbot library that was used to develop Minerva. As we said in the research section, this library seemed to be in very common use for making basic chatbots in Python, and there were lots of recommendations online to use it for making a chatbot in Python.
@@ -485,7 +502,7 @@ The filter example was just one of many problems we encountered as we tried to m
 
 In the end, we were too far into development to really rip out Chatterbot and replace it, we also could not find any suitable replacements, we would either have to downgrade to natural language processing tools and implement a lot of the chat processing ourselves, or we could sacrifice using code and control and use a web solution such as IBM Watson assistant. Neither of these solutions really appealed to us or seemed better than what we decided to do, which was to keep the Chatterbot library to run the basics and to work around it to implement the more advanced features ourselves, what this means is that Minerva is slightly less intelligent that we originally wanted, she needs more help and prompt formatting by users to be able to understand what they want.
 
-### Text-to-SQL API & MYSQL API Troubles
+### 6.2 Text-to-SQL API & MYSQL API Troubles
 
 <!-- Talk about the different trials and tribulations of all the models and APIs u tried -->
 
@@ -497,9 +514,7 @@ For the MYSQL API, we used mysql.connector library [mysql.connector library](htt
 
 As we were creating our own file to get the API to function how we wanted it to, We decided to have both the Text-to-SQL and MYSQL API's in the same file as having minerva import one file with many functions is better than having minerva run seperate python scripts for each API and database available. Jack made the functions and got them working ecept for the swapDB function as he was struggling with the global variables. While he was working on other parts of the project Gareth fixed the function and also set up a config file that allows for the username, passwords, device IPv4 addresses, etc to be kept private and not have those pieces of information available on the gitlab for anyone to access. The way he did this was by using the [dotenv libary](https://pypi.org/project/python-dotenv/).
 
-### Hosting - A fruitless foray
-
-<!-- little section on trying to host not on localhost, not worth effort to try find free version -->
+### 6.3 Hosting
 
 One thing we tried out briefly was looking to host our flask application somewhere other than locally, this would be a learning experience as neither of us had done this before and would also provide a cleaner way to view Minerva as the webpage would be accessible from any device all the time, instead of having to be run locally and accessed that way aswell.
 
@@ -523,11 +538,11 @@ After much frustration and many experiments, we decided to just stay on localhos
 
 ---
 
-## Testing
+## 7. Testing
 
 This section contains an overview of the testing practices we implemented for Minerva throughout the development. You can also read about our user testing at the end of this section and how we used the feedback to improve the final version of Minerva.
 
-### Git
+### 7.1 Git
 
 Throughout our project as required, we used Gitlab to store our code. This was vital for working well together on the same set of files especially near the end of the project where we both we doing work on the same files every day. Every time we would finish our work for the day or complete a feature we would commit and push the changes to our repo and notify our partner.
 This flow of work helped make sure we had no major merge conflicts during this project and could work unimpeded, we also made sure to be in constant communication with each other about what we were doing and planning to do so that neither of us was implementing the same feature or writing the same section of a document.
@@ -536,7 +551,7 @@ Below you can see two examples of the commits we made to the repo, when committi
 ![commit example one](../media/commit1.png)
 ![commit example two](../media/commit2.png)
 
-### CI/CD Pipelines
+#### CI/CD Pipelines
 
 For most of the project we made use of gitlab pipelines to automate some of the testing of Minerva, these tests were used to confirm that Minerva was performing as expected and were run every time an update was pushed to our repo.
 These tests were very useful during the prototyping stages of Minerva so that every time a change was made we could verify that Minerva was still responding correctly to the basic prompts we had made before. The tests were made to verify Minerva's answers to some example prompts, one of our early test files can be seen below, it is still located in the prototyping directory of res/gareth/gareth_prototyping/testing.
@@ -549,7 +564,7 @@ However, as we approached the end of the project and we began linking things tog
 
 The pipeline file (.gitlab-ci.yml) is still present and can be viewed however the running of the prompt tests has been disabled.
 
-### Unit Testing
+### 7.2 Unit Testing
 
 The nature of Minerva is a user-centric system, a lot of how the system works requires user input and interaction through the web interface, because of this we knew that we wouldn't be able to fully automate testing and instead wanted to focus efforts on producing a good unit testing system that we could expand and run as the systems evolved to maintain good coverage of all Minerva's features and verify they worked every time we made changes or major updates.
 
@@ -569,7 +584,7 @@ If all is working well an output like below should be seen.
 
 ![Unit Test Results](../media/testSuccess.png)
 
-### System Testing
+### 7.3 System Testing
 
 The unit tests and automated testing we implemented helped a lot with verifying the integrity of Minerva and noticing quickly any bugs or inconsistencies introduced after major changes. However, to fully and rigorously test Minerva we need to do a lot of manual Ad-Hoc testing and system tests, interacting with Minerva through the web interface.
 A lot of the system is regularly tested and put through its paces due to the nature of development and we do a lot of Ad-Hoc testing as we go along and add new features, testing new prompts, new buttons, and new javascript functions.
@@ -582,7 +597,7 @@ These walkthroughs also allowed us to vary the inputs and tests we did instead o
 
 > You can view our system walkthroughs in */res/testing-results/walkthroughts.xlsx*
 
-### User Testing
+### 7.4 User Testing
 
 > Resources and files relating to user testing, including results and copies of the Google form and consent documents can be found in */res/testing-results
 
@@ -594,6 +609,31 @@ The results collected from the forms can be found in *res/testing_results*
 
 For our testing we conducted the tests over the period of a week, this allowed us to treat the first test or two as pilot tests, and we could implement changes and improvements between each test both to Minerva but also how we ran the tests to make it as simple as possible for participants to complete and follow along.
 
+**User Test Contents**
+For each participant we got the system set up and the google form opened, we then handed control over to them to complete the form and included tasks. We made sure to observe and be around in case technical problems arose but did not interfere or give help on how things worked or what to do, we wanted to get a good observation on how the system performs for new or unexperienced users.
+
+Our form contained three sections:
+
+1. Plain Language Statement and Consent
+2. Task Section
+3. Feedback Section
+
+In the task section we set out a few simple tasks that Minerva can be used to perform and we asked the users to complete these tasks with minimal instructions provided, the questions asked were:
+
+1. In this demo, Minerva has two databases that can be switched between, the default is a medial database, can you switch to the financial database?
+   a. How easy was this to do? (1-5)
+2. For this task, try and ask Minerva some simple questions to figure out the system, what is Minerva, how does Minerva work, what can she do, how do you submit a prompt?
+   a. Input any questions that Minerva misunderstood or could not answer below:
+   b. How relevant was the information that Minerva responded with in terms of helping to understand the system and how to use it? (1-5)
+   c. Are there any questions you believe Minerva should be able to answer, additional things she could explain?  
+3. Using the medical database (loaded by default), submit a prompt to retrieve data about "Query: how many people are registered under 40"
+   a. Were you able to get the data? (Yes/No)
+   b. Was the data displayed in a clear and helpful format? (1-5)
+   c. Any suggestions as improvements to the viewing of the data, or difficulties encountered trying to submit a prompt?
+
+In the last section we asked the participants to give us some more general feedback about the system, and also asked them if they thought a system like this is needed, and if they needed to access databases often would they use it?
+
+**Feedback and Results**
 Some good feedback we got about the testing process that we acted upon was:
 
 - Adding example prompts
@@ -617,20 +657,7 @@ Overall we had good feedback on the feel and design of the system, and especiall
 
 ---
 
-## What we learnt
-
-<!-- SKills, tech and teamwork stuff, planning etc -->
-We learnt a lot over the course of this project, of course, we learnt a lot in our specific sections Gareth with Chatbots and hosting, Jack with Text-to-SQL models and API. That is not only what each of us learnt we also learnt about each other's sections when it came to combining are parts and testing Minerva.
-
-When we started this project both Jack and Gareth had very similar experiences with databases and APIs with Gareth having worked with chatbots before. Now after completing the project both of us have gained valuable insights into the operations and development of chatbots and APIs. What Jack learnt most was database and API interaction and gained a deeper insight into how databases work and how they can be manipulated. <!-- Gareth learned what gareth learned *plz write what you learned :)*.
-
-Teamwork, planning and communication were all skills that we developed as part of this project, having worked with each other before we knew what to expect from the other person but having this project have such influence over our final grade we pushed ourselves to improve every aspect on how we work together. We did this not only so the project would run more smoothly but also to improve our skills for when we start our jobs as we would have to develop these skills anyway and getting a head start doesn't hurt.
-
-This project was a great opportunity for us, not only did we get to expand our knowledge but we also got a small taste of what it will be like after college and when we are working in teams to create products for businesses. It has allowed us to practice all of the necessary skills and see the value in each of them without the pressure or risk of making a mistake that has a financial cost to it. These skills will be invaluable in the coming years and will stand to us during our career.
-
----
-
-## Installation Guide
+## 8. Installation Guide
 
 If you would like to try out the system for yourself please follow these instructions, however, it requires a bit of work to get working, including getting the databases set up in MySQL yourself and your own access to the text-to-SQL model:
 > *These instructions were made and tested in a fresh Ubuntu environment, your system may already have some of these libraries installed*
@@ -645,18 +672,26 @@ If you would like to try out the system for yourself please follow these instruc
 5. Start the flask application by running the command `python3 app.py deploy`
 6. This will power up Minerva and you can head to *127.0.0.1:5000* on your browser to open up Minerva's interface
 
-## Future Work
+---
 
-<!-- What we would like to have worked on more, natural extensions that could be accomplished next, what could be added or polished -->
+## 9. What we learnt
+
+<!-- SKills, tech and teamwork stuff, planning etc -->
+We learnt a lot over the course of this project, of course, we learnt a lot in our specific sections Gareth with Chatbots and hosting, Jack with Text-to-SQL models and API. That is not only what each of us learnt we also learnt about each other's sections when it came to combining are parts and testing Minerva.
+
+When we started this project both Jack and Gareth had very similar experiences with databases and APIs with Gareth having worked with chatbots before. Now after completing the project both of us have gained valuable insights into the operations and development of chatbots and APIs. What Jack learnt most was database and API interaction and gained a deeper insight into how databases work and how they can be manipulated. <!-- Gareth learned what gareth learned *plz write what you learned :)*.
+
+Teamwork, planning and communication were all skills that we developed as part of this project, having worked with each other before we knew what to expect from the other person but having this project have such influence over our final grade we pushed ourselves to improve every aspect on how we work together. We did this not only so the project would run more smoothly but also to improve our skills for when we start our jobs as we would have to develop these skills anyway and getting a head start doesn't hurt.
+
+This project was a great opportunity for us, not only did we get to expand our knowledge but we also got a small taste of what it will be like after college and when we are working in teams to create products for businesses. It has allowed us to practice all of the necessary skills and see the value in each of them without the pressure or risk of making a mistake that has a financial cost to it. These skills will be invaluable in the coming years and will stand to us during our career.
+
+---
+
+## 10. Future Work
 
 In this section we are going to outline some things that we did not get done during the project that would've helped make Minerva an even better system, we will also outline a few extensions and additional functions that could be added to Minerva to increase her value and usefulness to users.
 
-### Training and Intelligence
-<!-- 
-Making Minerva better able to converse 
-Conversation tracking, options change as the conversation does
-interactive back and forth, refine data queries and offer more functions
--->
+### 10.1 Training and Intelligence
 
 One thing we would have loved to improve upon is Minerva's conversational skill and intelligence, this aspect of any chatbot is constantly evolving as the chatbot grows, gains more functions and is trained with more data. Unfortunately because of the time restraints and the limitations of the Chatterbot library Minerva is more limited than we first envisioned.
 
@@ -664,20 +699,13 @@ If we had more time we would've liked to redesign the base of Minerva to involve
 
 This type of redesign would also help to improve Minerva's maintainability and scalability, right now some of Minerva's functionality is coded into the interface or the backend functions splitting where the system does work. In an ideal system, all of the possible functionality could be controlled through Minerva, instead of having to do additional manual filtering like we do for the query extraction and database access functions.
 
-### Graphing & Data Analysis
-
-<!-- 
-Graphing
-Deployment
-Distributed Database
-Data Analysis
--->
+### 10.2 Graphing & Data Analysis
 
 One feature we initially had plans to maybe implement if we had time was further data analysis and graphing on top of database retrieval. Minerva is capable of filtering and retrieving a lot of useful information in her current state, but no major transformations are being done to the data beyond what SQL can do. If the resulting data is more than a few rows long it quickly becomes hard to read and meaningless to the user.
 
 We would love to see Minerva be able to transform and manipulate the data retrieved for the user according to follow-up questions and instructions from the user, for example, a complex set of stock market data could be transformed into a line graph plotted over time to better facilitate viewing trends and patterns. Graphing would just be the start as many other functions could be added over time to increase Minerva's analysis capabilities, the system being based in Python and having access to tools like Pandas would enable Minerva to become a powerful analysis tool as well as retrieval. In the metabolic syndrome database for example, Minerva could be employed to retrieve a specific set of records based on patient attributes and then conduct a deeper analysis into the similarities and differences of the rows and relate this to whether each patient has been diagnosed with Metabolic Syndrome or not.
 
-### Distributed Database & Deployment
+### 10.3 Distributed Database & Deployment
 
 Some natural advancements for Minerva would include opening up the system to a wider range of databases and also hosting the system online to allow anyone to use and test it instead of hosting it locally. These are upgrades that would be easy to implement with more time and resources but we never planned to implement them as they fall out of the scope of what we wanted to build and show off.
 
